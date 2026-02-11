@@ -1,0 +1,17 @@
+{
+  "name": "tempo-site",
+  "version": "0.1.0",
+  "description": "Client site template — extends tempo-core Nuxt layer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "tempo-core": "file:./tempo-core"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "about": "À propos",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "cta": {
+    "book": "Réserver",
+    "contact": "Me contacter",
+    "learnMore": "En savoir plus",
+    "send": "Envoyer",
+    "readMore": "Lire la suite"
+  },
+  "contact": {
+    "title": "Contact",
+    "name": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "message": "Message",
+    "namePlaceholder": "Votre nom",
+    "emailPlaceholder": "votre{'@'}email.com",
+    "phonePlaceholder": "+33 6 ...",
+    "messagePlaceholder": "Votre message...",
+    "success": "Message envoyé avec succès !",
+    "error": "Une erreur est survenue. Réessayez."
+  },
+  "footer": {
+    "rights": "Tous droits réservés",
+    "social": "Réseaux sociaux"
+  },
+  "blog": {
+    "title": "Blog",
+    "published": "Publié le",
+    "backToList": "Retour aux articles"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "close": "Fermer",
+    "skipToContent": "Aller au contenu"
+  },
+  "error": {
+    "notFound": "Cette page n'existe pas.",
+    "generic": "Une erreur est survenue.",
+    "backHome": "Retour à l'accueil"
+  },
+  "home": {
+    "secondaryCta": "En savoir plus",
+    "servicesTitle": "Services",
+    "servicesSubtitle": "Ce que nous proposons",
+    "designTitle": "Design",
+    "designDescription": "Sites web sur-mesure, modernes et performants.",
+    "performanceTitle": "Performance",
+    "performanceDescription": "Optimisation SEO et temps de chargement minimal.",
+    "supportTitle": "Accompagnement",
+    "supportDescription": "Suivi personnalisé et formation à la gestion du site.",
+    "statsProjects": "Projets livrés",
+    "statsSatisfaction": "Clients satisfaits",
+    "statsSpeed": "Temps de chargement",
+    "statsSupport": "Support",
+    "testimonialsTitle": "Témoignages",
+    "testimonialsSubtitle": "Ce que nos clients disent de nous",
+    "testimonial1": "Un travail remarquable, site livré en un temps record.",
+    "testimonial1Author": "Marie D.",
+    "testimonial1Role": "Thérapeute",
+    "testimonial2": "Professionnel et à l'écoute, je recommande vivement.",
+    "testimonial2Author": "Pierre L.",
+    "testimonial2Role": "Restaurateur",
+    "testimonial3": "Mon site est exactement ce que j'imaginais.",
+    "testimonial3Author": "Sophie R.",
+    "testimonial3Role": "Coach sportif",
+    "faqTitle": "Questions fréquentes",
+    "faq1Question": "Combien de temps pour créer un site ?",
+    "faq1Answer": "Un site vitrine est livré en 1 à 2 semaines selon la complexité.",
+    "faq2Question": "Le site est-il modifiable ?",
+    "faq2Answer": "Oui, un CMS intégré vous permet de modifier vos textes et images en autonomie.",
+    "faq3Question": "Le site est-il responsive ?",
+    "faq3Answer": "Tous nos sites sont optimisés pour mobile, tablette et desktop.",
+    "ctaTitle": "Prêt à lancer votre projet ?",
+    "ctaSubtitle": "Prenez rendez-vous pour en discuter, c'est gratuit et sans engagement.",
+    "ctaButton": "Prendre rendez-vous"
+  }
+}

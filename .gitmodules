@@ -1,0 +1,3 @@
+[submodule "tempo-core"]
+	path = tempo-core
+	url = git@github.com:jdenozi/tempo-core.git

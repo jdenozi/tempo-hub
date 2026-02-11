@@ -1,0 +1,35 @@
+services:
+  app:
+    build: .
+    container_name: ${APP_NAME:-tempo-hub}
+    restart: unless-stopped
+    environment:
+      - NITRO_PORT=3000
+      - NITRO_HOST=0.0.0.0
+    volumes:
+      - uploads:/app/.output/public/images/uploads
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}.rule=Host(`${DOMAIN:-localhost}`)"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}.entrypoints=websecure"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}.tls.certresolver=letsencrypt"
+      - "traefik.http.services.${APP_NAME:-tempo-hub}.loadbalancer.server.port=3000"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.5"
+
+volumes:
+  uploads:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${UPLOADS_PATH:-./data/uploads}
+
+networks:
+  web:
+    external: true

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Analytics — Tempo Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f7f8fe;
+      --card: #ffffff;
+      --text: #313d3e;
+      --muted: #7c8b8c;
+      --border: #dfdfe3;
+      --accent: #3a69c7;
+      --accent-light: #e8eefb;
+      --green: #16a34a;
+      --blue: #3a69c7;
+      --topbar: #ffffff;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 0;
+      margin: 0;
+    }
+    .topbar {
+      background: var(--topbar);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .topbar h1 { font-size: 1.25rem; margin: 0; }
+    .topbar a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+    .topbar a:hover { text-decoration: underline; }
+    .main-content {
+      padding: 2rem 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .period-select {
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card);
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .period-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Summary cards */
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .stat-card .label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .stat-card .value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* Chart area */
+    .chart-container {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .chart-container h2 {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 180px;
+      padding-top: 1rem;
+    }
+    .chart-bar {
+      flex: 1;
+      background: var(--accent);
+      border-radius: 3px 3px 0 0;
+      min-width: 4px;
+      position: relative;
+      transition: opacity 0.2s;
+      cursor: pointer;
+    }
+    .chart-bar:hover { opacity: 0.8; }
+    .chart-bar .tooltip {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      margin-bottom: 4px;
+    }
+    .chart-bar:hover .tooltip { display: block; }
+
+    /* Tables */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    .table-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .table-card h2 {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      text-align: left;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #f5ebe1;
+      font-size: 0.9rem;
+    }
+    td:last-child {
+      text-align: right;
+      font-weight: 600;
+    }
+    .bar-cell {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .bar-fill {
+      height: 6px;
+      background: var(--accent);
+      border-radius: 3px;
+      min-width: 4px;
+    }
+    .locale-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .locale-fr { background: #dbeafe; color: var(--blue); }
+    .locale-en { background: #dcfce7; color: var(--green); }
+
+    .loading {
+      text-align: center;
+      color: var(--muted);
+      padding: 4rem 0;
+      font-size: 1.1rem;
+    }
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="/admin/">&larr; CMS</a>
+      <h1>Analytics</h1>
+    </div>
+    <select class="period-select" id="period" onchange="loadStats()">
+      <option value="7">7 days</option>
+      <option value="30" selected>30 days</option>
+      <option value="90">90 days</option>
+    </select>
+  </div>
+
+  <div class="main-content" id="content">
+    <div class="loading">Loading analytics...</div>
+  </div>
+
+  <script>
+    async function loadStats() {
+      const days = document.getElementById('period').value;
+      const content = document.getElementById('content');
+
+      try {
+        const res = await fetch('/api/analytics/stats?days=' + days);
+        const data = await res.json();
+        renderDashboard(data);
+      } catch (err) {
+        content.innerHTML = '<div class="empty">Unable to load analytics. Make sure the dev server is running.</div>';
+      }
+    }
+
+    function renderDashboard(data) {
+      const content = document.getElementById('content');
+      const { summary, dailyViews, topPages, referrers, locales } = data;
+
+      // Sort daily views by date
+      const sortedDays = Object.entries(dailyViews).sort((a, b) => a[0].localeCompare(b[0]));
+      const maxViews = Math.max(...sortedDays.map(d => d[1]), 1);
+
+      // Chart bars
+      const bars = sortedDays.map(([date, views]) => {
+        const height = Math.max((views / maxViews) * 100, 2);
+        const dateStr = new Date(date + 'T00:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+        return `<div class="chart-bar" style="height:${height}%">
+          <div class="tooltip">${dateStr}: ${views} views</div>
+        </div>`;
+      }).join('');
+
+      // Top pages rows
+      const maxPageViews = topPages.length ? topPages[0].views : 1;
+      const pageRows = topPages.length
+        ? topPages.map(p => `<tr>
+            <td>
+              <div class="bar-cell">
+                <div class="bar-fill" style="width:${Math.max((p.views / maxPageViews) * 80, 4)}px"></div>
+                ${escapeHtml(p.path)}
+              </div>
+            </td>
+            <td>${p.views}</td>
+          </tr>`).join('')
+        : '<tr><td colspan="2" class="empty">No data yet</td></tr>';
+
+      // Referrer rows
+      const refRows = referrers.length
+        ? referrers.map(r => `<tr>
+            <td>${escapeHtml(r.source || 'Direct')}</td>
+            <td>${r.count}</td>
+          </tr>`).join('')
+        : '<tr><td colspan="2" class="empty">No referrers today</td></tr>';
+
+      // Locale breakdown
+      const totalLocaleViews = Object.values(locales).reduce((s, v) => s + v, 0) || 1;
+      const localeHtml = Object.entries(locales).length
+        ? Object.entries(locales)
+            .sort((a, b) => b[1] - a[1])
+            .map(([code, count]) => {
+              const pct = Math.round((count / totalLocaleViews) * 100);
+              const cls = code === 'fr' ? 'locale-fr' : 'locale-en';
+              return `<span class="locale-badge ${cls}">${code.toUpperCase()} ${pct}%</span>`;
+            }).join(' ')
+        : '<span class="empty">No data</span>';
+
+      content.innerHTML = `
+        <div class="summary">
+          <div class="stat-card">
+            <div class="label">Total views (period)</div>
+            <div class="value">${summary.totalViews.toLocaleString()}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Today</div>
+            <div class="value">${summary.todayViews.toLocaleString()}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Daily average</div>
+            <div class="value">${summary.avgDaily.toLocaleString()}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Unique pages</div>
+            <div class="value">${summary.topPagesCount}</div>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <h2>Daily Views</h2>
+          <div class="chart">${bars}</div>
+        </div>
+
+        <div class="grid-2">
+          <div class="table-card">
+            <h2>Top Pages</h2>
+            <table>
+              <thead><tr><th>Page</th><th>Views</th></tr></thead>
+              <tbody>${pageRows}</tbody>
+            </table>
+          </div>
+          <div class="table-card">
+            <h2>Referrers (today)</h2>
+            <table>
+              <thead><tr><th>Source</th><th>Visits</th></tr></thead>
+              <tbody>${refRows}</tbody>
+            </table>
+            <h2 style="margin-top:1.5rem">Languages</h2>
+            <div style="margin-top:0.75rem">${localeHtml}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // Load on page load
+    loadStats();
+  </script>
+</body>
+</html>
