@@ -4,18 +4,19 @@ export default defineAppConfig({
   client: {
     name: 'Tempo Hub',
     profession: 'Agence web',
-    logo: '',
+    logo: '', // TODO: Set logo path (e.g., '/images/logo.svg')
     favicon: '/favicon.ico',
   },
 
   // === CONTACT INFO ===
   contact: {
     email: 'contact@tempo-hub.fr',
-    phone: '+33 6 00 00 00 00',
-    address: '',
+    phone: '', // TODO: Set business phone number (e.g., '+33 1 23 45 67 89')
+    address: '', // TODO: Set business address
   },
 
   // === SOCIAL LINKS ===
+  // TODO: Set social media URLs (string) or leave null to hide
   social: {
     instagram: null,
     facebook: null,
@@ -30,7 +31,7 @@ export default defineAppConfig({
   },
 
   n8n: {
-    webhookContact: '',
+    webhookContact: '', // TODO: Set n8n webhook URL for contact form
   },
 
   // === FEATURE FLAGS ===

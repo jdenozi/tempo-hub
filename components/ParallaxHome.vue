@@ -286,7 +286,7 @@
           <p class="text-[0.65rem] sm:text-xs uppercase tracking-[0.5em] text-[#d4a853] mb-4 font-light retro-glow">{{ client.profession }}</p>
           <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-bold text-white uppercase tracking-wider leading-none retro-title">{{ client.name }}</h1>
           <div class="w-20 sm:w-28 h-px bg-gradient-to-r from-transparent via-[#d4a853] to-transparent mt-6 mb-6" />
-          <p class="text-sm sm:text-base md:text-lg text-gray-300 font-light tracking-wide max-w-lg">Concentrez-vous sur votre activité</p>
+          <p class="text-sm sm:text-base md:text-lg text-gray-300 font-light tracking-wide max-w-lg">{{ $t('home.scene1Subtitle') }}</p>
         </div>
         <!-- Scroll indicator -->
         <div ref="scrollIndRef" class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
@@ -353,9 +353,8 @@
 
         <!-- Text Scene 2 -->
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <p class="text-[0.65rem] sm:text-xs uppercase tracking-[0.5em] text-[#d4a853]/70 mb-6 font-light retro-glow">Notre mission</p>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white max-w-3xl leading-tight retro-title">
-            Dans l'immensité du numérique,<br><span class="text-[#d4a853]">nous traçons votre route</span>
+          <p class="text-[0.65rem] sm:text-xs uppercase tracking-[0.5em] text-[#d4a853]/70 mb-6 font-light retro-glow">{{ $t('home.scene2Label') }}</p>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white max-w-3xl leading-tight retro-title" v-html="$t('home.scene2Title')">
           </h2>
         </div>
       </div>
@@ -2512,7 +2511,7 @@
             </div>
           </div>
         </div>
-        <p class="absolute top-[12%] left-1/2 -translate-x-1/2 text-[0.65rem] sm:text-xs uppercase tracking-[0.5em] text-[#d4a853]/70 font-light retro-glow">Nos expertises</p>
+        <p class="absolute top-[12%] left-1/2 -translate-x-1/2 text-[0.65rem] sm:text-xs uppercase tracking-[0.5em] text-[#d4a853]/70 font-light retro-glow">{{ $t('home.scene3Label') }}</p>
       </div>
 
       <!-- ==================== SCENE 4 : L'ASCENSION (Dawn over city skyline) ==================== -->
@@ -3139,8 +3138,8 @@
 
         <!-- Text + CTA -->
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4" style="margin-top: -14%">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4 retro-title">Prêt à décoller ?</h2>
-          <p class="text-gray-300 text-sm sm:text-base max-w-lg mb-10 font-light">Prenez rendez-vous pour en discuter,<br>c'est gratuit et sans engagement.</p>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4 retro-title">{{ $t('home.scene4Title') }}</h2>
+          <p class="text-gray-300 text-sm sm:text-base max-w-lg mb-10 font-light" v-html="$t('home.scene4Subtitle')"></p>
           <NuxtLinkLocale to="/contact" class="cta-btn">
             Prendre rendez-vous
           </NuxtLinkLocale>

@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { rand, lerp, clamp } from '../parallax-utils'
+import { rand } from '../../composables/useParallaxData'
+import { lerp, clamp } from '../parallax-utils'
 
 describe('parallax-utils', () => {
   describe('rand()', () => {

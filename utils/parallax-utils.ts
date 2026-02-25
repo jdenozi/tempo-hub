@@ -3,7 +3,6 @@
  * Re-exports rand() from useParallaxData and adds additional helpers.
  */
 
-import { rand } from '../composables/useParallaxData'
 
 /**
  * Linear interpolation between two values.
@@ -40,5 +39,3 @@ export function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value))
 }
 
-// Re-export rand from useParallaxData for convenience
-export { rand }
