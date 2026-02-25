@@ -25,7 +25,7 @@ export default defineAppConfig({
 
   // === INTEGRATIONS ===
   calcom: {
-    username: '',
+    username: 'tempo-hub',
     defaultEvent: 'consultation',
   },
 
