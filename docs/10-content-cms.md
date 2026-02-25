@@ -1,8 +1,8 @@
-# 10 — Nuxt Content + Decap CMS
+# 10 — Nuxt Content + Nuxt Studio
 
 ## Overview
 
-This feature adds Markdown-based content management using **@nuxt/content v3** with collection-based schemas, and **Decap CMS** for visual editing by non-technical users.
+This feature adds Markdown-based content management using **@nuxt/content v3** with collection-based schemas, and **Nuxt Studio** for visual editing by non-technical users.
 
 ## Architecture
 
@@ -24,10 +24,6 @@ content/
 │   └── general.json    # Site identity, contact, social links
 
 content.config.ts       # Collection definitions (Zod schemas)
-
-public/admin/
-├── index.html          # Decap CMS entry point
-└── config.yml          # Collections, fields, i18n config
 ```
 
 ## Content Configuration
@@ -88,35 +84,44 @@ const { data } = await useAsyncData('key', () =>
 )
 ```
 
-## Decap CMS
+## Nuxt Studio
 
-Accessible at `/admin/`. Configuration dans `public/admin/config.yml`.
+Nuxt Studio est un CMS visuel intégré qui fonctionne comme un overlay sur le site.
 
-### Backend
+### Mode dev
 
-- **git-gateway** backend (works with Netlify Identity, GitLab, etc.)
-- **local_backend** for development (`npx decap-server`)
+En développement (`nuxt dev`), Studio se charge automatiquement en overlay sur toutes les pages. Aucune authentification nécessaire.
 
-### Collections CMS
+### Mode production
 
-Le CMS expose **6 collections** correspondant aux collections Nuxt Content :
+En production, l'accès se fait via `/_studio` qui redirige vers l'authentification GitHub OAuth. Nécessite les variables d'environnement `STUDIO_GITHUB_CLIENT_ID` et `STUDIO_GITHUB_CLIENT_SECRET`.
 
-| Collection CMS | Label | Type | i18n |
-|---------------|-------|------|------|
-| `settings` | ⚙️ Settings | `files` (single file) | Non |
-| `blog` | 📝 Blog | `folder` | `multiple_folders` (fr/en) |
-| `pages` | 📄 Pages | `folder` | `multiple_folders` (fr/en) |
-| `testimonials` | 💬 Testimonials | `folder` | `multiple_folders` (fr/en) |
-| `faq` | ❓ FAQ | `folder` | `multiple_folders` (fr/en) |
-| `projects` | 🎨 Projects | `folder` | `multiple_folders` (fr/en) |
+### Configuration
 
-La collection `settings` utilise un widget `files` (fichier unique `content/settings/general.json`) contenant l'identité du site, les coordonnées et les liens sociaux.
+```typescript
+// nuxt.config.ts
+studio: {
+  dev: true,
+  route: '/_studio',
+  repository: {
+    provider: 'github',
+    owner: 'jdenozi',
+    repo: 'tempo-hub',
+    branch: 'main',
+  },
+  auth: {
+    github: {
+      clientId: process.env.STUDIO_GITHUB_CLIENT_ID,
+      clientSecret: process.env.STUDIO_GITHUB_CLIENT_SECRET,
+    },
+  },
+  i18n: { defaultLocale: 'fr' },
+}
+```
 
-Les collections i18n utilisent la structure `multiple_folders` : le contenu est stocké dans `content/{locale}/collection/`.
+### Collections
 
-### Accès admin
-
-Le client accède à `monsite.fr/admin/` pour éditer son contenu. En dev, lancer `npx decap-server` pour le backend local.
+Studio détecte automatiquement les collections définies dans `content.config.ts` et génère l'interface d'édition à partir des schémas Zod.
 
 ## Content Format
 
@@ -158,4 +163,4 @@ image: "/images/blog-placeholder.jpg"
 
 - `@nuxt/content` ^3.11 — Content management with collections
 - `better-sqlite3` — Required database driver for Content v3
-- Decap CMS loaded via CDN (`unpkg.com/decap-cms@^3`)
+- `nuxt-studio` ^1.3 — Visual CMS overlay

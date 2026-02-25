@@ -20,7 +20,7 @@ tempo-template/              ← Ce repo (template client)
 ├── tailwind.config.ts       ← Couleurs/fonts du client
 ├── content/                 ← Contenu Markdown/JSON
 ├── locales/                 ← Traductions (fr.json, en.json)
-├── public/                  ← Favicon, og-image, manifest, Decap CMS
+├── public/                  ← Favicon, og-image, manifest
 └── docs/                    ← Documentation
 ```
 
@@ -35,8 +35,8 @@ tempo-template/              ← Ce repo (template client)
 - **SEO complet** — `@nuxtjs/seo` (sitemap, robots, schema.org), og:image, hreflang, structured data (BlogPosting, FAQPage)
 - **Fonts optimisées** — `@nuxt/fonts` (font-display: swap, preload automatique)
 - **Nuxt Content v3** — Contenu Markdown avec 6 collections (blog, pages, testimonials, FAQ, projects, settings)
-- **Decap CMS** — Interface d'édition visuelle pour le client (`/admin/`)
-- **Analytics** — Tracking léger intégré avec dashboard (`/admin/stats/`)
+- **Nuxt Studio** — Interface d'édition visuelle en overlay (dev: auto, prod: `/_studio`)
+- **Analytics** — Tracking léger intégré
 - **Intégrations** — Cal.com (réservation), n8n (webhooks contact)
 - **Docker** — Dockerfile multi-stage + docker-compose avec Traefik
 - **Accessibilité** — Skip-to-content, HTML sémantique, aria-labels
@@ -212,17 +212,7 @@ content/
 
 Modifier `locales/fr.json` et `locales/en.json` pour adapter les textes de l'interface (navigation, boutons, footer, etc.).
 
-### 7. CMS (`public/admin/config.yml`)
-
-Configurer le backend Decap CMS :
-
-```yaml
-backend:
-  name: git-gateway    # ou github
-  branch: main
-```
-
-### 8. Variables d'environnement
+### 7. Variables d'environnement
 
 Copier `.env.example` vers `.env` :
 
@@ -276,8 +266,7 @@ Un fix dans `tempo-core/` se propage à tous les sites clients via cette command
 - [ ] `public/site.webmanifest` — nom et couleurs du client
 - [ ] `content/` — pages et articles de blog
 - [ ] `locales/` — traductions FR/EN
-- [ ] `public/admin/config.yml` — backend CMS
-- [ ] `.env` — variables d'environnement
+- [ ] `.env` — variables d'environnement (Studio GitHub OAuth)
 - [ ] Tester : `npm run dev` puis `npm run build`
 - [ ] Déployer : `docker compose up -d`
 - [ ] Post-deploy : soumettre sitemap à Google Search Console
@@ -299,7 +288,7 @@ Voir le dossier `docs/` pour la documentation détaillée :
 | `07-smooth-scroll.md` | Smooth scroll (Lenis) |
 | `08-threejs.md` | Three.js scenes |
 | `09-i18n-seo.md` | i18n + SEO |
-| `10-content-cms.md` | Nuxt Content + Decap CMS |
+| `10-content-cms.md` | Nuxt Content + Nuxt Studio |
 | `11-integrations.md` | Cal.com + n8n |
 | `12-docker-deployment.md` | Docker + deployment |
 | `13-seo-strategy.md` | Stratégie SEO complète |

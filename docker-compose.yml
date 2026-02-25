@@ -8,6 +8,7 @@ services:
       - NITRO_HOST=0.0.0.0
     volumes:
       - uploads:/app/.output/public/images/uploads
+      - ./data:/app/data
     networks:
       - web
     labels:

@@ -14,6 +14,12 @@ COPY nuxt.config.ts app.config.ts tailwind.config.ts content.config.ts tsconfig.
 COPY content/ ./content/
 COPY locales/ ./locales/
 COPY public/ ./public/
+COPY components/ ./components/
+COPY assets/ ./assets/
+COPY pages/ ./pages/
+COPY server/ ./server/
+COPY composables/ ./composables/
+COPY utils/ ./utils/
 RUN npm run build
 
 # ── Stage 3: Production ──

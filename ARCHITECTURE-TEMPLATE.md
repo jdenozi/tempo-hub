@@ -19,7 +19,7 @@ Un **template client** avec un **Nuxt Layer** (`tempo-core/`) en **git submodule
 |--------|--------|------|
 | **Framework** | Nuxt 3 | SSR, routing, API routes |
 | **UI** | Vue 3 + Tailwind CSS | Composants, styles |
-| **Contenu** | Nuxt Content + Decap CMS | Markdown éditable par le client |
+| **Contenu** | Nuxt Content + Nuxt Studio | Markdown éditable par le client |
 | **Traduction** | @nuxtjs/i18n | Multi-langue (FR/EN/...) |
 | **SEO** | @nuxtjs/seo | Meta, sitemap, schema.org |
 | **Animations** | GSAP + ScrollTrigger | Animations 2D au scroll |
@@ -113,8 +113,7 @@ tempo-template/                       # Repo client (clone du template)
 │   │   └── blog/
 │   └── en/
 ├── locales/                          # fr.json, en.json
-├── public/
-│   └── admin/                        # Decap CMS (index.html + config.yml)
+├── public/                               # Static assets
 └── docs/                             # Documentation
 ```
 
@@ -490,55 +489,44 @@ Le composant `PageRenderer.vue` :
 
 ---
 
-## 9. CMS (Decap)
+## 9. CMS (Nuxt Studio)
+
+### Fonctionnement
+
+Nuxt Studio fonctionne comme un overlay sur le site :
+
+- **Dev** : s'active automatiquement sur toutes les pages (`nuxt dev`)
+- **Production** : authentification via GitHub OAuth à `/_studio`
+- **Raccourci** : `Ctrl + .` (ou `Cmd + .`) pour ouvrir/fermer
 
 ### Configuration
 
-```yaml
-# public/admin/config.yml
-
-backend:
-  name: git-gateway  # ou github
-  branch: main
-
-media_folder: "public/images/uploads"
-public_folder: "/images/uploads"
-
-collections:
-  - name: "pages"
-    label: "Pages"
-    folder: "content/fr/pages"
-    create: true
-    fields:
-      - { label: "Titre", name: "title", widget: "string" }
-      - { label: "Description SEO", name: "description", widget: "text" }
-      - { label: "Image", name: "image", widget: "image", required: false }
-      - { label: "Sections", name: "sections", widget: "list", fields: [...] }
-
-  - name: "blog"
-    label: "Articles"
-    folder: "content/fr/blog"
-    create: true
-    fields:
-      - { label: "Titre", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Image", name: "image", widget: "image" }
-      - { label: "Contenu", name: "body", widget: "markdown" }
-
-  - name: "testimonials"
-    label: "Témoignages"
-    file: "content/data/testimonials.yaml"
-    fields:
-      - label: "Témoignages"
-        name: "items"
-        widget: "list"
-        fields:
-          - { label: "Citation", name: "quote", widget: "text" }
-          - { label: "Auteur", name: "author", widget: "string" }
-          - { label: "Rôle", name: "role", widget: "string" }
+```typescript
+// nuxt.config.ts
+studio: {
+  dev: true,
+  route: '/_studio',
+  repository: {
+    provider: 'github',
+    owner: 'jdenozi',
+    repo: 'tempo-hub',
+    branch: 'main',
+  },
+  auth: {
+    github: {
+      clientId: process.env.STUDIO_GITHUB_CLIENT_ID,
+      clientSecret: process.env.STUDIO_GITHUB_CLIENT_SECRET,
+    },
+  },
+  ai: {
+    apiKey: process.env.AI_GATEWAY_API_KEY,
+    context: { title: 'Tempo Hub', description: '...' },
+  },
+  i18n: { defaultLocale: 'fr' },
+}
 ```
 
-Le client accède à `monsite.fr/admin` pour éditer son contenu.
+Les collections sont détectées automatiquement depuis `content.config.ts`.
 
 ---
 
@@ -834,7 +822,7 @@ git remote set-url origin git@github.com:jdenozi/client-nom.git
 # - nuxt.config.ts (site metadata)
 # - content/ (contenu)
 # - locales/ (traductions)
-# - public/admin/config.yml (CMS)
+# - .env (Studio GitHub OAuth)
 
 # 4. Lancer
 npm install && npm run dev
