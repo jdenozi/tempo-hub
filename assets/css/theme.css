@@ -1,0 +1,112 @@
+/*
+ * Tempo Hub — Sci-fi dark theme overrides
+ * Loaded after tempo-core/assets/css/main.css
+ * Remaps CSS variables for dark space background with gold/blue palette
+ */
+
+:root {
+  /* Background & foreground */
+  --color-background: #050816;
+  --color-foreground: #bcc5d8;
+
+  /* Muted surfaces (cards, sections) */
+  --color-muted: #0a0e24;
+  --color-muted-foreground: #6878a0;
+
+  /* Borders */
+  --color-border: #1a2545;
+
+  /* Primary brand color — gold */
+  --color-primary: #d4a853;
+  --color-primary-hover: #dea95a;
+  --color-primary-active: #b88a3d;
+
+  /* Accent — fire orange */
+  --color-accent: #d08030;
+
+  /* Section spacing (keep defaults from core) */
+
+  /* Theme-color for browser chrome */
+  --theme-color: #d4a853;
+}
+
+/* Prose (markdown content) — dark theme overrides */
+.prose {
+  --tw-prose-body: #bcc5d8;
+  --tw-prose-headings: #e8eaf2;
+  --tw-prose-lead: #96a4bf;
+  --tw-prose-links: #d4a853;
+  --tw-prose-bold: #e8eaf2;
+  --tw-prose-counters: #6878a0;
+  --tw-prose-bullets: #6878a0;
+  --tw-prose-hr: #1a2545;
+  --tw-prose-quotes: #96a4bf;
+  --tw-prose-quote-borders: #d4a853;
+  --tw-prose-captions: #6878a0;
+  --tw-prose-code: #dea95a;
+  --tw-prose-pre-code: #bcc5d8;
+  --tw-prose-pre-bg: #0a0e24;
+  --tw-prose-th-borders: #1a2545;
+  --tw-prose-td-borders: #1a2545;
+}
+
+/* === DARK PREMIUM DESIGN TOKENS === */
+
+.glass {
+  background: rgba(5, 8, 22, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 168, 83, 0.1);
+}
+
+.glass-card {
+  background: rgba(5, 8, 22, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 168, 83, 0.1);
+  border-radius: var(--radius-card, 0.75rem);
+}
+
+.glow-gold {
+  box-shadow: 0 0 20px rgba(212, 168, 83, 0.25), 0 0 60px rgba(212, 168, 83, 0.08);
+}
+
+.glow-gold-strong {
+  box-shadow: 0 0 20px rgba(212, 168, 83, 0.4), 0 0 60px rgba(212, 168, 83, 0.12);
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(80, 160, 220, 0.25), 0 0 60px rgba(80, 160, 220, 0.08);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(212, 168, 83, 0.4), 0 0 60px rgba(212, 168, 83, 0.12);
+}
+
+.text-glow-subtle {
+  text-shadow: 0 0 12px rgba(212, 168, 83, 0.2);
+}
+
+.gradient-section {
+  background: linear-gradient(180deg, var(--color-muted) 0%, #0d1230 50%, var(--color-muted) 100%);
+}
+
+.gradient-section-alt {
+  background: linear-gradient(180deg, #050816 0%, #0a1028 50%, #050816 100%);
+}
+
+.border-glow {
+  border: 1px solid rgba(212, 168, 83, 0.15);
+}
+
+.border-glow:hover {
+  border-color: rgba(212, 168, 83, 0.3);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
