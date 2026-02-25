@@ -1,17 +1,48 @@
 {
-  "siteName": "Tempo Hub",
-  "profession": "Agence web",
-  "logo": "",
-  "favicon": "/favicon.ico",
+  "identity": {
+    "siteName": "Tempo Hub",
+    "profession": "Solution web clé en main",
+    "logo": "",
+    "favicon": "/favicon.ico"
+  },
   "contact": {
     "email": "contact@tempo-hub.fr",
-    "phone": "+33 6 00 00 00 00",
-    "address": ""
+    "phone": "+330665425514",
+    "address": "",
+    "city": "",
+    "zipCode": "",
+    "country": "France",
+    "mapUrl": ""
   },
   "social": {
     "instagram": "",
     "facebook": "",
     "linkedin": "",
-    "twitter": ""
+    "twitter": "",
+    "youtube": "",
+    "tiktok": "",
+    "github": ""
+  },
+  "seo": {
+    "defaultTitle": "Tempo Hub | Agence Web",
+    "defaultDescription": "Agence web spécialisée dans la création de sites vitrines sur mesure, performants et optimisés SEO.",
+    "ogImage": "/og-image.jpg",
+    "googleAnalytics": "",
+    "gtmId": ""
+  },
+  "appearance": {
+    "primaryColor": "#d4a853",
+    "secondaryColor": "#1a1a2e",
+    "headingFont": "Space Grotesk",
+    "bodyFont": "Inter",
+    "headerStyle": "transparent"
+  },
+  "features": {
+    "scrollAnimations": true,
+    "customCursor": true,
+    "backToTop": false,
+    "cookieBanner": false,
+    "maintenanceMode": false,
+    "maintenanceMessage": ""
   }
 }
