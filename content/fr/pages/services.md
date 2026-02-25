@@ -1,66 +1,67 @@
 ---
-title: "Services"
-description: "Découvrez nos services de création de sites web"
+title: Services
+description: Découvrez nos services de création web sur-mesure
+navLabel: Services
+order: 1
+showInNav: true
 sections:
   - type: hero
-    props:
-      title: "Nos services"
-      subtitle: "Des solutions adaptées à chaque besoin"
+    title: Nos services
+    subtitle: Des solutions digitales sur-mesure pour propulser votre activité
+    ctaText: Prendre rendez-vous
+    ctaLink: /rendez-vous
   - type: features
-    props:
-      title: "Ce que nous proposons"
-      items:
-        - icon: heart
-          title: "Sites vitrine"
-          description: "Un site professionnel pour présenter votre activité et attirer de nouveaux clients."
-        - icon: star
-          title: "Sites e-commerce"
-          description: "Vendez vos produits en ligne avec une boutique performante et sécurisée."
-        - icon: users
-          title: "Applications web"
-          description: "Des outils sur-mesure pour digitaliser vos processus métier."
-  - type: pricing
-    props:
-      title: "Nos offres"
-      subtitle: "Choisissez la formule adaptée à votre projet"
-      plans:
-        - name: "Essentiel"
-          price: "990€"
-          description: "Pour démarrer rapidement"
-          features:
-            - "Site vitrine 5 pages"
-            - "Design responsive"
-            - "Formulaire de contact"
-            - "SEO de base"
-          ctaText: "Choisir"
-          ctaLink: "/contact"
-        - name: "Pro"
-          price: "1990€"
-          description: "Pour se démarquer"
-          features:
-            - "Tout Essentiel +"
-            - "Animations premium"
-            - "CMS intégré"
-            - "Multi-langue"
-            - "Support 6 mois"
-          ctaText: "Choisir"
-          ctaLink: "/contact"
-          highlighted: true
-        - name: "Sur-mesure"
-          price: "Sur devis"
-          description: "Pour les projets ambitieux"
-          features:
-            - "Tout Pro +"
-            - "Fonctionnalités custom"
-            - "Intégrations API"
-            - "3D / WebGL"
-            - "Support 12 mois"
-          ctaText: "Nous contacter"
-          ctaLink: "/contact"
+    title: Ce que nous proposons
+    subtitle: De la conception à la mise en production, nous couvrons tous vos besoins
+    items:
+      - icon: globe
+        title: Sites vitrine
+        description: Un site professionnel pour présenter votre activité et attirer de nouveaux clients. Design sur-mesure, responsive et optimisé SEO.
+      - icon: shopping-cart
+        title: Sites e-commerce
+        description: Vendez vos produits en ligne avec une boutique performante et sécurisée. Intégration Stripe, gestion des stocks et tableau de bord.
+      - icon: code
+        title: Applications web
+        description: Des outils sur-mesure pour digitaliser vos processus métier. Tableaux de bord, automatisations et intégrations API.
+      - icon: rocket
+        title: Landing pages
+        description: Des pages d'atterrissage optimisées pour la conversion. A/B testing, analytics et suivi des performances.
+      - icon: palette
+        title: Identité visuelle
+        description: Charte graphique complète, logo, typographie et palette de couleurs pour une image de marque cohérente.
+      - icon: server
+        title: Hébergement & maintenance
+        description: Hébergement sécurisé, mises à jour régulières et support technique pour garder votre site au top.
+    animation:
+      name: stagger
+  - type: stats
+    items:
+      - value: "50+"
+        label: Projets livrés
+      - value: "100%"
+        label: Clients satisfaits
+      - value: "24/7"
+        label: Support technique
+      - value: "5 ans"
+        label: D'expérience
+    animation:
+      name: fadeUp
+  - type: stripe-pricing
+    title: Nos offres
+    subtitle: Choisissez la formule adaptée à votre projet
+    tables:
+      - pricingTableId: prctbl_1Szf80CuCsLyVwsnL07sI8KS
+      - pricingTableId: prctbl_1Szf5dCuCsLyVwsnfYPVzqKg
+    animation:
+      name: scaleIn
   - type: cta
-    props:
-      title: "Un projet en tête ?"
-      subtitle: "Discutons-en autour d'un café virtuel, c'est gratuit."
-      ctaText: "Prendre rendez-vous"
-      ctaLink: "/contact"
+    title: Un projet en tête ?
+    subtitle: Discutons-en autour d'un café virtuel, c'est gratuit.
+    ctaText: Prendre rendez-vous
+    ctaLink: /rendez-vous
+    secondaryCtaText: Nous contacter
+    secondaryCtaLink: /contact
+    animation:
+      name: fadeUp
+      delay: 0.2
 ---
