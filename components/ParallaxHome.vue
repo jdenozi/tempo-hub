@@ -2979,6 +2979,7 @@
           <!-- Positioned left, angled toward upper-right (~-25°) -->
           <!-- GSAP moves entire group diagonally: +x, -y -->
           <g ref="saucerRef" opacity="0">
+            <g class="spacecraft-float">
             <g transform="translate(340,560) rotate(-25)">
 
               <!-- ~~~ ENGINE EXHAUST (in separate ref for scale animation) ~~~ -->
@@ -3084,6 +3085,7 @@
               <!-- Ambient glow -->
               <ellipse cx="0" cy="0" rx="90" ry="35" fill="#6878a0" opacity="0.04" filter="url(#s4-glow-lg)" />
             </g>
+            </g> <!-- /spacecraft-float -->
           </g>
 
           <!-- Foreground terrain -->
@@ -3430,6 +3432,16 @@ onUnmounted(() => {
 .blast-ring-1 { animation: blast-expand-1 2s ease-in-out infinite; transform-origin: center; }
 .blast-ring-2 { animation: blast-expand-2 1.8s ease-in-out infinite 0.3s; transform-origin: center; }
 .blast-ring-3 { animation: blast-expand-3 1.5s ease-in-out infinite 0.6s; transform-origin: center; }
+
+/* Spacecraft floating/bobbing animation */
+@keyframes spacecraft-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.spacecraft-float {
+  animation: spacecraft-float 3s ease-in-out infinite;
+  transform-origin: center center;
+}
 
 /* Sparks flying outward */
 @keyframes spark-fly-1 { 0%,100% { transform: translate(0,0); opacity: 0.6; } 50% { transform: translate(-15px, -8px); opacity: 0; } }
