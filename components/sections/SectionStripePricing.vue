@@ -18,6 +18,7 @@
                 :pricing-table-id="table.pricingTableId"
                 :publishable-key="publishableKey"
               />
+            </div>
           </div>
         </div>
       </ClientOnly>
