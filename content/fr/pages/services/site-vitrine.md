@@ -70,6 +70,13 @@ sections:
         ctaText: "Discuter de mon projet"
         ctaLink: "/contact"
   - type: cta
+    title: "WordPress vs site sur mesure : le comparatif technique"
+    subtitle: "Découvrez pourquoi un site codé sur mesure surpasse WordPress en SEO, performance et sécurité — avec des preuves techniques."
+    ctaText: "Lire l'analyse complète"
+    ctaLink: "/blog/site-sur-mesure-vs-wordpress-seo"
+    animation:
+      name: fadeUp
+  - type: cta
     title: "Votre site actuel est-il à la hauteur de votre entreprise ?"
     subtitle: "Audit gratuit de votre site existant : performance, SEO, sécurité. On vous dit exactement ce qui freine votre visibilité."
     ctaText: "Demander un audit gratuit"

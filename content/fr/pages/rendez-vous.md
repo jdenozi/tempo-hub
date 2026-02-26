@@ -2,7 +2,7 @@
 title: Rendez-vous
 description: Réservez un créneau pour discuter de votre projet
 navLabel: Rendez-vous
-order: 3
+order: 4
 showInNav: true
 ---
 

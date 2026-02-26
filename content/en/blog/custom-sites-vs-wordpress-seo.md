@@ -2,7 +2,6 @@
 title: "Custom Sites vs WordPress: Why a Tailor-Made Website is Better for SEO"
 description: "Performance, semantic markup, security, Core Web Vitals... Discover why a custom-coded website outperforms WordPress in organic search rankings, with concrete technical evidence."
 date: 2026-02-15
-image: "/images/blog-placeholder.jpg"
 author: "Tempo Hub"
 ---
 

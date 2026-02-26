@@ -60,6 +60,12 @@ sections:
       - question: "What if I need more pages?"
         answer: "The base offer includes 5 pages. Each additional page is billed at 100€. You can also upgrade to our Pro offer at any time."
   - type: cta
+    title: "Why not WordPress?"
+    subtitle: "We technically analysed why a custom site outperforms WordPress in performance, security and SEO. The answer might surprise you."
+    ctaText: "Read the full analysis"
+    ctaLink: "/blog/custom-sites-vs-wordpress-seo"
+    animation:
+      name: fadeUp
     title: "Ready to launch your business online?"
     subtitle: "A 15-minute call is enough to scope your project. It's free and no commitment."
     ctaText: "Book a free call"

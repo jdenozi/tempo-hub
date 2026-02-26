@@ -3137,11 +3137,17 @@
         </div>
 
         <!-- Text + CTA -->
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4" style="margin-top: -14%">
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-50" style="margin-top: -14%"> <!-- z-50: ensures CTA stays above countdown-overlay (z-40) -->
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4 retro-title">{{ $t('home.scene4Title') }}</h2>
           <p class="text-gray-300 text-sm sm:text-base max-w-lg mb-10 font-light" v-html="$t('home.scene4Subtitle')"></p>
-          <NuxtLinkLocale to="/contact" class="cta-btn">
-            Prendre rendez-vous
+          <NuxtLinkLocale to="/rendez-vous" class="cta-btn">
+            {{ $t('home.ctaButton') }}
+          </NuxtLinkLocale>
+          <NuxtLinkLocale
+            :to="locale === 'fr' ? '/blog/site-sur-mesure-vs-wordpress-seo' : '/blog/custom-sites-vs-wordpress-seo'"
+            class="mt-6 inline-block text-sm text-[#d4a853]/60 hover:text-[#d4a853] transition-colors"
+          >
+            {{ $t('home.wordpressPromo') }}
           </NuxtLinkLocale>
         </div>
         <!-- Footer -->
@@ -3204,6 +3210,7 @@ import { useLaunchSequence } from '~/composables/useLaunchSequence'
 
 // === CLIENT CONFIG ===
 const { client, contact } = useClientConfig()
+const { locale } = useI18n()
 
 // === TEMPLATE REFS ===
 const viewportRef = ref<HTMLElement | null>(null)

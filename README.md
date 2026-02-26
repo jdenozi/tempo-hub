@@ -41,6 +41,7 @@ tempo-template/              ← Ce repo (template client)
 - **Docker** — Dockerfile multi-stage + docker-compose avec Traefik
 - **Accessibilité** — Skip-to-content, HTML sémantique, aria-labels
 
+- **Premium dark theme** — tempo-hub ships with a glassmorphism dark theme (gold accents, GSAP animations) as a showcase of what the template system can do. Client sites define their own look via `tailwind.config.ts`.
 ---
 
 ## Quick Start

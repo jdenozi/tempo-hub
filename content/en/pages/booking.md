@@ -2,7 +2,7 @@
 title: Booking
 description: Book a slot to discuss your project
 navLabel: Booking
-order: 3
+order: 4
 showInNav: true
 ---
 

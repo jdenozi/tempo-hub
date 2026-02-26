@@ -1,6 +1,6 @@
 /**
  * Pure utility functions for the parallax system.
- * Re-exports rand() from useParallaxData and adds additional helpers.
+ * Pure utility functions for the parallax system (lerp, clamp).
  */
 
 

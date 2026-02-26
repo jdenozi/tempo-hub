@@ -24,7 +24,8 @@
   /* Accent — fire orange */
   --color-accent: #d08030;
 
-  /* Section spacing (keep defaults from core) */
+  /* Section spacing */
+  --section-padding-y: clamp(4rem, 10vw, 8rem);
 
   /* Theme-color for browser chrome */
   --theme-color: #d4a853;
@@ -109,4 +110,15 @@
 
 .hover-lift:hover {
   transform: translateY(-4px);
+}
+
+/* Force dark background on body (overrides tempo-core white default) */
+body {
+  background-color: var(--color-background);
+}
+
+/* Section vertical spacing (must be outside @layer to override core) */
+.section-padding {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
 }

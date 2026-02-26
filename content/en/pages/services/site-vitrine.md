@@ -70,6 +70,13 @@ sections:
         ctaText: "Discuss my project"
         ctaLink: "/contact"
   - type: cta
+    title: "WordPress vs custom website: the technical comparison"
+    subtitle: "Discover why a custom-coded website outperforms WordPress in SEO, performance and security — with technical proof."
+    ctaText: "Read the full analysis"
+    ctaLink: "/blog/custom-sites-vs-wordpress-seo"
+    animation:
+      name: fadeUp
+  - type: cta
     title: "Is your current website up to your business standards?"
     subtitle: "Free audit of your existing site: performance, SEO, security. We'll tell you exactly what's holding back your visibility."
     ctaText: "Request a free audit"

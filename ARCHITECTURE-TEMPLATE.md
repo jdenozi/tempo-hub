@@ -477,6 +477,10 @@ Le composant `PageRenderer.vue` :
 | `stats` | `SectionStats` |
 | `logos` | `SectionLogos` |
 
+| `booking` | `SectionBooking` |
+| `projects` | `SectionProjects` |
+| `stripe-pricing` | `SectionStripePricing` |
+
 ### Gestion des backgrounds
 
 | Type | Rendu | Fallback si flag désactivé |

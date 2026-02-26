@@ -1,4 +1,4 @@
-// Client-specific identity, contact info, and feature flags
+// Client-specific identity, contact info, and feature flags.
 export default defineAppConfig({
   // === CLIENT IDENTITY ===
   client: {
@@ -12,7 +12,7 @@ export default defineAppConfig({
   contact: {
     email: 'contact@tempo-hub.fr',
     phone: '', // TODO: Set business phone number (e.g., '+33 1 23 45 67 89')
-    address: '', // TODO: Set business address
+    address: '', // TODO: Set business address (e.g., '12 rue du Temple, 75004 Paris')
   },
 
   // === SOCIAL LINKS ===
@@ -44,5 +44,5 @@ export default defineAppConfig({
   },
 
   // === PER-PAGE OVERRIDES ===
-  pages: {},
+  pages: {}, // Per-page feature overrides (e.g., { home: { threejs: true } } enables 3D on home only)
 })

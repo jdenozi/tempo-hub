@@ -60,6 +60,12 @@ sections:
       - question: "Et si j'ai besoin de plus de pages ?"
         answer: "L'offre de base inclut 5 pages. Chaque page supplémentaire est facturée 100€. Vous pouvez aussi évoluer vers notre offre Pro à tout moment."
   - type: cta
+    title: "Pourquoi pas WordPress ?"
+    subtitle: "Nous avons analysé techniquement pourquoi un site sur mesure surpasse WordPress en performance, sécurité et SEO. La réponse va vous surprendre."
+    ctaText: "Lire l'analyse complète"
+    ctaLink: "/blog/site-sur-mesure-vs-wordpress-seo"
+    animation:
+      name: fadeUp
     title: "Prêt à lancer votre activité en ligne ?"
     subtitle: "Un appel de 15 minutes suffit pour cadrer votre projet. C'est gratuit et sans engagement."
     ctaText: "Réserver un appel gratuit"
