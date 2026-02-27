@@ -6,7 +6,7 @@ order: 3
 showInNav: true
 ---
 
-:section-hero{subtitle="Découvrez une sélection de projets qui illustrent notre expertise" title="Nos réalisations"}
+:section-hero{heroPreset="planet-horizon" subtitle="Découvrez une sélection de projets qui illustrent notre expertise" title="Nos réalisations"}
 
 ::section-projects
 ---

@@ -12,6 +12,7 @@ title: Our services
 subtitle: Custom digital solutions to propel your business forward
 ctaText: Book a meeting
 ctaLink: /booking
+heroPreset: grid-station
 ---
 ::
 

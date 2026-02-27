@@ -10,6 +10,7 @@ showInNav: true
 ---
 title: Prenez rendez-vous
 subtitle: Réservez un créneau gratuit de 30 minutes pour discuter de votre projet
+heroPreset: orbital
 ---
 ::
 

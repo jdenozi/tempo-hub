@@ -10,6 +10,7 @@ showInNav: true
 ---
 ctaLink: /rendez-vous
 ctaText: Prendre rendez-vous
+heroPreset: grid-station
 subtitle: Des solutions digitales sur-mesure pour propulser votre activité
 title: Nos services
 ---

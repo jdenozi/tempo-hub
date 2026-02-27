@@ -10,6 +10,7 @@ showInNav: true
 ---
 title: Book a meeting
 subtitle: Reserve a free 30-minute slot to discuss your project
+heroPreset: orbital
 ---
 ::
 

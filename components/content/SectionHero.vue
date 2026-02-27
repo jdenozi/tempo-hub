@@ -20,6 +20,9 @@ const props = defineProps<{
   ctaLink?: string
   secondaryCtaText?: string
   secondaryCtaLink?: string
+  heroPreset?: string
+  heroImage?: string
+  heroOverlay?: string
   animation?: {
     name: AnimationName
     delay?: number

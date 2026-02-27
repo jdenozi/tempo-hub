@@ -10,6 +10,7 @@ showInNav: true
 ---
 title: "About us"
 subtitle: "Passionate about the web, we build websites that make a difference."
+heroPreset: nebula
 ---
 ::
 

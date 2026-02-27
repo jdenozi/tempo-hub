@@ -10,6 +10,7 @@ showInNav: true
 ---
 title: Our work
 subtitle: Discover a selection of projects that showcase our expertise
+heroPreset: planet-horizon
 ---
 ::
 
