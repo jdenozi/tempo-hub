@@ -1,5 +1,5 @@
 <template>
-  <section class="relative min-h-screen flex items-center gradient-section-alt">
+  <section class="relative min-h-[50vh] flex items-center gradient-section-alt">
     <!-- Dynamic background layer (behind everything) -->
     <div
       v-if="activeBackground"
