@@ -13,7 +13,8 @@
 
 const starsRef = ref<HTMLDivElement | null>(null)
 const atmosphereRef = ref<HTMLDivElement | null>(null)
-const reducedMotion = ref(false)
+const containerRef = ref<HTMLElement | null>(null)
+const { isPaused, isReducedMotion } = useAnimationLifecycle(containerRef)
 
 // --- SVG star field generator ---
 function generateStarSVG(width: number, height: number, count: number): string {
@@ -34,9 +35,6 @@ function generateStarSVG(width: number, height: number, count: number): string {
 onMounted(async () => {
   if (!import.meta.client) return
 
-  // Reduced motion check
-  reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
   // L2: Apply star field as tiled SVG background
   if (starsRef.value) {
     starsRef.value.style.backgroundImage = generateStarSVG(250, 250, 50)
@@ -44,28 +42,39 @@ onMounted(async () => {
   }
 
   // L4: GSAP atmosphere pulse (skipped for reduced motion)
-  if (reducedMotion.value || !atmosphereRef.value) return
+  if (isReducedMotion.value || !atmosphereRef.value) return
 
   const gsapModule = await useGsap()
-  if (!gsapModule) return
+  if (!gsapModule || !containerRef.value) return
   const { gsap } = gsapModule
 
+  const tweens: gsap.core.Tween[] = []
+
   const ctx = gsap.context(() => {
-    gsap.to(atmosphereRef.value, {
+    tweens.push(gsap.to(atmosphereRef.value, {
       opacity: 0.6,
       duration: 8,
       ease: 'sine.inOut',
       repeat: -1,
       yoyo: true,
-    })
-  })
+      paused: true,
+    }))
+  }, containerRef.value)
 
-  onUnmounted(() => ctx.revert())
+  // Watch isPaused to control playback
+  watch(isPaused, (paused) => {
+    tweens.forEach(t => paused ? t.pause() : t.resume())
+  }, { immediate: true })
+
+  onUnmounted(() => {
+    ctx.revert()
+    tweens.length = 0
+  })
 })
 </script>
 
 <template>
-  <div class="absolute inset-0 overflow-hidden">
+  <div ref="containerRef" class="absolute inset-0 overflow-hidden">
     <!-- L1: Deep space → warm horizon gradient -->
     <div
       class="absolute inset-0"

@@ -96,6 +96,10 @@ export function useSpaceParticles(
   let particles: Particle[] = []
   let canvasWidth = 0
   let canvasHeight = 0
+  let isInView = false
+  let isTabActive = true
+  let ioObserver: IntersectionObserver | null = null
+  let onVisibilityChange: (() => void) | null = null
 
   onMounted(() => {
     if (!import.meta.client) return
@@ -110,11 +114,15 @@ export function useSpaceParticles(
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    // Mobile detection — reduce particle count by 50% on small screens
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    const effectiveCount = isMobile ? Math.ceil(config.count * 0.5) : config.count
+
     // --- DPR + sizing ---
     function applySize() {
       if (!canvas) return
       const rect = canvas.getBoundingClientRect()
-      const dpr = window.devicePixelRatio || 1
+      const dpr = Math.min(window.devicePixelRatio || 1, 2) // Cap at 2x — 3x DPR = 55% extra pixels for imperceptible quality gain
 
       canvas.width = rect.width * dpr
       canvas.height = rect.height * dpr
@@ -127,7 +135,7 @@ export function useSpaceParticles(
     applySize()
 
     // --- Initialize particles ---
-    particles = Array.from({ length: config.count }, () =>
+    particles = Array.from({ length: effectiveCount }, () =>
       createParticle(canvasWidth, canvasHeight, config),
     )
 
@@ -142,6 +150,20 @@ export function useSpaceParticles(
     })
     resizeObserver.observe(canvas)
 
+    // --- Visibility helpers ---
+    function startLoop() {
+      if (isInView && isTabActive && animFrameId === null) {
+        animFrameId = requestAnimationFrame(animate)
+      }
+    }
+
+    function stopLoop() {
+      if (animFrameId !== null) {
+        cancelAnimationFrame(animFrameId)
+        animFrameId = null
+      }
+    }
+
     // --- Animation loop ---
     const animate = () => {
       ctx.clearRect(0, 0, canvasWidth, canvasHeight)
@@ -153,10 +175,28 @@ export function useSpaceParticles(
       }
 
       ctx.globalAlpha = 1
-      animFrameId = requestAnimationFrame(animate)
+      if (isInView && isTabActive) {
+        animFrameId = requestAnimationFrame(animate)
+      }
+      // Loop stops naturally when not visible — startLoop() restarts it when needed
     }
 
-    animate()
+    // --- IntersectionObserver: pause when canvas off-screen ---
+    ioObserver = new IntersectionObserver(([entry]) => {
+      isInView = entry.isIntersecting
+      if (isInView) startLoop()
+      else stopLoop()
+    }, { threshold: 0.01 }) // Very low threshold — pause as soon as barely off-screen
+    ioObserver.observe(canvas)
+
+    // --- visibilitychange: pause when browser tab is hidden ---
+    isTabActive = !document.hidden
+    onVisibilityChange = () => {
+      isTabActive = !document.hidden
+      if (isTabActive) startLoop()
+      else stopLoop()
+    }
+    document.addEventListener('visibilitychange', onVisibilityChange)
   })
 
   onUnmounted(() => {
@@ -166,6 +206,12 @@ export function useSpaceParticles(
     }
     resizeObserver?.disconnect()
     resizeObserver = null
+    ioObserver?.disconnect()
+    ioObserver = null
+    if (onVisibilityChange) {
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+      onVisibilityChange = null
+    }
     particles = []
   })
 }

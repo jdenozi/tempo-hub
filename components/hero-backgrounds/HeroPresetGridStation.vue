@@ -17,26 +17,34 @@
 const containerRef = ref<HTMLElement | null>(null)
 const orbitRingRef = ref<SVGEllipseElement | null>(null)
 
+const { isPaused, isReducedMotion } = useAnimationLifecycle(containerRef)
+
 onMounted(async () => {
   if (!import.meta.client) return
+
+  // Guard reduced motion BEFORE loading GSAP
+  if (isReducedMotion.value) return
 
   const gsapModule = await useGsap()
   if (!gsapModule || !containerRef.value) return
   const { gsap } = gsapModule
 
+  const tweens: gsap.core.Tween[] = []
+
   const ctx = gsap.context(() => {
     // Grid line subtle pulse
-    gsap.to('.grid-line', {
+    tweens.push(gsap.to('.grid-line', {
       opacity: 0.25,
       duration: 6,
       ease: 'sine.inOut',
       repeat: -1,
       yoyo: true,
       stagger: 0.3,
-    })
+      paused: true,
+    }))
 
     // Station nodes stagger pulse
-    gsap.to('.station-node', {
+    tweens.push(gsap.to('.station-node', {
       opacity: 0.8,
       scale: 1.5,
       duration: 2,
@@ -45,21 +53,31 @@ onMounted(async () => {
       yoyo: true,
       stagger: 0.5,
       transformOrigin: 'center',
-    })
+      paused: true,
+    }))
 
     // Orbit ring continuous rotation
     if (orbitRingRef.value) {
-      gsap.to(orbitRingRef.value, {
+      tweens.push(gsap.to(orbitRingRef.value, {
         rotation: 360,
         duration: 40,
         ease: 'none',
         repeat: -1,
         transformOrigin: '400px 210px',
-      })
+        paused: true,
+      }))
     }
   }, containerRef.value)
 
-  onUnmounted(() => ctx.revert())
+  // Watch isPaused to control playback
+  watch(isPaused, (paused) => {
+    tweens.forEach(t => paused ? t.pause() : t.resume())
+  }, { immediate: true })
+
+  onUnmounted(() => {
+    ctx.revert()
+    tweens.length = 0
+  })
 })
 
 // --- Perspective grid geometry ---

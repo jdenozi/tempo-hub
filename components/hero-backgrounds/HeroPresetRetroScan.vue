@@ -14,30 +14,32 @@
 
 const scanLinesRef = ref<HTMLDivElement | null>(null)
 const flickerRef = ref<HTMLDivElement | null>(null)
-const turbulenceRef = ref<SVGFETurbulenceElement | null>(null)
-const reducedMotion = ref(false)
+const containerRef = ref<HTMLElement | null>(null)
+const { isPaused, isReducedMotion } = useAnimationLifecycle(containerRef)
 
 onMounted(async () => {
   if (!import.meta.client) return
 
-  // Reduced motion check
-  reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (reducedMotion.value) return
+  // Guard reduced motion BEFORE loading GSAP
+  if (isReducedMotion.value) return
 
   // Lazy-load GSAP (SSR-safe, respects feature flags)
   const gsapModule = await useGsap()
-  if (!gsapModule) return
+  if (!gsapModule || !containerRef.value) return
   const { gsap } = gsapModule
+
+  const tweens: (gsap.core.Tween | gsap.core.Timeline)[] = []
 
   const ctx = gsap.context(() => {
     // L2: Scan lines — slow vertical scroll
     if (scanLinesRef.value) {
-      gsap.to(scanLinesRef.value, {
+      tweens.push(gsap.to(scanLinesRef.value, {
         backgroundPositionY: '-100px',
         duration: 10,
         ease: 'none',
         repeat: -1,
-      })
+        paused: true,
+      }))
     }
 
     // L4: CRT flicker — very subtle, rare opacity flash
@@ -45,32 +47,31 @@ onMounted(async () => {
       const flickerTimeline = gsap.timeline({
         repeat: -1,
         repeatDelay: gsap.utils.random(3, 8),
+        paused: true,
       })
       flickerTimeline
         .to(flickerRef.value, { opacity: 0.97, duration: 0.05 })
         .to(flickerRef.value, { opacity: 1, duration: 0.05 })
         .to(flickerRef.value, { opacity: 0.98, duration: 0.03 })
         .to(flickerRef.value, { opacity: 1, duration: 0.05 })
+      tweens.push(flickerTimeline)
     }
+  }, containerRef.value)
 
-    // L5: Film grain — animated baseFrequency for subtle movement
-    if (turbulenceRef.value) {
-      gsap.to(turbulenceRef.value, {
-        attr: { baseFrequency: '0.68' },
-        duration: 0.5,
-        ease: 'none',
-        repeat: -1,
-        yoyo: true,
-      })
-    }
+  // Watch isPaused to control playback
+  watch(isPaused, (paused) => {
+    tweens.forEach(t => paused ? t.pause() : t.resume())
+  }, { immediate: true })
+
+  onUnmounted(() => {
+    ctx.revert()
+    tweens.length = 0
   })
-
-  onUnmounted(() => ctx.revert())
 })
 </script>
 
 <template>
-  <div class="absolute inset-0 overflow-hidden">
+  <div ref="containerRef" class="absolute inset-0 overflow-hidden">
     <!-- L1: Warm dark gradient -->
     <div
       class="absolute inset-0"
@@ -79,7 +80,7 @@ onMounted(async () => {
 
     <!-- L2: CRT scan lines (hidden when reduced motion) -->
     <div
-      v-if="!reducedMotion"
+      v-if="!isReducedMotion"
       ref="scanLinesRef"
       class="absolute inset-0 pointer-events-none"
       style="
@@ -96,14 +97,14 @@ onMounted(async () => {
 
     <!-- L4: CRT flicker (hidden when reduced motion) -->
     <div
-      v-if="!reducedMotion"
+      v-if="!isReducedMotion"
       ref="flickerRef"
       class="absolute inset-0 pointer-events-none"
     />
 
     <!-- L5: Film grain via SVG feTurbulence (hidden when reduced motion) -->
     <svg
-      v-if="!reducedMotion"
+      v-if="!isReducedMotion"
       class="absolute inset-0 w-full h-full pointer-events-none"
       style="opacity: 0.08;"
       xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +112,6 @@ onMounted(async () => {
     >
       <filter id="retro-grain-filter">
         <feTurbulence
-          ref="turbulenceRef"
           type="fractalNoise"
           baseFrequency="0.65"
           numOctaves="3"

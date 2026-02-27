@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute inset-0 overflow-hidden nebula-bg">
+  <div ref="containerRef" class="absolute inset-0 overflow-hidden nebula-bg">
     <!-- Layer 2: SVG star field (data-URI applied in onMounted) -->
     <div ref="starFieldRef" class="absolute inset-0 pointer-events-none" />
 
@@ -40,7 +40,7 @@
 
     <!-- Layer 4: Canvas particles (skipped on reduced motion) -->
     <canvas
-      v-if="!reducedMotion"
+      v-if="!isReducedMotion"
       ref="canvasRef"
       class="absolute inset-0 w-full h-full pointer-events-none"
     />
@@ -56,7 +56,8 @@ const nebulaTealRef = ref<HTMLDivElement | null>(null)
 const nebulaGoldRef = ref<HTMLDivElement | null>(null)
 const starFieldRef = ref<HTMLDivElement | null>(null)
 const canvasRef = ref<HTMLCanvasElement | null>(null)
-const reducedMotion = ref(false)
+const containerRef = ref<HTMLElement | null>(null)
+const { isPaused, isReducedMotion } = useAnimationLifecycle(containerRef)
 
 // Layer 4: Canvas particles — composable handles lifecycle internally
 useSpaceParticles(canvasRef, {
@@ -69,9 +70,6 @@ useSpaceParticles(canvasRef, {
 
 onMounted(async () => {
   if (!import.meta.client) return
-
-  // Reduced motion check
-  reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   // Layer 2: Sparse SVG star field (40 stars, tiled)
   if (starFieldRef.value) {
@@ -90,32 +88,45 @@ onMounted(async () => {
   }
 
   // Skip GSAP if reduced motion
-  if (reducedMotion.value) return
+  if (isReducedMotion.value) return
 
   // Layer 3: GSAP nebula drift animations
   const gsapModule = await useGsap()
-  if (!gsapModule) return
+  if (!gsapModule || !containerRef.value) return
   const { gsap } = gsapModule
+
+  const tweens: gsap.core.Tween[] = []
 
   const ctx = gsap.context(() => {
     // Magenta nebula — slow diagonal drift
-    gsap.to(nebulaMagentaRef.value, {
+    tweens.push(gsap.to(nebulaMagentaRef.value, {
       x: '8%', y: '5%', duration: 25, ease: 'sine.inOut',
       repeat: -1, yoyo: true,
-    })
+      paused: true,
+    }))
     // Teal nebula — opposite drift, offset timing
-    gsap.to(nebulaTealRef.value, {
+    tweens.push(gsap.to(nebulaTealRef.value, {
       x: '-6%', y: '8%', duration: 30, ease: 'sine.inOut',
       repeat: -1, yoyo: true, delay: 5,
-    })
+      paused: true,
+    }))
     // Gold nebula — scale pulse
-    gsap.to(nebulaGoldRef.value, {
+    tweens.push(gsap.to(nebulaGoldRef.value, {
       scale: 1.2, opacity: 0.8, duration: 20, ease: 'sine.inOut',
       repeat: -1, yoyo: true, delay: 10,
-    })
-  })
+      paused: true,
+    }))
+  }, containerRef.value)
 
-  onUnmounted(() => ctx.revert())
+  // Watch isPaused to control playback
+  watch(isPaused, (paused) => {
+    tweens.forEach(t => paused ? t.pause() : t.resume())
+  }, { immediate: true })
+
+  onUnmounted(() => {
+    ctx.revert()
+    tweens.length = 0
+  })
 })
 </script>
 

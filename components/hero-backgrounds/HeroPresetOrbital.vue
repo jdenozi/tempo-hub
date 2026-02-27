@@ -18,7 +18,8 @@ const ring2Ref = ref<SVGGElement | null>(null)
 const ring3Ref = ref<SVGGElement | null>(null)
 const lensFlare1Ref = ref<HTMLDivElement | null>(null)
 const lensFlare2Ref = ref<HTMLDivElement | null>(null)
-const reducedMotion = ref(false)
+const containerRef = ref<HTMLElement | null>(null)
+const { isPaused, isReducedMotion } = useAnimationLifecycle(containerRef)
 
 // --- L4: Canvas particles (composable handles lifecycle + reduced-motion internally) ---
 useSpaceParticles(canvasRef, {
@@ -48,9 +49,6 @@ function generateStarSVG(width: number, height: number, count: number): string {
 onMounted(async () => {
   if (!import.meta.client) return
 
-  // Reduced motion check
-  reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
   // Apply tiled SVG star background
   if (starLayerRef.value) {
     starLayerRef.value.style.backgroundImage = generateStarSVG(250, 250, 40)
@@ -58,56 +56,62 @@ onMounted(async () => {
   }
 
   // Skip GSAP animations if reduced motion preferred
-  if (reducedMotion.value) return
+  if (isReducedMotion.value) return
 
   // --- L3 + L5: GSAP animations (dynamic import, SSR-safe) ---
   const gsapModule = await useGsap()
-  if (!gsapModule) return
+  if (!gsapModule || !containerRef.value) return
   const { gsap } = gsapModule
+
+  const tweens: gsap.core.Tween[] = []
 
   const ctx = gsap.context(() => {
     // Orbit ring rotations — different speeds and directions
     if (ring1Ref.value) {
-      gsap.to(ring1Ref.value, {
+      tweens.push(gsap.to(ring1Ref.value, {
         rotation: 360,
         duration: 20,
         ease: 'none',
         repeat: -1,
         transformOrigin: '400px 300px',
-      })
+        paused: true,
+      }))
     }
     if (ring2Ref.value) {
-      gsap.to(ring2Ref.value, {
+      tweens.push(gsap.to(ring2Ref.value, {
         rotation: -360,
         duration: 30,
         ease: 'none',
         repeat: -1,
         transformOrigin: '400px 300px',
-      })
+        paused: true,
+      }))
     }
     if (ring3Ref.value) {
-      gsap.to(ring3Ref.value, {
+      tweens.push(gsap.to(ring3Ref.value, {
         rotation: 360,
         duration: 45,
         ease: 'none',
         repeat: -1,
         transformOrigin: '400px 300px',
-      })
+        paused: true,
+      }))
     }
 
     // Lens flare pulses
     if (lensFlare1Ref.value) {
-      gsap.to(lensFlare1Ref.value, {
+      tweens.push(gsap.to(lensFlare1Ref.value, {
         opacity: 0.6,
         scale: 1.3,
         duration: 4,
         ease: 'sine.inOut',
         repeat: -1,
         yoyo: true,
-      })
+        paused: true,
+      }))
     }
     if (lensFlare2Ref.value) {
-      gsap.to(lensFlare2Ref.value, {
+      tweens.push(gsap.to(lensFlare2Ref.value, {
         opacity: 0.4,
         scale: 1.2,
         duration: 6,
@@ -115,16 +119,25 @@ onMounted(async () => {
         repeat: -1,
         yoyo: true,
         delay: 2,
-      })
+        paused: true,
+      }))
     }
-  })
+  }, containerRef.value)
 
-  onUnmounted(() => ctx.revert())
+  // Watch isPaused to control playback
+  watch(isPaused, (paused) => {
+    tweens.forEach(t => paused ? t.pause() : t.resume())
+  }, { immediate: true })
+
+  onUnmounted(() => {
+    ctx.revert()
+    tweens.length = 0
+  })
 })
 </script>
 
 <template>
-  <div class="absolute inset-0 overflow-hidden">
+  <div ref="containerRef" class="absolute inset-0 overflow-hidden">
     <!-- L1: Deep space gradient with blue tint -->
     <div
       class="absolute inset-0"
@@ -162,7 +175,7 @@ onMounted(async () => {
 
     <!-- L4: Canvas particles (hidden when reduced motion preferred) -->
     <canvas
-      v-if="!reducedMotion"
+      v-if="!isReducedMotion"
       ref="canvasRef"
       class="absolute inset-0 w-full h-full"
     />
