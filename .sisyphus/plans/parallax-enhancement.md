@@ -66,15 +66,15 @@ Transform the parallax homepage from impressive to breathtaking — richer visua
 - Updated Playwright baseline screenshots (4 scenes)
 
 ### Definition of Done
-- [ ] `npm run build` succeeds
-- [ ] `npx vitest run` passes (31 hub + 24 core)
-- [ ] All 4 scenes render correctly (Playwright screenshots)
-- [ ] Window flicker animation runs on CSS (not GSAP tweens)
-- [ ] Countdown text animates 5→1→LIFTOFF on scroll
-- [ ] Launch tower visible with arm retraction animation
-- [ ] No `feDisplacementMap` usage anywhere
-- [ ] `v-once` applied to all static SVG groups
-- [ ] `gsap.context()` wraps all GSAP code in onMounted
+- [x] `npm run build` succeeds
+- [x] `npx vitest run` passes (31 hub + 24 core)
+- [x] All 4 scenes render correctly (Playwright screenshots)
+- [x] Window flicker animation runs on CSS (not GSAP tweens)
+- [x] Countdown text animates 5→1→LIFTOFF on scroll
+- [x] Launch tower visible with arm retraction animation
+- [x] No `feDisplacementMap` usage anywhere
+- [x] `v-once` applied to all static SVG groups
+- [x] `gsap.context()` wraps all GSAP code in onMounted
 
 ### Must Have
 - Performance hardening BEFORE visual enhancements (Task 0)
@@ -189,7 +189,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
 
 ## TODOs
 
-- [ ] 1. [HUB] Performance Hardening — v-once, markRaw, gsap.context, CSS file
+- [x] 1. [HUB] Performance Hardening — v-once, markRaw, gsap.context, CSS file
 
   **What to do**:
   - Add `v-once` directive to ALL static SVG `<g>` groups in ParallaxHome.vue template:
@@ -277,7 +277,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Files: `components/ParallaxHome.vue`, `composables/useParallaxData.ts`, `assets/css/parallax-animations.css`
   - Pre-commit: `npm run build && npx vitest run`
 
-- [ ] 2. [HUB] Scene 1 — Enhanced Nebula, Planet Detail, Improved Asteroids
+- [x] 2. [HUB] Scene 1 — Enhanced Nebula, Planet Detail, Improved Asteroids
 
   **What to do**:
   - Enhance the nebula cloud layer (lines ~148-180):
@@ -343,7 +343,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Files: `components/ParallaxHome.vue`
   - Pre-commit: `npm run build`
 
-- [ ] 3. [HUB] Scene 2 — Denser Constellation with Data Streams
+- [x] 3. [HUB] Scene 2 — Denser Constellation with Data Streams
 
   **What to do**:
   - Increase constellation density:
@@ -410,7 +410,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Files: `components/ParallaxHome.vue`, `composables/useParallaxData.ts`
   - Pre-commit: `npm run build`
 
-- [ ] 4. [HUB] Scene 3 — Window Flicker CSS + Neon Sign Animations
+- [x] 4. [HUB] Scene 3 — Window Flicker CSS + Neon Sign Animations
 
   **What to do**:
   - Apply CSS flicker animations to existing city windows:
@@ -494,7 +494,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Files: `components/ParallaxHome.vue`, `assets/css/parallax-animations.css`
   - Pre-commit: `npm run build`
 
-- [ ] 5. [HUB] Scene 3 — Street-Level Details (Roads, Lampposts, Ground Vehicles)
+- [x] 5. [HUB] Scene 3 — Street-Level Details (Roads, Lampposts, Ground Vehicles)
 
   **What to do**:
   - Add street-level ground plane below buildings:
@@ -563,7 +563,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Files: `components/ParallaxHome.vue`, `assets/css/parallax-animations.css`
   - Pre-commit: `npm run build`
 
-- [ ] 6. [HUB] Scene 3 — Rooftop Details + Building Variety + Advertising Holograms
+- [x] 6. [HUB] Scene 3 — Rooftop Details + Building Variety + Advertising Holograms
 
   **What to do**:
   - Add rooftop details to 5-6 largest buildings:
@@ -633,7 +633,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Files: `components/ParallaxHome.vue`, `assets/css/parallax-animations.css`
   - Pre-commit: `npm run build`
 
-- [ ] 7. [HUB] Scene 4 — Launch Tower/Gantry + Umbilical Arm Retraction
+- [x] 7. [HUB] Scene 4 — Launch Tower/Gantry + Umbilical Arm Retraction
 
   **What to do**:
   - Add launch tower/gantry structure next to landing platform:
@@ -712,7 +712,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Files: `components/ParallaxHome.vue`, `composables/useLaunchSequence.ts`
   - Pre-commit: `npm run build`
 
-- [ ] 8. [HUB] Scene 4 — Animated Countdown Overlay (5→1→LIFTOFF)
+- [x] 8. [HUB] Scene 4 — Animated Countdown Overlay (5→1→LIFTOFF)
 
   **What to do**:
   - Add countdown HTML overlay (NOT SVG `<text>` — better typography):
@@ -799,7 +799,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Files: `components/ParallaxHome.vue`, `assets/css/parallax-animations.css`
   - Pre-commit: `npm run build`
 
-- [ ] 9. [HUB] Scene 4 — Dust Clouds + Smoke + Camera Shake Effects
+- [x] 9. [HUB] Scene 4 — Dust Clouds + Smoke + Camera Shake Effects
 
   **What to do**:
   - Add launch dust clouds (ground-level):
@@ -884,7 +884,7 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Files: `components/ParallaxHome.vue`, `composables/useLaunchSequence.ts`
   - Pre-commit: `npm run build`
 
-- [ ] 10. [HUB] Scene 4 — Enhanced Terrain + Spaceport Ground Detail
+- [x] 10. [HUB] Scene 4 — Enhanced Terrain + Spaceport Ground Detail
 
   **What to do**:
   - Enhance terrain layers (existing 3 curved paths):
@@ -957,15 +957,15 @@ Max Concurrent: 3 (Waves 1, 2, 3)
 
 > 3 review agents run in PARALLEL. ALL must APPROVE. Rejection → fix → re-run.
 
-- [ ] 11. **Update Playwright Baselines + Visual QA** — `unspecified-high` + `playwright` skill
+- [x] 11. **Update Playwright Baselines + Visual QA** — `unspecified-high` + `playwright` skill
   Build the app, start server, scroll through all 4 scenes. Capture screenshots at 0%, 25%, 50%, 75%, 90%, 100% scroll positions. Save as new baselines. Verify: city windows flicker, neon signs pulse, launch tower visible, countdown text appears, dust clouds animate, camera shake triggers.
   Output: `Screenshots [N captured] | Scenes [4/4 verified] | VERDICT`
 
-- [ ] F1. **Plan Compliance Audit** — `unspecified-high`
+- [x] F1. **Plan Compliance Audit** — `unspecified-high`
   Read plan end-to-end. For each "Must Have": verify implementation exists. For each "Must NOT Have": grep codebase for forbidden patterns. Check all deliverables exist.
   Output: `Must Have [N/N] | Must NOT Have [N/N] | VERDICT`
 
-- [ ] F2. **Performance Audit** — `deep`
+- [x] F2. **Performance Audit** — `deep`
   Count total DOM nodes in ParallaxHome template (grep for `<rect`, `<circle`, `<line`, `<path`, `<ellipse`, `<g`, `<text`, `<use`). Verify `v-once` on static groups. Verify no `feDisplacementMap`. Verify `will-change` on ≤15 elements. Verify `gsap.context()` usage. Check CSS file exists for window flicker.
   Output: `DOM Nodes [N] | v-once [N groups] | Banned Patterns [CLEAN/N] | will-change [N/15 max] | VERDICT`
 
@@ -1015,11 +1015,11 @@ npx playwright test tests/parallax-home.spec.ts  # Expected: all pass
 ```
 
 ### Final Checklist
-- [ ] All "Must Have" items present
-- [ ] All "Must NOT Have" items absent
-- [ ] All tests pass (`npx vitest run`)
-- [ ] Build succeeds
-- [ ] 4 updated Playwright baseline screenshots
-- [ ] Countdown text visible and animating
-- [ ] City windows flickering
-- [ ] Launch tower + arm retraction visible
+- [x] All "Must Have" items present
+- [x] All "Must NOT Have" items absent
+- [x] All tests pass (`npx vitest run`)
+- [x] Build succeeds
+- [x] 4 updated Playwright baseline screenshots
+- [x] Countdown text visible and animating
+- [x] City windows flickering
+- [x] Launch tower + arm retraction visible
