@@ -1,8 +1,12 @@
 <template>
-  <section class="section-padding gradient-section">
-    <div class="container-page max-w-3xl mx-auto">
+  <section :class="[spacingClass, bgClass, borderClass]" class="relative">
+    <!-- Fond anime optionnel -->
+    <div v-if="isAnimatedBg" class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <component :is="animatedBgComponent" />
+    </div>
+    <div class="container-page max-w-3xl mx-auto relative z-10">
       <div class="text-center mb-12 md:mb-16">
-        <h2 class="text-hero text-white text-glow">{{ title }}</h2>
+        <h2 :class="titleClass">{{ title }}</h2>
         <p v-if="subtitle" class="mt-4 text-lg text-gray-300">
           {{ subtitle }}
         </p>
@@ -44,9 +48,13 @@
       </div>
     </div>
   </section>
+  <UiSectionDivider :variant="dividerAfter" />
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
+import type { SectionVisualProps } from '../../composables/useSectionStyle'
+
 export interface FaqItem {
   question: string
   answer: string
@@ -56,10 +64,17 @@ const props = withDefaults(defineProps<{
   title: string
   subtitle?: string
   items?: FaqItem[]
-}>(), {
+} & SectionVisualProps>(), {
   subtitle: '',
   items: () => [],
+  sectionBg: 'default',
+  sectionSpacing: 'normal',
+  sectionBorder: 'none',
+  titleStyle: 'standard',
+  dividerAfter: 'none',
 })
+
+const { bgClass, spacingClass, borderClass, titleClass, isAnimatedBg } = useSectionStyle(props)
 
 const openIndex = ref<number | null>(null)
 
@@ -77,4 +92,17 @@ useSchemaOrg([
     }),
   ),
 ])
+
+const bgComponents: Record<string, ReturnType<typeof defineAsyncComponent>> = {
+  'starfield': defineAsyncComponent(() => import('../hero-backgrounds/HeroPresetStarfield.vue')),
+  'nebula': defineAsyncComponent(() => import('../hero-backgrounds/HeroPresetNebula.vue')),
+  'planet-horizon': defineAsyncComponent(() => import('../hero-backgrounds/HeroPresetPlanetHorizon.vue')),
+  'grid-station': defineAsyncComponent(() => import('../hero-backgrounds/HeroPresetGridStation.vue')),
+  'orbital': defineAsyncComponent(() => import('../hero-backgrounds/HeroPresetOrbital.vue')),
+  'retro-scan': defineAsyncComponent(() => import('../hero-backgrounds/HeroPresetRetroScan.vue')),
+}
+
+const animatedBgComponent = computed(() =>
+  props.sectionBg ? bgComponents[props.sectionBg] : null,
+)
 </script>

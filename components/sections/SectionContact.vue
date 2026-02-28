@@ -1,10 +1,10 @@
 <template>
-  <section class="section-padding gradient-section">
+  <section :class="[spacingClass, bgClass, borderClass]">
     <div class="container-page">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
         <!-- Info side -->
         <div class="space-y-6">
-          <h2 class="text-hero text-white text-glow">{{ title }}</h2>
+          <h2 :class="titleClass">{{ title }}</h2>
           <p v-if="subtitle" class="text-lg text-gray-300">
             {{ subtitle }}
           </p>
@@ -38,17 +38,27 @@
       </div>
     </div>
   </section>
+  <UiSectionDivider :variant="dividerAfter" />
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{
+import type { SectionVisualProps } from '../../composables/useSectionStyle'
+
+const props = withDefaults(defineProps<{
   title: string
   subtitle?: string
   showPhone?: boolean
-}>(), {
+} & SectionVisualProps>(), {
   subtitle: '',
   showPhone: true,
+  sectionBg: 'default',
+  sectionSpacing: 'normal',
+  sectionBorder: 'none',
+  titleStyle: 'standard',
+  dividerAfter: 'none',
 })
+
+const { bgClass, spacingClass, borderClass, titleClass } = useSectionStyle(props)
 
 const { contact: contactInfo, calcom } = useClientConfig()
 </script>

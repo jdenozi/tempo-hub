@@ -1,7 +1,7 @@
 <template>
-  <section class="section-padding gradient-section-alt">
+  <section :class="[spacingClass, bgClass, borderClass]">
     <div class="container-page">
-      <h2 v-if="title" class="text-3xl md:text-4xl font-heading font-bold text-center text-white mb-4 text-glow">
+      <h2 v-if="title" :class="[titleClass, 'text-center mb-4']">
         {{ title }}
       </h2>
       <p v-if="subtitle" class="text-center text-gray-300 max-w-2xl mx-auto mb-12">
@@ -24,9 +24,12 @@
       </ClientOnly>
     </div>
   </section>
+  <UiSectionDivider :variant="dividerAfter" />
 </template>
 
 <script setup lang="ts">
+import type { SectionVisualProps } from '../../composables/useSectionStyle'
+
 const { publishableKey } = useStripeConfig()
 
 useHead({
@@ -35,12 +38,20 @@ useHead({
   ],
 })
 
-defineProps<{
+const props = withDefaults(defineProps<{
   title?: string
   subtitle?: string
   tables: Array<{
     pricingTableId: string
     label?: string
   }>
-}>()
+} & SectionVisualProps>(), {
+  sectionBg: 'alt',
+  sectionSpacing: 'normal',
+  sectionBorder: 'none',
+  titleStyle: 'standard',
+  dividerAfter: 'none',
+})
+
+const { bgClass, spacingClass, borderClass, titleClass } = useSectionStyle(props)
 </script>

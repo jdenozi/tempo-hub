@@ -20,6 +20,7 @@ heroPreset: grid-station
 ---
 title: What we offer
 subtitle: From design to production, we cover all your needs
+dividerAfter: gradient
 items:
   - icon: globe
     title: Showcase websites

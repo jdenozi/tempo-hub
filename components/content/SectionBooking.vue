@@ -17,6 +17,12 @@ const props = defineProps<{
   title: string
   subtitle?: string
   theme?: 'light' | 'dark' | 'auto'
+  sectionBg?: 'default' | 'alt' | 'transparent' | 'starfield' | 'nebula' | 'planet-horizon' | 'grid-station' | 'orbital' | 'retro-scan'
+  sectionSpacing?: 'compact' | 'normal' | 'spacious'
+  sectionBorder?: 'none' | 'glow' | 'subtle'
+  titleStyle?: 'standard' | 'large' | 'hero'
+  dividerAfter?: 'none' | 'line' | 'gradient' | 'stars'
+  columns?: '2' | '3' | '4' | 'auto'
   animation?: {
     name: AnimationName
     delay?: number
