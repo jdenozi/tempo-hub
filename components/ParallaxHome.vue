@@ -4,6 +4,7 @@
     <div ref="progressRef" class="fixed top-0 left-0 h-[2px] bg-[#d4a853] z-50 origin-left" style="transform: scaleX(0)" />
 
     <!-- ====== FIXED VIEWPORT ====== -->
+    <ClientOnly>
     <div ref="viewportRef" class="fixed inset-0 z-0 overflow-hidden">
 
       <!-- Background (deep space → warm transition) -->
@@ -3195,6 +3196,7 @@
 
     </div>
     <!-- END FIXED VIEWPORT -->
+    </ClientOnly>
 
     <!-- ====== SCROLL DRIVER ====== -->
     <div ref="driverRef" style="height: 600vh" />
@@ -3253,7 +3255,7 @@ const { hasAnimations } = useFeatures()
 const {
   stars, brightStars, dustParticles, ringDustParticles,
   asteroids, constNodes, constEdges, tendrils, orbitalParticles,
-  gridH, gridV, COS_TILT, SIN_TILT,
+  gridH, gridV, services, COS_TILT, SIN_TILT,
 } = useParallaxData()
 
 // === LIFECYCLE ===
@@ -3265,6 +3267,7 @@ onMounted(async () => {
   if (!gsapModule) return
   const { gsap } = gsapModule
 
+  await nextTick()
   gsapCtx = gsap.context(() => {
     // Scroll-driven background animations (progress, stars, dust, saturn, etc.)
     useScrollAnimations({

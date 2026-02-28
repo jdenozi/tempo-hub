@@ -86,7 +86,7 @@ User: "Optimise le plus possible car il y a beaucoup d'animations" — préventi
 ### Wave 3: Verification
 
 - [x] F1: Vérification build `bun run build`
-- [ ] F2: Git commit
+- [x] F2: Git commit
 
 ---
 
