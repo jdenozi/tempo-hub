@@ -6,7 +6,7 @@ order: 1
 showInNav: true
 ---
 
-::section-hero
+::section-page-banner
 ---
 title: Our services
 subtitle: Custom digital solutions to propel your business forward

@@ -5,9 +5,9 @@
     :delay="animation.delay"
     :stagger="animation.stagger"
   >
-    <SectionsSectionHero v-bind="sectionProps" />
+    <SectionsSectionPageBanner v-bind="sectionProps" />
   </AnimationsAnimateOnScroll>
-  <SectionsSectionHero v-else v-bind="sectionProps" />
+  <SectionsSectionPageBanner v-else v-bind="sectionProps" />
 </template>
 
 <script setup lang="ts">

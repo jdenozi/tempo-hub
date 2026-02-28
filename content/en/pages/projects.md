@@ -6,7 +6,7 @@ order: 3
 showInNav: true
 ---
 
-::section-hero
+::section-page-banner
 ---
 title: Our work
 subtitle: Discover a selection of projects that showcase our expertise

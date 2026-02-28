@@ -6,7 +6,7 @@ order: 4
 showInNav: true
 ---
 
-::section-hero
+::section-page-banner
 ---
 title: Prenez rendez-vous
 subtitle: Réservez un créneau gratuit de 30 minutes pour discuter de votre projet

@@ -6,7 +6,7 @@ order: 2
 showInNav: true
 ---
 
-:section-hero{heroPreset="nebula" subtitle="Passionnés du web, nous créons des sites qui font la différence." title="À propos"}
+:section-page-banner{heroPreset="nebula" subtitle="Passionnés du web, nous créons des sites qui font la différence." title="À propos"}
 
 ::section-features
 ---

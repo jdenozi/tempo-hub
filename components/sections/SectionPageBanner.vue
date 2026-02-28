@@ -1,5 +1,5 @@
 <template>
-  <section class="relative min-h-[50vh] flex items-center gradient-section-alt">
+  <section class="relative min-h-[50vh] flex items-center gradient-section-alt -mt-16 md:-mt-20">
     <!-- Dynamic background layer (behind everything) -->
     <div
       v-if="activeBackground"
@@ -9,7 +9,7 @@
     </div>
 
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(212,168,83,0.06)_0%,transparent_60%)] pointer-events-none" />
-    <div class="container-page section-padding text-center">
+    <div class="container-page section-padding pt-16 md:pt-20 text-center">
       <h1 class="text-display text-white max-w-4xl mx-auto text-glow">
         {{ title }}
       </h1>

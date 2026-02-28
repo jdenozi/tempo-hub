@@ -6,7 +6,7 @@ order: 1
 showInNav: true
 ---
 
-::section-hero
+::section-page-banner
 ---
 ctaLink: /rendez-vous
 ctaText: Prendre rendez-vous

@@ -6,7 +6,7 @@ navLabel: "About"
 showInNav: true
 ---
 
-::section-hero
+::section-page-banner
 ---
 title: "About us"
 subtitle: "Passionate about the web, we build websites that make a difference."

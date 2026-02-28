@@ -67,7 +67,7 @@ export default defineNuxtConfig({
     meta: {
       components: {
         include: [
-          'SectionHero',
+          'SectionPageBanner',
           'SectionFeatures',
           'SectionCta',
           'SectionStats',

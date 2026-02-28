@@ -6,7 +6,7 @@ order: 4
 showInNav: true
 ---
 
-::section-hero
+::section-page-banner
 ---
 title: Book a meeting
 subtitle: Reserve a free 30-minute slot to discuss your project
