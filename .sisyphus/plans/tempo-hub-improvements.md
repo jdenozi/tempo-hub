@@ -63,12 +63,12 @@ Make tempo-hub production-ready while strengthening tempo-core as a reusable fou
 - SEO fixes across both repos
 
 ### Definition of Done
-- [ ] `npm run build` succeeds in both tempo-hub and tempo-core
-- [ ] `npx vitest run` passes with >80% coverage on composables
-- [ ] Zero hardcoded `#d4a853` in non-ParallaxHome hub components
-- [ ] Stripe webhook receives test events successfully
-- [ ] ParallaxHome.vue < 2,000 lines
-- [ ] Lighthouse SEO score > 90
+- [x] `npm run build` succeeds in both tempo-hub and tempo-core
+- [x] `npx vitest run` passes with >80% coverage on composables
+- [x] Zero hardcoded `#d4a853` in non-ParallaxHome hub components
+- [x] Stripe webhook receives test events successfully
+- [x] ParallaxHome.vue < 2,000 lines
+- [x] Lighthouse SEO score > 90
 
 ### Must Have
 - TDD approach — tests written before implementation
@@ -197,7 +197,7 @@ Max Concurrent: 6 (Wave 1)
 ## TODOs
 
 
-- [ ] 1. [CORE] Setup Vitest Infrastructure + Characterization Tests
+- [x] 1. [CORE] Setup Vitest Infrastructure + Characterization Tests
 
   **What to do**:
   - Install vitest, @vue/test-utils, happy-dom in tempo-core
@@ -234,9 +234,9 @@ Max Concurrent: 6 (Wave 1)
   - Nuxt testing: https://nuxt.com/docs/getting-started/testing
 
   **Acceptance Criteria**:
-  - [ ] `npx vitest run` executes without errors
-  - [ ] At least 2 test files exist (useClientConfig.test.ts, useFeatures.test.ts)
-  - [ ] All tests pass
+  - [x] `npx vitest run` executes without errors
+  - [x] At least 2 test files exist (useClientConfig.test.ts, useFeatures.test.ts)
+  - [x] All tests pass
 
   **QA Scenarios:**
   ```
@@ -265,7 +265,7 @@ Max Concurrent: 6 (Wave 1)
   - Files: `tempo-core/vitest.config.ts`, `tempo-core/package.json`, `tempo-hub/vitest.config.ts`, `tempo-hub/package.json`, `tempo-core/composables/__tests__/*.test.ts`
   - Pre-commit: `npx vitest run`
 
-- [ ] 2. [CORE] Extend CSS Variable System
+- [x] 2. [CORE] Extend CSS Variable System
 
   **What to do**:
   - Add `--color-primary` (maps to primary-500) to `tempo-core/assets/css/main.css`
@@ -295,9 +295,9 @@ Max Concurrent: 6 (Wave 1)
   - `tempo-hub/tailwind.config.ts:10-22` — Primary color palette (#d4a853 = primary-500)
 
   **Acceptance Criteria**:
-  - [ ] `--color-primary` defined in main.css and theme.css
-  - [ ] `--color-accent` defined in main.css and theme.css
-  - [ ] `npm run build` succeeds
+  - [x] `--color-primary` defined in main.css and theme.css
+  - [x] `--color-accent` defined in main.css and theme.css
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
   ```
@@ -315,7 +315,7 @@ Max Concurrent: 6 (Wave 1)
   - Files: `tempo-core/assets/css/main.css`, `assets/css/theme.css`
   - Pre-commit: `npm run build`
 
-- [ ] 3. [HUB] Refactor Button.vue Theming
+- [x] 3. [HUB] Refactor Button.vue Theming
 
   **What to do**:
   - Replace `bg-[#d4a853]` with `bg-primary-500`
@@ -344,9 +344,9 @@ Max Concurrent: 6 (Wave 1)
   - `tailwind.config.ts` — Verify primary-500 = #d4a853
 
   **Acceptance Criteria**:
-  - [ ] Zero `#d4a853` or `#dea95a` or `#b88a3d` in Button.vue
-  - [ ] `npm run build` succeeds
-  - [ ] Visual appearance unchanged (same gold color)
+  - [x] Zero `#d4a853` or `#dea95a` or `#b88a3d` in Button.vue
+  - [x] `npm run build` succeeds
+  - [x] Visual appearance unchanged (same gold color)
 
   **QA Scenarios:**
   ```
@@ -373,7 +373,7 @@ Max Concurrent: 6 (Wave 1)
   - Files: `components/ui/Button.vue`
   - Pre-commit: `npm run build`
 
-- [ ] 4. [HUB] Refactor Input/Textarea/Card Theming
+- [x] 4. [HUB] Refactor Input/Textarea/Card Theming
 
   **What to do**:
   - Replace hardcoded hex colors in `Input.vue`, `Textarea.vue`, `Card.vue`
@@ -395,8 +395,8 @@ Max Concurrent: 6 (Wave 1)
   - `components/ui/Input.vue`, `components/ui/Textarea.vue`, `components/ui/Card.vue`
 
   **Acceptance Criteria**:
-  - [ ] Zero `#d4a853` in all three files
-  - [ ] `npm run build` succeeds
+  - [x] Zero `#d4a853` in all three files
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
   ```
@@ -411,7 +411,7 @@ Max Concurrent: 6 (Wave 1)
   **Commit**: YES (groups with Task 3)
   - Files: `components/ui/Input.vue`, `components/ui/Textarea.vue`, `components/ui/Card.vue`
 
-- [ ] 5. [HUB] Refactor Header/Footer/Navbar Theming
+- [x] 5. [HUB] Refactor Header/Footer/Navbar Theming
 
   **What to do**:
   - Replace hardcoded hex in `Header.vue`: `bg-[#050816]` → `bg-secondary-950`
@@ -434,8 +434,8 @@ Max Concurrent: 6 (Wave 1)
   - `components/layout/Header.vue`, `components/layout/Footer.vue`, `components/layout/Navbar.vue`, `components/layout/LangSwitcher.vue`
 
   **Acceptance Criteria**:
-  - [ ] Zero `#d4a853` or `#050816` in layout components
-  - [ ] `npm run build` succeeds
+  - [x] Zero `#d4a853` or `#050816` in layout components
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
   ```
@@ -450,7 +450,7 @@ Max Concurrent: 6 (Wave 1)
   **Commit**: YES (groups with Tasks 3, 4)
   - Files: `components/layout/Header.vue`, `components/layout/Footer.vue`, `components/layout/Navbar.vue`, `components/layout/LangSwitcher.vue`
 
-- [ ] 6. [HUB] Refactor Section Components Theming
+- [x] 6. [HUB] Refactor Section Components Theming
 
   **What to do**:
   - Refactor 6 section component overrides:
@@ -478,8 +478,8 @@ Max Concurrent: 6 (Wave 1)
   - `components/sections/SectionTestimonials.vue`, `components/sections/SectionCta.vue`
 
   **Acceptance Criteria**:
-  - [ ] Zero `#d4a853` in all 6 section components
-  - [ ] `npm run build` succeeds
+  - [x] Zero `#d4a853` in all 6 section components
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
   ```
@@ -496,7 +496,7 @@ Max Concurrent: 6 (Wave 1)
   - Files: `components/sections/*.vue`
   - Pre-commit: `npm run build`
 
-- [ ] 7. [CORE] Add Stripe SDK + Types + RuntimeConfig
+- [x] 7. [CORE] Add Stripe SDK + Types + RuntimeConfig
 
   **What to do**:
   - Install `stripe` package in tempo-core
@@ -527,10 +527,10 @@ Max Concurrent: 6 (Wave 1)
   - Stripe Node.js docs: https://stripe.com/docs/api?lang=node
 
   **Acceptance Criteria**:
-  - [ ] `stripe` in tempo-core/package.json dependencies
-  - [ ] `tempo-core/server/utils/stripe.ts` exports configured Stripe client
-  - [ ] runtimeConfig includes `stripe.secretKey`
-  - [ ] Test for useStripeConfig passes
+  - [x] `stripe` in tempo-core/package.json dependencies
+  - [x] `tempo-core/server/utils/stripe.ts` exports configured Stripe client
+  - [x] runtimeConfig includes `stripe.secretKey`
+  - [x] Test for useStripeConfig passes
 
   **QA Scenarios:**
   ```
@@ -554,7 +554,7 @@ Max Concurrent: 6 (Wave 1)
   - Files: `tempo-core/package.json`, `tempo-core/server/utils/stripe.ts`, `tempo-core/nuxt.config.ts`, `tempo-core/types/stripe.ts`, `tempo-core/composables/useStripeConfig.ts`
   - Pre-commit: `npm run build && npx vitest run`
 
-- [ ] 8. [CORE] Implement Stripe Webhook Handler
+- [x] 8. [CORE] Implement Stripe Webhook Handler
 
   **What to do**:
   - Create `tempo-core/server/api/stripe/webhook.post.ts`
@@ -583,9 +583,9 @@ Max Concurrent: 6 (Wave 1)
   - Signature verification: https://stripe.com/docs/webhooks/signatures
 
   **Acceptance Criteria**:
-  - [ ] Webhook endpoint exists at `/api/stripe/webhook`
-  - [ ] Invalid signatures return 400
-  - [ ] Valid checkout.session.completed events return 200
+  - [x] Webhook endpoint exists at `/api/stripe/webhook`
+  - [x] Invalid signatures return 400
+  - [x] Valid checkout.session.completed events return 200
 
   **QA Scenarios:**
   ```
@@ -611,7 +611,7 @@ Max Concurrent: 6 (Wave 1)
   - Files: `tempo-core/server/api/stripe/webhook.post.ts`, `.env.example`
   - Pre-commit: `npm run build`
 
-- [ ] 9. [CORE] Implement Customer Portal Redirect
+- [x] 9. [CORE] Implement Customer Portal Redirect
 
   **What to do**:
   - Create `tempo-core/server/api/stripe/portal.post.ts`
@@ -633,8 +633,8 @@ Max Concurrent: 6 (Wave 1)
   - Stripe Customer Portal: https://stripe.com/docs/billing/subscriptions/customer-portal
 
   **Acceptance Criteria**:
-  - [ ] `/api/stripe/portal` endpoint exists
-  - [ ] Returns redirect URL on success
+  - [x] `/api/stripe/portal` endpoint exists
+  - [x] Returns redirect URL on success
 
   **QA Scenarios:**
   ```
@@ -650,7 +650,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `feat(core): add stripe customer portal redirect endpoint`
   - Files: `tempo-core/server/api/stripe/portal.post.ts`
 
-- [ ] 10. [HUB] Move Stripe Keys to Env + Update Content
+- [x] 10. [HUB] Move Stripe Keys to Env + Update Content
 
   **What to do**:
   - Add `STRIPE_PUBLISHABLE_KEY` and `STRIPE_SECRET_KEY` to `.env`
@@ -679,9 +679,9 @@ Max Concurrent: 6 (Wave 1)
   - `components/sections/SectionStripePricing.vue` — Update to use composable
 
   **Acceptance Criteria**:
-  - [ ] Zero `pk_live_` strings in content/ directory
-  - [ ] STRIPE_* vars in .env.example
-  - [ ] Pricing tables still work (using env keys)
+  - [x] Zero `pk_live_` strings in content/ directory
+  - [x] STRIPE_* vars in .env.example
+  - [x] Pricing tables still work (using env keys)
 
   **QA Scenarios:**
   ```
@@ -707,7 +707,7 @@ Max Concurrent: 6 (Wave 1)
   - Files: `.env.example`, `content/fr/pages/services.md`, `components/sections/SectionStripePricing.vue`
   - Pre-commit: `npm run build`
 
-- [ ] 11. [HUB] Setup Playwright for Visual Regression
+- [x] 11. [HUB] Setup Playwright for Visual Regression
 
   **What to do**:
   - Install `@playwright/test` in tempo-hub
@@ -736,9 +736,9 @@ Max Concurrent: 6 (Wave 1)
   - `components/ParallaxHome.vue` — Target for visual testing
 
   **Acceptance Criteria**:
-  - [ ] `npx playwright test` runs successfully
-  - [ ] 4 baseline screenshots captured
-  - [ ] Screenshots show all 4 scenes
+  - [x] `npx playwright test` runs successfully
+  - [x] 4 baseline screenshots captured
+  - [x] Screenshots show all 4 scenes
 
   **QA Scenarios:**
   ```
@@ -755,7 +755,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `test(hub): setup playwright visual regression for ParallaxHome`
   - Files: `playwright.config.ts`, `tests/parallax-home.spec.ts`, `tests/screenshots/baseline/*.png`
 
-- [ ] 12. [HUB] Extract useParallaxData Composable
+- [x] 12. [HUB] Extract useParallaxData Composable
 
   **What to do**:
   - Create `composables/useParallaxData.ts`
@@ -795,10 +795,10 @@ Max Concurrent: 6 (Wave 1)
   - Metis analysis: "Data generation is safely extractable. No dependencies on GSAP/refs."
 
   **Acceptance Criteria**:
-  - [ ] `composables/useParallaxData.ts` exists
-  - [ ] ParallaxHome imports `useParallaxData()`
-  - [ ] Unit tests pass for data generation
-  - [ ] Visual regression: no changes in screenshots
+  - [x] `composables/useParallaxData.ts` exists
+  - [x] ParallaxHome imports `useParallaxData()`
+  - [x] Unit tests pass for data generation
+  - [x] Visual regression: no changes in screenshots
 
   **QA Scenarios:**
   ```
@@ -822,7 +822,7 @@ Max Concurrent: 6 (Wave 1)
   - Files: `composables/useParallaxData.ts`, `components/ParallaxHome.vue`
   - Pre-commit: `npx vitest run && npx playwright test`
 
-- [ ] 13. [HUB] Extract Utility Functions
+- [x] 13. [HUB] Extract Utility Functions
 
   **What to do**:
   - Create `utils/parallax-utils.ts`
@@ -844,8 +844,8 @@ Max Concurrent: 6 (Wave 1)
   - `components/ParallaxHome.vue` — Look for `function rand`
 
   **Acceptance Criteria**:
-  - [ ] `utils/parallax-utils.ts` exists
-  - [ ] Unit tests for rand() pass
+  - [x] `utils/parallax-utils.ts` exists
+  - [x] Unit tests for rand() pass
 
   **QA Scenarios:**
   ```
@@ -860,7 +860,7 @@ Max Concurrent: 6 (Wave 1)
   **Commit**: YES (groups with Task 12)
   - Files: `utils/parallax-utils.ts`
 
-- [ ] 14. [HUB] Extract useScrollAnimations Composable
+- [x] 14. [HUB] Extract useScrollAnimations Composable
 
   **What to do**:
   - Create `composables/useScrollAnimations.ts`
@@ -896,9 +896,9 @@ Max Concurrent: 6 (Wave 1)
   - Metis analysis: "Pass refs as params. Animation extraction is medium risk."
 
   **Acceptance Criteria**:
-  - [ ] `composables/useScrollAnimations.ts` exists
-  - [ ] Progress bar animates on scroll
-  - [ ] Visual regression: no differences
+  - [x] `composables/useScrollAnimations.ts` exists
+  - [x] Progress bar animates on scroll
+  - [x] Visual regression: no differences
 
   **QA Scenarios:**
   ```
@@ -917,7 +917,7 @@ Max Concurrent: 6 (Wave 1)
   - Files: `composables/useScrollAnimations.ts`, `components/ParallaxHome.vue`
   - Pre-commit: `npx vitest run && npx playwright test`
 
-- [ ] 15. [HUB] Extract useSceneTransitions Composable
+- [x] 15. [HUB] Extract useSceneTransitions Composable
 
   **What to do**:
   - Create `composables/useSceneTransitions.ts`
@@ -946,9 +946,9 @@ Max Concurrent: 6 (Wave 1)
   - Metis analysis: "Scene transition choreography is high risk. Test thoroughly."
 
   **Acceptance Criteria**:
-  - [ ] `composables/useSceneTransitions.ts` exists
-  - [ ] All 4 scenes transition correctly
-  - [ ] Visual regression: no differences
+  - [x] `composables/useSceneTransitions.ts` exists
+  - [x] All 4 scenes transition correctly
+  - [x] Visual regression: no differences
 
   **QA Scenarios:**
   ```
@@ -966,7 +966,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `refactor(hub): extract useSceneTransitions from ParallaxHome`
   - Files: `composables/useSceneTransitions.ts`, `components/ParallaxHome.vue`
 
-- [ ] 16. [HUB] Extract useLaunchSequence Composable
+- [x] 16. [HUB] Extract useLaunchSequence Composable
 
   **What to do**:
   - Create `composables/useLaunchSequence.ts`
@@ -990,9 +990,9 @@ Max Concurrent: 6 (Wave 1)
   - **Blocked By**: Task 15
 
   **Acceptance Criteria**:
-  - [ ] `composables/useLaunchSequence.ts` exists
-  - [ ] Launch animation plays at 80-98% scroll
-  - [ ] Visual regression: no differences
+  - [x] `composables/useLaunchSequence.ts` exists
+  - [x] Launch animation plays at 80-98% scroll
+  - [x] Visual regression: no differences
 
   **QA Scenarios:**
   ```
@@ -1009,7 +1009,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `refactor(hub): extract useLaunchSequence from ParallaxHome`
   - Files: `composables/useLaunchSequence.ts`, `components/ParallaxHome.vue`
 
-- [ ] 17. [HUB] Final ParallaxHome Cleanup
+- [x] 17. [HUB] Final ParallaxHome Cleanup
 
   **What to do**:
   - Review ParallaxHome.vue line count (target: <2000)
@@ -1030,9 +1030,9 @@ Max Concurrent: 6 (Wave 1)
   - **Blocked By**: Task 16
 
   **Acceptance Criteria**:
-  - [ ] ParallaxHome.vue < 2000 lines
-  - [ ] No TypeScript errors
-  - [ ] Visual regression passes
+  - [x] ParallaxHome.vue < 2000 lines
+  - [x] No TypeScript errors
+  - [x] Visual regression passes
 
   **QA Scenarios:**
   ```
@@ -1056,7 +1056,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `refactor(hub): complete ParallaxHome extraction (3595 -> <2000 lines)`
   - Files: `components/ParallaxHome.vue`
 
-- [ ] 18. [HUB] Fix robots.txt and Meta Description
+- [x] 18. [HUB] Fix robots.txt and Meta Description
 
   **What to do**:
   - Delete `public/_robots.txt` (module generates dynamically)
@@ -1080,9 +1080,9 @@ Max Concurrent: 6 (Wave 1)
   - `public/_robots.txt` — Delete this file
 
   **Acceptance Criteria**:
-  - [ ] No `_robots.txt` file in public/
-  - [ ] site.description updated
-  - [ ] `/robots.txt` returns valid content
+  - [x] No `_robots.txt` file in public/
+  - [x] site.description updated
+  - [x] `/robots.txt` returns valid content
 
   **QA Scenarios:**
   ```
@@ -1105,7 +1105,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `fix(hub): correct robots.txt and meta description`
   - Files: `nuxt.config.ts`, delete `public/_robots.txt`
 
-- [ ] 19. [CORE] Add Organization/LocalBusiness Schema Support
+- [x] 19. [CORE] Add Organization/LocalBusiness Schema Support
 
   **What to do**:
   - Create `tempo-core/composables/useSchemaOrg.ts`
@@ -1130,8 +1130,8 @@ Max Concurrent: 6 (Wave 1)
   - schema.org docs: https://schema.org/Organization
 
   **Acceptance Criteria**:
-  - [ ] `useSchemaOrg()` composable exists
-  - [ ] Organization JSON-LD appears in page source
+  - [x] `useSchemaOrg()` composable exists
+  - [x] Organization JSON-LD appears in page source
 
   **QA Scenarios:**
   ```
@@ -1147,7 +1147,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `feat(core): add organization and local business schema support`
   - Files: `tempo-core/composables/useSchemaOrg.ts`
 
-- [ ] 20. [HUB] Create English Blog Translation
+- [x] 20. [HUB] Create English Blog Translation
 
   **What to do**:
   - Create `content/en/blog/` directory
@@ -1171,9 +1171,9 @@ Max Concurrent: 6 (Wave 1)
   - `content/fr/blog/site-sur-mesure-vs-wordpress-seo.md` — Source (294 lines)
 
   **Acceptance Criteria**:
-  - [ ] `content/en/blog/custom-sites-vs-wordpress-seo.md` exists
-  - [ ] All frontmatter fields present (title, description, date, image)
-  - [ ] Build succeeds with new content
+  - [x] `content/en/blog/custom-sites-vs-wordpress-seo.md` exists
+  - [x] All frontmatter fields present (title, description, date, image)
+  - [x] Build succeeds with new content
 
   **QA Scenarios:**
   ```
@@ -1190,7 +1190,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `content(hub): add english translation of SEO blog article`
   - Files: `content/en/blog/custom-sites-vs-wordpress-seo.md`
 
-- [ ] 21. [HUB] Update general.json with Real Content
+- [x] 21. [HUB] Update general.json with Real Content
 
   **What to do**:
   - Update `content/settings/general.json`:
@@ -1214,9 +1214,9 @@ Max Concurrent: 6 (Wave 1)
   - `content/settings/general.json` — Target file
 
   **Acceptance Criteria**:
-  - [ ] defaultTitle is not empty
-  - [ ] defaultDescription matches nuxt.config
-  - [ ] Build succeeds
+  - [x] defaultTitle is not empty
+  - [x] defaultDescription matches nuxt.config
+  - [x] Build succeeds
 
   **QA Scenarios:**
   ```
@@ -1232,7 +1232,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `content(hub): update general.json with real site metadata`
   - Files: `content/settings/general.json`
 
-- [ ] 22. [HUB] Bundle Analysis and Report
+- [x] 22. [HUB] Bundle Analysis and Report
 
   **What to do**:
   - Run `npx nuxi analyze`
@@ -1252,8 +1252,8 @@ Max Concurrent: 6 (Wave 1)
   - **Blocked By**: Task 21
 
   **Acceptance Criteria**:
-  - [ ] Bundle analysis report exists
-  - [ ] Three.js not in main bundle (feature disabled)
+  - [x] Bundle analysis report exists
+  - [x] Three.js not in main bundle (feature disabled)
 
   **QA Scenarios:**
   ```
@@ -1270,7 +1270,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `docs(hub): add bundle analysis report`
   - Files: `.sisyphus/reports/bundle-analysis.md`
 
-- [ ] 23. [CORE] Fix Dockerfile Missing Directories
+- [x] 23. [CORE] Fix Dockerfile Missing Directories
 
   **What to do**:
   - Update tempo-core Dockerfile to include:
@@ -1295,8 +1295,8 @@ Max Concurrent: 6 (Wave 1)
   - Metis finding: "Dockerfile doesn't COPY components/, assets/, pages/, server/"
 
   **Acceptance Criteria**:
-  - [ ] Dockerfile includes all necessary directories
-  - [ ] `docker build` succeeds
+  - [x] Dockerfile includes all necessary directories
+  - [x] `docker build` succeeds
 
   **QA Scenarios:**
   ```
@@ -1312,7 +1312,7 @@ Max Concurrent: 6 (Wave 1)
   - Message: `fix(core): add missing directories to Dockerfile`
   - Files: `Dockerfile`
 
-- [ ] 24. [HUB] Docker Analytics Volume Mount
+- [x] 24. [HUB] Docker Analytics Volume Mount
 
   **What to do**:
   - Update `docker-compose.yml` to add volume for analytics SQLite:
@@ -1334,8 +1334,8 @@ Max Concurrent: 6 (Wave 1)
   - `data/analytics.db` — SQLite database
 
   **Acceptance Criteria**:
-  - [ ] Volume mount in docker-compose.yml
-  - [ ] data/ directory persists
+  - [x] Volume mount in docker-compose.yml
+  - [x] data/ directory persists
 
   **QA Scenarios:**
   ```
@@ -1356,19 +1356,19 @@ Max Concurrent: 6 (Wave 1)
 
 > 4 review agents run in PARALLEL. ALL must APPROVE. Rejection → fix → re-run.
 
-- [ ] F1. **Plan Compliance Audit** — `oracle`
+- [x] F1. **Plan Compliance Audit** — `oracle`
   Read the plan end-to-end. For each "Must Have": verify implementation exists. For each "Must NOT Have": search codebase for forbidden patterns. Check evidence files exist in .sisyphus/evidence/. Compare deliverables against plan.
   Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
-- [ ] F2. **Code Quality Review** — `unspecified-high`
+- [x] F2. **Code Quality Review** — `unspecified-high`
   Run `npm run build` in both repos. Run `npx vitest run`. Check for TypeScript errors, unused imports, console.log in prod. Verify no hardcoded `#d4a853` outside ParallaxHome.
   Output: `Build [PASS/FAIL] | Tests [N pass/N fail] | Theming [CLEAN/N issues] | VERDICT`
 
-- [ ] F3. **Visual QA with Playwright** — `unspecified-high` + `playwright` skill
+- [x] F3. **Visual QA with Playwright** — `unspecified-high` + `playwright` skill
   Run all Playwright tests. Verify ParallaxHome scrolls through 4 scenes. Capture screenshots at each scene transition. Compare with baseline (if exists).
   Output: `Scenarios [N/N pass] | Screenshots [N captured] | Regressions [N/NONE] | VERDICT`
 
-- [ ] F4. **Scope Fidelity Check** — `deep`
+- [x] F4. **Scope Fidelity Check** — `deep`
   For each task: read "What to do", verify actual implementation matches. Check [CORE] tasks modified only tempo-core, [HUB] tasks modified only tempo-hub. Verify submodule pointer updated correctly.
   Output: `Tasks [N/N compliant] | Repo Boundary [CLEAN/N violations] | VERDICT`
 
@@ -1421,10 +1421,10 @@ npx lighthouse https://localhost:3000 --only-categories=seo --output=json | jq '
 ```
 
 ### Final Checklist
-- [ ] All "Must Have" items present and verified
-- [ ] All "Must NOT Have" items absent (grep verification)
-- [ ] All tests pass (`npx vitest run`)
-- [ ] Build succeeds in both repos
-- [ ] ParallaxHome visual regression passes
-- [ ] Stripe webhook responds to test events
-- [ ] SEO score > 90
+- [x] All "Must Have" items present and verified
+- [x] All "Must NOT Have" items absent (grep verification)
+- [x] All tests pass (`npx vitest run`)
+- [x] Build succeeds in both repos
+- [x] ParallaxHome visual regression passes
+- [x] Stripe webhook responds to test events
+- [x] SEO score > 90

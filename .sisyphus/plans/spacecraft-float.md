@@ -68,7 +68,7 @@ No Final Verification Wave needed (trivial change).
 
 ## TODOs
 
-- [ ] 1. Add spacecraft floating CSS animation
+- [x] 1. Add spacecraft floating CSS animation
 
   **What to do**:
   1. In `components/ParallaxHome.vue` template, at line ~2982, wrap the existing transform group:
@@ -131,9 +131,9 @@ No Final Verification Wave needed (trivial change).
   - `composables/useLaunchSequence.ts:71-88` — GSAP animations on saucerRef (DO NOT MODIFY)
 
   **Acceptance Criteria**:
-  - [ ] `npm run build` → exit 0
-  - [ ] `npx vitest run` → 31 pass
-  - [ ] `grep -c 'spacecraft-float' components/ParallaxHome.vue` → ≥ 2
+  - [x] `npm run build` → exit 0
+  - [x] `npx vitest run` → 31 pass
+  - [x] `grep -c 'spacecraft-float' components/ParallaxHome.vue` → ≥ 2
 
   **QA Scenarios:**
   ```
@@ -171,7 +171,7 @@ grep -c 'spacecraft-float' components/ParallaxHome.vue  # Expected: ≥ 2
 ```
 
 ### Final Checklist
-- [ ] Spacecraft has gentle floating CSS animation
-- [ ] No GSAP conflict (animation on inner wrapper, not saucerRef)
-- [ ] Build passes
-- [ ] Tests pass
+- [x] Spacecraft has gentle floating CSS animation
+- [x] No GSAP conflict (animation on inner wrapper, not saucerRef)
+- [x] Build passes
+- [x] Tests pass

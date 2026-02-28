@@ -89,17 +89,17 @@ Elevate all non-parallax pages to match the premium dark sci-fi aesthetic of the
 - `tempo-core/components/content/PageRenderer.vue` — Register new section types with safe fallback
 
 ### Definition of Done
-- [ ] `npm run build` succeeds (exit 0)
-- [ ] `npx vitest run` passes (31 tests)
-- [ ] All pages load at 3 viewports (375px, 768px, 1440px)
-- [ ] Glassmorphism visible on cards (backdrop-blur + border)
-- [ ] Gold glow effects on buttons and headings
-- [ ] Gradient backgrounds on sections (not flat colors)
-- [ ] Scroll entrance animations on sections
-- [ ] Navigation includes all new pages
-- [ ] FR and EN locales work for all pages
-- [ ] Cal.com embed loads on booking page
-- [ ] Portfolio grid renders with project cards
+- [x] `npm run build` succeeds (exit 0)
+- [x] `npx vitest run` passes (31 tests)
+- [x] All pages load at 3 viewports (375px, 768px, 1440px)
+- [x] Glassmorphism visible on cards (backdrop-blur + border)
+- [x] Gold glow effects on buttons and headings
+- [x] Gradient backgrounds on sections (not flat colors)
+- [x] Scroll entrance animations on sections
+- [x] Navigation includes all new pages
+- [x] FR and EN locales work for all pages
+- [x] Cal.com embed loads on booking page
+- [x] Portfolio grid renders with project cards
 
 ### Must Have
 - Glassmorphism on ALL card-based components (Features, Testimonials, Pricing, Portfolio)
@@ -221,7 +221,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 1. CSS Design Token Utilities in theme.css
+- [x] 1. CSS Design Token Utilities in theme.css
 
   **What to do**:
   - Open `assets/css/theme.css` and add the following utility classes after the existing `:root` and `.prose` blocks:
@@ -274,9 +274,9 @@ Max Concurrent: 6 (Wave 2)
   - `ParallaxHome.vue` — These exact RGBA values create the premium look; do NOT deviate from them
 
   **Acceptance Criteria**:
-  - [ ] `assets/css/theme.css` contains all 11 utility classes listed above
-  - [ ] Grep: `grep -c 'glass\|glow-gold\|text-glow\|gradient-section\|hover-lift' assets/css/theme.css` returns ≥ 11
-  - [ ] `npm run build` succeeds (exit 0)
+  - [x] `assets/css/theme.css` contains all 11 utility classes listed above
+  - [x] Grep: `grep -c 'glass\|glow-gold\|text-glow\|gradient-section\|hover-lift' assets/css/theme.css` returns ≥ 11
+  - [x] `npm run build` succeeds (exit 0)
 
   **QA Scenarios:**
 
@@ -312,7 +312,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 2. UiCard Glassmorphism + Glow Upgrade
+- [x] 2. UiCard Glassmorphism + Glow Upgrade
 
   **What to do**:
   - Open `components/ui/Card.vue` and upgrade it with glassmorphism and glow effects:
@@ -356,11 +356,11 @@ Max Concurrent: 6 (Wave 2)
   - Feature/Pricing sections — These are consumers; `glow` prop should be backward-compatible (default false)
 
   **Acceptance Criteria**:
-  - [ ] `components/ui/Card.vue` has glassmorphism (backdrop-filter blur)
-  - [ ] Card has hover glow effect (box-shadow on hover)
-  - [ ] `glow` prop exists with default `false`
-  - [ ] Existing `bordered` and `padded` props still work
-  - [ ] `npm run build` succeeds
+  - [x] `components/ui/Card.vue` has glassmorphism (backdrop-filter blur)
+  - [x] Card has hover glow effect (box-shadow on hover)
+  - [x] `glow` prop exists with default `false`
+  - [x] Existing `bordered` and `padded` props still work
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -393,7 +393,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 3. UiButton Gold Glow + Variant Upgrade
+- [x] 3. UiButton Gold Glow + Variant Upgrade
 
   **What to do**:
   - Open `components/ui/Button.vue` and enhance all variants with premium dark theme polish:
@@ -432,10 +432,10 @@ Max Concurrent: 6 (Wave 2)
   - `variantClasses` at line 43-48 is the ONLY object to change — add Tailwind shadow utilities to each variant's hover state
 
   **Acceptance Criteria**:
-  - [ ] Primary variant has gold glow on hover
-  - [ ] Outline variant has gold glow on hover
-  - [ ] `npm run build` succeeds
-  - [ ] All 4 variants still render correctly
+  - [x] Primary variant has gold glow on hover
+  - [x] Outline variant has gold glow on hover
+  - [x] `npm run build` succeeds
+  - [x] All 4 variants still render correctly
 
   **QA Scenarios:**
 
@@ -468,7 +468,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 4. App Config — Cal.com Username + Nav Config
+- [x] 4. App Config — Cal.com Username + Nav Config
 
   **What to do**:
   - Open `app.config.ts` and set `calcom.username` to `'tempo-hub'`:
@@ -506,8 +506,8 @@ Max Concurrent: 6 (Wave 2)
   - SectionContact shows the embed only renders when username is truthy
 
   **Acceptance Criteria**:
-  - [ ] `grep 'username' app.config.ts` shows `'tempo-hub'`
-  - [ ] `npm run build` succeeds
+  - [x] `grep 'username' app.config.ts` shows `'tempo-hub'`
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -538,7 +538,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 5. PageRenderer — Register New Section Types
+- [x] 5. PageRenderer — Register New Section Types
 
   **What to do**:
   - Open `tempo-core/components/content/PageRenderer.vue` and:
@@ -589,10 +589,10 @@ Max Concurrent: 6 (Wave 2)
   - Safe fallback prevents blank pages when a section type is misspelled
 
   **Acceptance Criteria**:
-  - [ ] `grep 'projects' tempo-core/components/content/PageRenderer.vue` shows the mapping
-  - [ ] `grep 'booking' tempo-core/components/content/PageRenderer.vue` shows the mapping
-  - [ ] `grep 'console.warn' tempo-core/components/content/PageRenderer.vue` shows the fallback
-  - [ ] NOTE: Build may warn about missing components (SectionProjects/SectionBooking don't exist yet) — that's OK, they'll be created in Tasks 14-15
+  - [x] `grep 'projects' tempo-core/components/content/PageRenderer.vue` shows the mapping
+  - [x] `grep 'booking' tempo-core/components/content/PageRenderer.vue` shows the mapping
+  - [x] `grep 'console.warn' tempo-core/components/content/PageRenderer.vue` shows the fallback
+  - [x] NOTE: Build may warn about missing components (SectionProjects/SectionBooking don't exist yet) — that's OK, they'll be created in Tasks 14-15
 
   **QA Scenarios:**
 
@@ -625,7 +625,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 6. SectionHero Premium Upgrade
+- [x] 6. SectionHero Premium Upgrade
 
   **What to do**:
   - Open `components/sections/SectionHero.vue` and apply premium dark theme:
@@ -664,10 +664,10 @@ Max Concurrent: 6 (Wave 2)
   - ParallaxHome's text-shadow values are the exact gold glow to replicate via `.text-glow` utility
 
   **Acceptance Criteria**:
-  - [ ] `<section>` has gradient background (not flat color)
-  - [ ] `<h1>` has text glow effect
-  - [ ] Decorative line element exists below subtitle
-  - [ ] `npm run build` succeeds
+  - [x] `<section>` has gradient background (not flat color)
+  - [x] `<h1>` has text glow effect
+  - [x] Decorative line element exists below subtitle
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -698,7 +698,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 7. SectionFeatures Premium Upgrade
+- [x] 7. SectionFeatures Premium Upgrade
 
   **What to do**:
   - Open `components/sections/SectionFeatures.vue` and apply premium theme:
@@ -737,11 +737,11 @@ Max Concurrent: 6 (Wave 2)
   - Card.vue upgrade (Task 2) means we only need to add hover-lift, not re-implement glassmorphism
 
   **Acceptance Criteria**:
-  - [ ] `<section>` uses gradient background
-  - [ ] Heading has text glow
-  - [ ] Icon wrapped in subtle glow container
-  - [ ] Cards have `hover-lift` class
-  - [ ] `npm run build` succeeds
+  - [x] `<section>` uses gradient background
+  - [x] Heading has text glow
+  - [x] Icon wrapped in subtle glow container
+  - [x] Cards have `hover-lift` class
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -763,7 +763,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 8. SectionCta Premium Upgrade
+- [x] 8. SectionCta Premium Upgrade
 
   **What to do**:
   - Open `components/sections/SectionCta.vue` and apply premium theme:
@@ -794,10 +794,10 @@ Max Concurrent: 6 (Wave 2)
   - `components/sections/SectionCta.vue:1-34` — Full component. Modify `<section>` class (line 2), `<h2>` (line 4), button wrapper (line 8)
 
   **Acceptance Criteria**:
-  - [ ] `<section>` uses gradient background with glow border
-  - [ ] Heading has text glow
-  - [ ] Decorative line element present
-  - [ ] `npm run build` succeeds
+  - [x] `<section>` uses gradient background with glow border
+  - [x] Heading has text glow
+  - [x] Decorative line element present
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -818,7 +818,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 9. SectionTestimonials Premium Upgrade
+- [x] 9. SectionTestimonials Premium Upgrade
 
   **What to do**:
   - Open `components/sections/SectionTestimonials.vue` and apply premium theme:
@@ -851,11 +851,11 @@ Max Concurrent: 6 (Wave 2)
   - `components/sections/SectionTestimonials.vue:1-43` — Full component. Modify section class (line 2), heading (line 5), star icon (line 13), blockquote (line 14), author (line 18)
 
   **Acceptance Criteria**:
-  - [ ] `<section>` uses gradient background
-  - [ ] Star icons have gold drop-shadow
-  - [ ] Blockquote has left gold border
-  - [ ] Cards have `hover-lift`
-  - [ ] `npm run build` succeeds
+  - [x] `<section>` uses gradient background
+  - [x] Star icons have gold drop-shadow
+  - [x] Blockquote has left gold border
+  - [x] Cards have `hover-lift`
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -877,7 +877,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 10. SectionStats Premium Upgrade
+- [x] 10. SectionStats Premium Upgrade
 
   **What to do**:
   - Open `components/sections/SectionStats.vue` and apply premium theme:
@@ -910,10 +910,10 @@ Max Concurrent: 6 (Wave 2)
   - `components/sections/SectionStats.vue:35-40` — `gridClasses` computed. Consider adding `divide-x` here or as separate class
 
   **Acceptance Criteria**:
-  - [ ] `<section>` uses gradient background
-  - [ ] Stat values have gold text glow
-  - [ ] Stat items have glass container
-  - [ ] `npm run build` succeeds
+  - [x] `<section>` uses gradient background
+  - [x] Stat values have gold text glow
+  - [x] Stat items have glass container
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -934,7 +934,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 11. SectionPricing Premium Upgrade
+- [x] 11. SectionPricing Premium Upgrade
 
   **What to do**:
   - Open `components/sections/SectionPricing.vue` and apply premium theme:
@@ -968,11 +968,11 @@ Max Concurrent: 6 (Wave 2)
   - `components/sections/SectionPricing.vue:14` — Highlighted plan class. Replace `ring-2 ring-primary-500` with `glow-gold`
 
   **Acceptance Criteria**:
-  - [ ] `<section>` uses gradient background
-  - [ ] Highlighted plan has gold glow (not ring)
-  - [ ] Price values have subtle text glow
-  - [ ] Non-highlighted cards have hover-lift
-  - [ ] `npm run build` succeeds
+  - [x] `<section>` uses gradient background
+  - [x] Highlighted plan has gold glow (not ring)
+  - [x] Price values have subtle text glow
+  - [x] Non-highlighted cards have hover-lift
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -994,7 +994,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 12. SectionFaq + SectionLogos + SectionContact Premium Upgrade
+- [x] 12. SectionFaq + SectionLogos + SectionContact Premium Upgrade
 
   **What to do**:
   - This task bundles 3 smaller section components into one:
@@ -1049,11 +1049,11 @@ Max Concurrent: 6 (Wave 2)
   - Contact embeds Cal.com — wrapping ContactForm in glass-card improves visual consistency
 
   **Acceptance Criteria**:
-  - [ ] All 3 components have gradient backgrounds
-  - [ ] FAQ active item has visual distinction
-  - [ ] Logo hover has gold drop-shadow
-  - [ ] Contact form wrapped in glass container
-  - [ ] `npm run build` succeeds
+  - [x] All 3 components have gradient backgrounds
+  - [x] FAQ active item has visual distinction
+  - [x] Logo hover has gold drop-shadow
+  - [x] Contact form wrapped in glass container
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -1084,7 +1084,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 13. SectionStripePricing Minimal Dark Alignment
+- [x] 13. SectionStripePricing Minimal Dark Alignment
 
   **What to do**:
   - Open `components/sections/SectionStripePricing.vue` and make minimal dark theme alignment:
@@ -1117,9 +1117,9 @@ Max Concurrent: 6 (Wave 2)
   - `components/sections/SectionStripePricing.vue:1-44` — Full component. Add gradient to section (2), glow to h2 (4), glass wrapper around stripe-pricing-table (16-19)
 
   **Acceptance Criteria**:
-  - [ ] Section has gradient background
-  - [ ] Stripe table wrapped in glass container
-  - [ ] `npm run build` succeeds
+  - [x] Section has gradient background
+  - [x] Stripe table wrapped in glass container
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -1140,7 +1140,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 14. SectionProjects.vue — NEW Grid Component
+- [x] 14. SectionProjects.vue — NEW Grid Component
 
   **What to do**:
   - Create `components/sections/SectionProjects.vue` — a new section component for portfolio/project grid:
@@ -1214,12 +1214,12 @@ Max Concurrent: 6 (Wave 2)
   - PageRenderer's `getSectionProps` means items come as a flat prop from markdown frontmatter
 
   **Acceptance Criteria**:
-  - [ ] `components/sections/SectionProjects.vue` exists
-  - [ ] Component accepts `title`, `subtitle`, `items` props
-  - [ ] Grid layout: 1/2/3 columns responsive
-  - [ ] Cards have glassmorphism + hover-lift
-  - [ ] Tags rendered as gold pills
-  - [ ] `npm run build` succeeds
+  - [x] `components/sections/SectionProjects.vue` exists
+  - [x] Component accepts `title`, `subtitle`, `items` props
+  - [x] Grid layout: 1/2/3 columns responsive
+  - [x] Cards have glassmorphism + hover-lift
+  - [x] Tags rendered as gold pills
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -1251,7 +1251,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 15. SectionBooking.vue — NEW Cal.com Wrapper
+- [x] 15. SectionBooking.vue — NEW Cal.com Wrapper
 
   **What to do**:
   - Create `components/sections/SectionBooking.vue` — a new section component that wraps Cal.com embed:
@@ -1309,11 +1309,11 @@ Max Concurrent: 6 (Wave 2)
   - CalEmbed source shows it auto-resolves username from config, so we just pass theme
 
   **Acceptance Criteria**:
-  - [ ] `components/sections/SectionBooking.vue` exists
-  - [ ] Component uses `IntegrationsCalEmbed`
-  - [ ] Wrapped in glass-card container
-  - [ ] Default theme is 'dark'
-  - [ ] `npm run build` succeeds
+  - [x] `components/sections/SectionBooking.vue` exists
+  - [x] Component uses `IntegrationsCalEmbed`
+  - [x] Wrapped in glass-card container
+  - [x] Default theme is 'dark'
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -1344,7 +1344,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 16. Header + Footer Premium Upgrade
+- [x] 16. Header + Footer Premium Upgrade
 
   **What to do**:
   - **Header** (`components/layout/Header.vue`):
@@ -1389,10 +1389,10 @@ Max Concurrent: 6 (Wave 2)
   - Footer line 2 needs gradient + gold border to match section styling
 
   **Acceptance Criteria**:
-  - [ ] Header has enhanced glassmorphism (`backdrop-blur-xl` + gold border)
-  - [ ] Footer uses gradient background
-  - [ ] Brand names have text glow
-  - [ ] `npm run build` succeeds
+  - [x] Header has enhanced glassmorphism (`backdrop-blur-xl` + gold border)
+  - [x] Footer uses gradient background
+  - [x] Brand names have text glow
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -1422,7 +1422,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 17. Services Page Redesign FR + EN
+- [x] 17. Services Page Redesign FR + EN
 
   **What to do**:
   - Redesign both `content/fr/pages/services.md` and `content/en/pages/services.md` with premium section types:
@@ -1530,11 +1530,11 @@ Max Concurrent: 6 (Wave 2)
   - animations.ts shows valid `name` values for the `animation` block
 
   **Acceptance Criteria**:
-  - [ ] FR services.md has: hero + features (6 items) + stats + stripe-pricing + cta
-  - [ ] EN services.md has: identical structure with English text
-  - [ ] Both have `animation` blocks on features and stats
-  - [ ] EN has `stripe-pricing` section (parity fix)
-  - [ ] `npm run build` succeeds
+  - [x] FR services.md has: hero + features (6 items) + stats + stripe-pricing + cta
+  - [x] EN services.md has: identical structure with English text
+  - [x] Both have `animation` blocks on features and stats
+  - [x] EN has `stripe-pricing` section (parity fix)
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -1565,7 +1565,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 18. Booking Page FR + EN
+- [x] 18. Booking Page FR + EN
 
   **What to do**:
   - Create `content/fr/pages/rendez-vous.md`:
@@ -1646,10 +1646,10 @@ Max Concurrent: 6 (Wave 2)
   - PageSection shows that props are passed as flat YAML keys under each section
 
   **Acceptance Criteria**:
-  - [ ] `content/fr/pages/rendez-vous.md` exists with hero + booking + cta sections
-  - [ ] `content/en/pages/booking.md` exists with matching structure
-  - [ ] Both have `showInNav: true`
-  - [ ] `npm run build` succeeds
+  - [x] `content/fr/pages/rendez-vous.md` exists with hero + booking + cta sections
+  - [x] `content/en/pages/booking.md` exists with matching structure
+  - [x] Both have `showInNav: true`
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -1681,7 +1681,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 19. Portfolio Page FR + EN
+- [x] 19. Portfolio Page FR + EN
 
   **What to do**:
   - Create `content/fr/pages/projets.md`:
@@ -1769,11 +1769,11 @@ Max Concurrent: 6 (Wave 2)
   - ProjectItem interface defines what fields are valid in the `items` array
 
   **Acceptance Criteria**:
-  - [ ] `content/fr/pages/projets.md` exists with hero + projects (6 items) + cta
-  - [ ] `content/en/pages/projects.md` exists with matching structure
-  - [ ] Both have `showInNav: true` and `order: 2`
-  - [ ] Projects section has 6 items with title, description, tags
-  - [ ] `npm run build` succeeds
+  - [x] `content/fr/pages/projets.md` exists with hero + projects (6 items) + cta
+  - [x] `content/en/pages/projects.md` exists with matching structure
+  - [x] Both have `showInNav: true` and `order: 2`
+  - [x] Projects section has 6 items with title, description, tags
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -1806,7 +1806,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 20. Entrance Animations on All Pages
+- [x] 20. Entrance Animations on All Pages
 
   **What to do**:
   - Add `animation` blocks to ALL section definitions across ALL content pages to enable scroll-triggered entrance animations:
@@ -1861,9 +1861,9 @@ Max Concurrent: 6 (Wave 2)
   - PageRenderer shows the YAML format expected: `animation.name`, `animation.delay`, `animation.stagger`
 
   **Acceptance Criteria**:
-  - [ ] ALL section definitions (except top-of-page hero) have `animation` blocks
-  - [ ] Only animation names from config/animations.ts are used
-  - [ ] `npm run build` succeeds
+  - [x] ALL section definitions (except top-of-page hero) have `animation` blocks
+  - [x] Only animation names from config/animations.ts are used
+  - [x] `npm run build` succeeds
 
   **QA Scenarios:**
 
@@ -1900,7 +1900,7 @@ Max Concurrent: 6 (Wave 2)
 
 > 3 review agents run in PARALLEL. ALL must APPROVE. Rejection → fix → re-run.
 
-- [ ] F1. **Visual QA — Playwright Screenshots All Pages × 3 Viewports**
+- [x] F1. **Visual QA — Playwright Screenshots All Pages × 3 Viewports**
 
   **Recommended Agent Profile**:
   - **Category**: `unspecified-high`
@@ -1934,17 +1934,17 @@ Max Concurrent: 6 (Wave 2)
   - Save all screenshots to `.sisyphus/evidence/final-qa/`
 
   **Acceptance Criteria**:
-  - [ ] Screenshots captured for ALL pages at ALL 3 viewports
-  - [ ] No pages show flat/unstyled sections (bg-muted without gradient)
-  - [ ] Glassmorphism visible on card elements
-  - [ ] Gold glow visible on headings
-  - [ ] Navigation includes Services, Projets/Projects, Rendez-vous/Booking links
+  - [x] Screenshots captured for ALL pages at ALL 3 viewports
+  - [x] No pages show flat/unstyled sections (bg-muted without gradient)
+  - [x] Glassmorphism visible on card elements
+  - [x] Gold glow visible on headings
+  - [x] Navigation includes Services, Projets/Projects, Rendez-vous/Booking links
 
   **Output**: `Pages [N/N rendered] | Viewports [3/3] | Visual Consistency [PASS/FAIL] | VERDICT: APPROVE/REJECT`
 
 ---
 
-- [ ] F2. **Build + Test + Navigation Audit**
+- [x] F2. **Build + Test + Navigation Audit**
 
   **Recommended Agent Profile**:
   - **Category**: `unspecified-high`
@@ -1963,16 +1963,16 @@ Max Concurrent: 6 (Wave 2)
      - Verify nav includes: Services, Projets/Projects, Rendez-vous/Booking, Contact
 
   **Acceptance Criteria**:
-  - [ ] Build succeeds (exit 0)
-  - [ ] All tests pass (≥31)
-  - [ ] No console.log, as any, or @ts-ignore in changed files
-  - [ ] No new TypeScript errors
+  - [x] Build succeeds (exit 0)
+  - [x] All tests pass (≥31)
+  - [x] No console.log, as any, or @ts-ignore in changed files
+  - [x] No new TypeScript errors
 
   **Output**: `Build [PASS/FAIL] | Tests [N pass/N fail] | TypeCheck [PASS/FAIL] | Code Quality [CLEAN/N issues] | VERDICT`
 
 ---
 
-- [ ] F3. **Content Parity FR/EN Check**
+- [x] F3. **Content Parity FR/EN Check**
 
   **Recommended Agent Profile**:
   - **Category**: `quick`
@@ -1991,10 +1991,10 @@ Max Concurrent: 6 (Wave 2)
   5. Verify `order:` values are consistent between FR and EN
 
   **Acceptance Criteria**:
-  - [ ] All FR/EN page pairs have identical section types and counts
-  - [ ] All FR/EN page pairs have identical animation blocks
-  - [ ] All pages have `showInNav: true`
-  - [ ] No section type in FR missing from EN or vice versa
+  - [x] All FR/EN page pairs have identical section types and counts
+  - [x] All FR/EN page pairs have identical animation blocks
+  - [x] All pages have `showInNav: true`
+  - [x] No section type in FR missing from EN or vice versa
 
   **Output**: `Pairs [N/N matched] | Sections [N/N parity] | Animations [N/N parity] | VERDICT`
 
@@ -2030,18 +2030,18 @@ npx vitest run --reporter=verbose     # Expected: ≥31 tests pass
 ```
 
 ### Final Checklist
-- [ ] `npm run build` succeeds
-- [ ] All existing tests pass (≥31)
-- [ ] All 10 section components have gradient backgrounds (no flat bg-muted)
-- [ ] UiCard has glassmorphism (backdrop-blur + gold border)
-- [ ] UiButton has gold glow on hover
-- [ ] Services page: 5 sections (hero, features, stats, stripe-pricing, cta)
-- [ ] Booking page: 3 sections (hero, booking, cta) with Cal.com embed
-- [ ] Portfolio page: 3 sections (hero, projects with 6 cards, cta)
-- [ ] All pages exist in both FR and EN with identical section structure
-- [ ] Navigation includes all new pages
-- [ ] Header has enhanced glassmorphism
-- [ ] Footer has gradient background
-- [ ] Scroll entrance animations on all sections (except top hero)
-- [ ] No `console.log`, `as any`, or `@ts-ignore` in changed files
-- [ ] No SVG art, scanlines, or vignette in section components
+- [x] `npm run build` succeeds
+- [x] All existing tests pass (≥31)
+- [x] All 10 section components have gradient backgrounds (no flat bg-muted)
+- [x] UiCard has glassmorphism (backdrop-blur + gold border)
+- [x] UiButton has gold glow on hover
+- [x] Services page: 5 sections (hero, features, stats, stripe-pricing, cta)
+- [x] Booking page: 3 sections (hero, booking, cta) with Cal.com embed
+- [x] Portfolio page: 3 sections (hero, projects with 6 cards, cta)
+- [x] All pages exist in both FR and EN with identical section structure
+- [x] Navigation includes all new pages
+- [x] Header has enhanced glassmorphism
+- [x] Footer has gradient background
+- [x] Scroll entrance animations on all sections (except top hero)
+- [x] No `console.log`, `as any`, or `@ts-ignore` in changed files
+- [x] No SVG art, scanlines, or vignette in section components

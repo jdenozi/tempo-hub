@@ -242,13 +242,13 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - GSAP docs: `gsap.context()` — scopes all tweens for clean revert on unmount
 
   **Acceptance Criteria**:
-  - [ ] `grep -c 'v-once' components/ParallaxHome.vue` → ≥ 8
-  - [ ] `grep 'markRaw' composables/useParallaxData.ts` → present
-  - [ ] `grep 'gsap.context' components/ParallaxHome.vue` → present
-  - [ ] `ls assets/css/parallax-animations.css` → exists
-  - [ ] `grep -c 'feDisplacementMap' components/ParallaxHome.vue` → 0
-  - [ ] `npm run build` → exit 0
-  - [ ] `npx vitest run` → 31+ tests pass
+  - [x] `grep -c 'v-once' components/ParallaxHome.vue` → ≥ 8
+  - [x] `grep 'markRaw' composables/useParallaxData.ts` → present
+  - [x] `grep 'gsap.context' components/ParallaxHome.vue` → present
+  - [x] `ls assets/css/parallax-animations.css` → exists
+  - [x] `grep -c 'feDisplacementMap' components/ParallaxHome.vue` → 0
+  - [x] `npm run build` → exit 0
+  - [x] `npx vitest run` → 31+ tests pass
 
   **QA Scenarios:**
   ```
@@ -319,10 +319,10 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Existing nebula: 3-4 ellipses with `feGaussianBlur` filters at lines ~155-175
 
   **Acceptance Criteria**:
-  - [ ] Nebula visually richer (more cloud layers visible)
-  - [ ] Planet has surface detail (craters/bands visible)
-  - [ ] Asteroids have surface texture
-  - [ ] `npm run build` → exit 0
+  - [x] Nebula visually richer (more cloud layers visible)
+  - [x] Planet has surface detail (craters/bands visible)
+  - [x] Asteroids have surface texture
+  - [x] `npm run build` → exit 0
 
   **QA Scenarios:**
   ```
@@ -386,10 +386,10 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Existing edge rendering: `<line>` elements with `stroke-dasharray`
 
   **Acceptance Criteria**:
-  - [ ] Constellation has 40+ nodes visible
-  - [ ] At least 8 edges have flowing dash animation
-  - [ ] 14+ orbital particles visible
-  - [ ] `npm run build` → exit 0
+  - [x] Constellation has 40+ nodes visible
+  - [x] At least 8 edges have flowing dash animation
+  - [x] 14+ orbital particles visible
+  - [x] `npm run build` → exit 0
 
   **QA Scenarios:**
   ```
@@ -460,11 +460,11 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Pattern: Windows are `<rect>` elements grouped in `<g>` per floor/building. Apply flicker class to `<g>` group, not individual rects.
 
   **Acceptance Criteria**:
-  - [ ] At least 8 window `<g>` groups have flicker CSS class
-  - [ ] 3-4 neon sign elements visible on buildings
-  - [ ] Holographic displays have pulsing animation
-  - [ ] Zero new GSAP tweens for window animation
-  - [ ] `npm run build` → exit 0
+  - [x] At least 8 window `<g>` groups have flicker CSS class
+  - [x] 3-4 neon sign elements visible on buildings
+  - [x] Holographic displays have pulsing animation
+  - [x] Zero new GSAP tweens for window animation
+  - [x] `npm run build` → exit 0
 
   **QA Scenarios:**
   ```
@@ -538,11 +538,11 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - City viewbox: 0 0 1440 800 — street level is y:760-800
 
   **Acceptance Criteria**:
-  - [ ] Road surface visible below buildings
-  - [ ] 6+ lampposts with light cones visible
-  - [ ] 4+ ground vehicles visible
-  - [ ] At least 1 vehicle has CSS drift animation
-  - [ ] `npm run build` → exit 0
+  - [x] Road surface visible below buildings
+  - [x] 6+ lampposts with light cones visible
+  - [x] 4+ ground vehicles visible
+  - [x] At least 1 vehicle has CSS drift animation
+  - [x] `npm run build` → exit 0
 
   **QA Scenarios:**
   ```
@@ -607,11 +607,11 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - `assets/css/parallax-animations.css` — Add `hologram-scanline` and `smoke-drift` keyframes
 
   **Acceptance Criteria**:
-  - [ ] 5+ buildings have rooftop details (antennas/dishes/panels)
-  - [ ] 2+ buildings have architectural variety (curved/stepped tops)
-  - [ ] 2+ holographic advertisement screens visible
-  - [ ] 1+ chimney smoke effect visible
-  - [ ] `npm run build` → exit 0
+  - [x] 5+ buildings have rooftop details (antennas/dishes/panels)
+  - [x] 2+ buildings have architectural variety (curved/stepped tops)
+  - [x] 2+ holographic advertisement screens visible
+  - [x] 1+ chimney smoke effect visible
+  - [x] `npm run build` → exit 0
 
   **QA Scenarios:**
   ```
@@ -686,11 +686,11 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Existing tower pattern: Control tower at lines ~2580-2600 (14×25px) — use similar style
 
   **Acceptance Criteria**:
-  - [ ] Launch tower visible next to platform (80+ px tall lattice structure)
-  - [ ] Umbilical arm connects to spacecraft
-  - [ ] Arm retracts on scroll past 82%
-  - [ ] Tower has red warning beacon blinking
-  - [ ] `npm run build` → exit 0
+  - [x] Launch tower visible next to platform (80+ px tall lattice structure)
+  - [x] Umbilical arm connects to spacecraft
+  - [x] Arm retracts on scroll past 82%
+  - [x] Tower has red warning beacon blinking
+  - [x] `npm run build` → exit 0
 
   **QA Scenarios:**
   ```
@@ -771,12 +771,12 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Scroll ranges: countdown should precede ignition (80-88%), overlapping early launch
 
   **Acceptance Criteria**:
-  - [ ] Countdown text visible at 80% scroll showing "5"
-  - [ ] Text decrements to 4, 3, 2, 1 as scroll progresses
-  - [ ] "LIFTOFF" appears at ~88% scroll
-  - [ ] Text has gold color + glow shadow
-  - [ ] Text fades out by 92% scroll
-  - [ ] `npm run build` → exit 0
+  - [x] Countdown text visible at 80% scroll showing "5"
+  - [x] Text decrements to 4, 3, 2, 1 as scroll progresses
+  - [x] "LIFTOFF" appears at ~88% scroll
+  - [x] Text has gold color + glow shadow
+  - [x] Text fades out by 92% scroll
+  - [x] `npm run build` → exit 0
 
   **QA Scenarios:**
   ```
@@ -853,11 +853,11 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - GSAP `rough` ease: Creates organic-feeling jitter for camera shake
 
   **Acceptance Criteria**:
-  - [ ] Dust clouds expand from platform on launch scroll
-  - [ ] Smoke columns rise from blast area
-  - [ ] Camera shake visible during ignition phase
-  - [ ] No `feDisplacementMap` in component (`grep` check)
-  - [ ] `npm run build` → exit 0
+  - [x] Dust clouds expand from platform on launch scroll
+  - [x] Smoke columns rise from blast area
+  - [x] Camera shake visible during ignition phase
+  - [x] No `feDisplacementMap` in component (`grep` check)
+  - [x] `npm run build` → exit 0
 
   **QA Scenarios:**
   ```
@@ -929,11 +929,11 @@ Max Concurrent: 3 (Waves 1, 2, 3)
   - Landing platform position: x:160-500, y:554
 
   **Acceptance Criteria**:
-  - [ ] Terrain has visible rock/vegetation details
-  - [ ] Runway markings + edge lights visible
-  - [ ] Fuel tanks or supply vehicle near spaceport
-  - [ ] Fog layer adds atmospheric depth
-  - [ ] `npm run build` → exit 0
+  - [x] Terrain has visible rock/vegetation details
+  - [x] Runway markings + edge lights visible
+  - [x] Fuel tanks or supply vehicle near spaceport
+  - [x] Fog layer adds atmospheric depth
+  - [x] `npm run build` → exit 0
 
   **QA Scenarios:**
   ```

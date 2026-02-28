@@ -419,13 +419,13 @@ Include all modified files.
 ## Verification Checklist
 
 After each task, verify:
-- [ ] `bun run build` exits 0
-- [ ] No TypeScript errors
-- [ ] useSpaceParticles: DPR capped (check: `Math.min(... , 2)` in source)
-- [ ] GridStation: reduced-motion check present before GSAP
-- [ ] RetroScan: no `gsap.to(turbulenceRef` call in source
-- [ ] All presets: `ref="containerRef"` on root div
-- [ ] All presets: `useAnimationLifecycle` imported and called
+- [x] `bun run build` exits 0
+- [x] No TypeScript errors
+- [x] useSpaceParticles: DPR capped (check: `Math.min(... , 2)` in source)
+- [x] GridStation: reduced-motion check present before GSAP
+- [x] RetroScan: no `gsap.to(turbulenceRef` call in source
+- [x] All presets: `ref="containerRef"` on root div
+- [x] All presets: `useAnimationLifecycle` imported and called
 
 ---
 

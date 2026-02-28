@@ -75,11 +75,11 @@ Enable Nuxt Studio as a drag-and-drop page builder by migrating all section-base
 - Updated `nuxt.config.ts` Studio config
 
 ### Definition of Done
-- [ ] `npm run build` succeeds (exit 0)
-- [ ] All pages render identically to before (visual regression)
-- [ ] Sections can be reordered via drag-and-drop in Studio
-- [ ] New sections can be added via `/` command in Studio
-- [ ] Section props editable via Studio props panel
+- [x] `npm run build` succeeds (exit 0)
+- [x] All pages render identically to before (visual regression)
+- [x] Sections can be reordered via drag-and-drop in Studio
+- [x] New sections can be added via `/` command in Studio
+- [x] Section props editable via Studio props panel
 
 ### Must Have
 - MDC wrapper for all 12 section types used in pages
@@ -191,7 +191,7 @@ Max Concurrent: 5 (Wave 3)
 ## TODOs
 
 
-- [ ] 1. Baseline Screenshots — All Pages Before Migration
+- [x] 1. Baseline Screenshots — All Pages Before Migration
 
   **What to do**:
   - Start dev server (`npm run dev`)
@@ -222,8 +222,8 @@ Max Concurrent: 5 (Wave 3)
   - `content/en/pages/` — EN page content files
 
   **Acceptance Criteria**:
-  - [ ] 9+ screenshots saved to `.sisyphus/evidence/baseline/`
-  - [ ] All pages load (HTTP 200, content visible)
+  - [x] 9+ screenshots saved to `.sisyphus/evidence/baseline/`
+  - [x] All pages load (HTTP 200, content visible)
 
   ```
   Scenario: Capture baseline screenshots of all section pages
@@ -241,7 +241,7 @@ Max Concurrent: 5 (Wave 3)
 
 ---
 
-- [ ] 2. Create MDC Wrapper Pattern — Prototype with SectionHero
+- [x] 2. Create MDC Wrapper Pattern — Prototype with SectionHero
 
   **What to do**:
   - Create `components/content/SectionHero.vue` — the MDC wrapper component
@@ -286,10 +286,10 @@ Max Concurrent: 5 (Wave 3)
   - `tempo-core/composables/useFeatures.ts` — `hasAnimations` feature flag
 
   **Acceptance Criteria**:
-  - [ ] `components/content/SectionHero.vue` exists
-  - [ ] `npm run build` succeeds
-  - [ ] Component accepts all Hero props + animation prop
-  - [ ] Component wraps with AnimateOnScroll when animation prop present
+  - [x] `components/content/SectionHero.vue` exists
+  - [x] `npm run build` succeeds
+  - [x] Component accepts all Hero props + animation prop
+  - [x] Component wraps with AnimateOnScroll when animation prop present
 
   ```
   Scenario: Verify MDC wrapper renders correctly
@@ -309,7 +309,7 @@ Max Concurrent: 5 (Wave 3)
 
 ---
 
-- [ ] 3. Override [slug].vue — ContentRenderer with Fallback
+- [x] 3. Override [slug].vue — ContentRenderer with Fallback
 
   **What to do**:
   - Create `pages/[...slug].vue` in the HUB repo (overrides `tempo-core/pages/[...slug].vue`)
@@ -342,9 +342,9 @@ Max Concurrent: 5 (Wave 3)
   - Nuxt Content v3 docs: `<ContentRenderer>` renders MDC body
 
   **Acceptance Criteria**:
-  - [ ] `pages/[...slug].vue` exists in hub root
-  - [ ] `npm run build` succeeds
-  - [ ] Existing frontmatter pages still render (backward compat)
+  - [x] `pages/[...slug].vue` exists in hub root
+  - [x] `npm run build` succeeds
+  - [x] Existing frontmatter pages still render (backward compat)
 
   ```
   Scenario: Verify slug override works with existing pages
@@ -364,7 +364,7 @@ Max Concurrent: 5 (Wave 3)
 
 ---
 
-- [ ] 4. Prototype Migration — about.md (FR) End-to-End
+- [x] 4. Prototype Migration — about.md (FR) End-to-End
 
   **What to do**:
   - Migrate `content/fr/pages/a-propos.md` from frontmatter sections to MDC body blocks
@@ -406,9 +406,9 @@ Max Concurrent: 5 (Wave 3)
   - `components/sections/SectionFeatures.vue` — features section props
 
   **Acceptance Criteria**:
-  - [ ] `content/fr/pages/a-propos.md` uses MDC body (no `sections:` in frontmatter)
-  - [ ] Page renders at `/a-propos` with all sections visible
-  - [ ] `npm run build` succeeds
+  - [x] `content/fr/pages/a-propos.md` uses MDC body (no `sections:` in frontmatter)
+  - [x] Page renders at `/a-propos` with all sections visible
+  - [x] `npm run build` succeeds
 
   ```
   Scenario: Verify about page renders with MDC content
@@ -429,7 +429,7 @@ Max Concurrent: 5 (Wave 3)
 
 ---
 
-- [ ] 5. MDC Wrappers Batch A — Features, Cta, Stats, Pricing
+- [x] 5. MDC Wrappers Batch A — Features, Cta, Stats, Pricing
 
   **What to do**:
   - Create 4 MDC wrapper components following the EXACT same pattern as SectionHero (Task 2):
@@ -462,8 +462,8 @@ Max Concurrent: 5 (Wave 3)
   - `components/sections/SectionPricing.vue` — defineProps (title, subtitle, plans[])
 
   **Acceptance Criteria**:
-  - [ ] 4 files created in `components/content/`
-  - [ ] `npm run build` succeeds
+  - [x] 4 files created in `components/content/`
+  - [x] `npm run build` succeeds
 
   ```
   Scenario: Build verification for batch A wrappers
@@ -482,7 +482,7 @@ Max Concurrent: 5 (Wave 3)
 
 ---
 
-- [ ] 6. MDC Wrappers Batch B — Testimonials, Faq, Contact, Logos
+- [x] 6. MDC Wrappers Batch B — Testimonials, Faq, Contact, Logos
 
   **What to do**:
   - Create 4 MDC wrapper components:
@@ -513,14 +513,14 @@ Max Concurrent: 5 (Wave 3)
   - `components/sections/SectionLogos.vue` — defineProps
 
   **Acceptance Criteria**:
-  - [ ] 4 files created in `components/content/`
-  - [ ] `npm run build` succeeds
+  - [x] 4 files created in `components/content/`
+  - [x] `npm run build` succeeds
 
   **Commit**: YES (groups with Tasks 5, 7)
 
 ---
 
-- [ ] 7. MDC Wrappers Batch C — StripePricing, Projects, Booking
+- [x] 7. MDC Wrappers Batch C — StripePricing, Projects, Booking
 
   **What to do**:
   - Create 3 MDC wrapper components:
@@ -549,14 +549,14 @@ Max Concurrent: 5 (Wave 3)
   - `components/sections/SectionBooking.vue` — defineProps
 
   **Acceptance Criteria**:
-  - [ ] 3 files created in `components/content/`
-  - [ ] `npm run build` succeeds
+  - [x] 3 files created in `components/content/`
+  - [x] `npm run build` succeeds
 
   **Commit**: YES (groups with Tasks 5, 6)
 
 ---
 
-- [ ] 8. Migrate Services Pages FR + EN
+- [x] 8. Migrate Services Pages FR + EN
 
   **What to do**:
   - Migrate `content/fr/pages/services.md` and `content/en/pages/services.md`
@@ -592,9 +592,9 @@ Max Concurrent: 5 (Wave 3)
   - Task 4 prototype — follow same MDC pattern
 
   **Acceptance Criteria**:
-  - [ ] Both FR and EN services.md use MDC body
-  - [ ] No `sections:` in frontmatter
-  - [ ] `npm run build` succeeds
+  - [x] Both FR and EN services.md use MDC body
+  - [x] No `sections:` in frontmatter
+  - [x] `npm run build` succeeds
 
   ```
   Scenario: Verify services page renders after migration
@@ -612,7 +612,7 @@ Max Concurrent: 5 (Wave 3)
 
 ---
 
-- [ ] 9. Migrate Booking Pages FR + EN
+- [x] 9. Migrate Booking Pages FR + EN
 
   **What to do**:
   - Migrate `content/fr/pages/rendez-vous.md` and `content/en/pages/booking.md`
@@ -634,14 +634,14 @@ Max Concurrent: 5 (Wave 3)
   - `content/en/pages/booking.md` — current format
 
   **Acceptance Criteria**:
-  - [ ] Both pages use MDC body
-  - [ ] `npm run build` succeeds
+  - [x] Both pages use MDC body
+  - [x] `npm run build` succeeds
 
   **Commit**: YES (groups with Tasks 8, 10, 11)
 
 ---
 
-- [ ] 10. Migrate Portfolio Pages FR + EN
+- [x] 10. Migrate Portfolio Pages FR + EN
 
   **What to do**:
   - Migrate `content/fr/pages/projets.md` and `content/en/pages/projects.md`
@@ -663,14 +663,14 @@ Max Concurrent: 5 (Wave 3)
   - `content/en/pages/projects.md` — current format
 
   **Acceptance Criteria**:
-  - [ ] Both pages use MDC body
-  - [ ] `npm run build` succeeds
+  - [x] Both pages use MDC body
+  - [x] `npm run build` succeeds
 
   **Commit**: YES (groups with Tasks 8, 9, 11)
 
 ---
 
-- [ ] 11. Migrate About EN + Verify About FR
+- [x] 11. Migrate About EN + Verify About FR
 
   **What to do**:
   - Migrate `content/en/pages/about.md` to MDC body (same pattern as FR prototype in Task 4)
@@ -692,15 +692,15 @@ Max Concurrent: 5 (Wave 3)
   - `content/fr/pages/a-propos.md` — already migrated (Task 4, verify it)
 
   **Acceptance Criteria**:
-  - [ ] EN about.md uses MDC body
-  - [ ] FR a-propos.md confirmed working
-  - [ ] `npm run build` succeeds
+  - [x] EN about.md uses MDC body
+  - [x] FR a-propos.md confirmed working
+  - [x] `npm run build` succeeds
 
   **Commit**: YES (groups with Tasks 8, 9, 10)
 
 ---
 
-- [ ] 12. Schema Cleanup + Studio Config
+- [x] 12. Schema Cleanup + Studio Config
 
   **What to do**:
   - Remove `sections` field from pages collection schema in `tempo-core/content.config.ts`
@@ -739,9 +739,9 @@ Max Concurrent: 5 (Wave 3)
   - `nuxt.config.ts` — Studio config (add meta.components.include)
 
   **Acceptance Criteria**:
-  - [ ] `sections` field removed from pages schema
-  - [ ] `studio.meta.components.include` configured with 12 section types
-  - [ ] `npm run build` succeeds
+  - [x] `sections` field removed from pages schema
+  - [x] `studio.meta.components.include` configured with 12 section types
+  - [x] `npm run build` succeeds
 
   **Commit**: YES
   - Message: `feat(studio): configure component whitelist and clean schema`
@@ -749,7 +749,7 @@ Max Concurrent: 5 (Wave 3)
 
 ---
 
-- [ ] 13. Visual Regression — Playwright All Pages × 3 Viewports
+- [x] 13. Visual Regression — Playwright All Pages × 3 Viewports
 
   **What to do**:
   - Start dev server
@@ -770,15 +770,15 @@ Max Concurrent: 5 (Wave 3)
   - **Blocked By**: Tasks 8-12
 
   **Acceptance Criteria**:
-  - [ ] All pages render with visible content (no empty sections)
-  - [ ] Visual quality matches or exceeds baseline
-  - [ ] Report in `.sisyphus/evidence/post-migration/report.md`
+  - [x] All pages render with visible content (no empty sections)
+  - [x] Visual quality matches or exceeds baseline
+  - [x] Report in `.sisyphus/evidence/post-migration/report.md`
 
   **Commit**: NO
 
 ---
 
-- [ ] 14. Build + Test + Code Quality Audit
+- [x] 14. Build + Test + Code Quality Audit
 
   **What to do**:
   - `npm run build` → exit 0
@@ -801,15 +801,15 @@ Max Concurrent: 5 (Wave 3)
   - **Blocked By**: Tasks 8-12
 
   **Acceptance Criteria**:
-  - [ ] Build exits 0
-  - [ ] Tests pass
-  - [ ] No forbidden patterns found
+  - [x] Build exits 0
+  - [x] Tests pass
+  - [x] No forbidden patterns found
 
   **Commit**: NO
 
 ---
 
-- [ ] 15. Studio Editing UX Verification
+- [x] 15. Studio Editing UX Verification
 
   **What to do**:
   - Start dev server
@@ -834,9 +834,9 @@ Max Concurrent: 5 (Wave 3)
   - **Blocked By**: Tasks 12, 13
 
   **Acceptance Criteria**:
-  - [ ] Section components appear in Studio palette
-  - [ ] Sections render in visual editor
-  - [ ] Report with findings
+  - [x] Section components appear in Studio palette
+  - [x] Sections render in visual editor
+  - [x] Report with findings
 
   **Commit**: NO
 
@@ -846,15 +846,15 @@ Max Concurrent: 5 (Wave 3)
 
 > 3 review agents run in PARALLEL. ALL must APPROVE. Rejection → fix → re-run.
 
-- [ ] F1. **Plan Compliance Audit** — `oracle`
+- [x] F1. **Plan Compliance Audit** — `oracle`
   Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, curl endpoint, run command). For each "Must NOT Have": search codebase for forbidden patterns — reject with file:line if found. Check evidence files exist in .sisyphus/evidence/. Compare deliverables against plan.
   Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
-- [ ] F2. **Code Quality Review** — `unspecified-high`
+- [x] F2. **Code Quality Review** — `unspecified-high`
   Run `tsc --noEmit` + linter + `bun test`. Review all changed files for: `as any`/`@ts-ignore`, empty catches, console.log in prod, commented-out code, unused imports. Check no nested MDC child components (`::: child`). Check no `.editor()` on component props. Check no `:propName="frontmatterKey"` in MDC files.
   Output: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Tests [N pass/N fail] | Files [N clean/N issues] | VERDICT`
 
-- [ ] F3. **Visual Regression Comparison** — `unspecified-high` + `playwright` skill
+- [x] F3. **Visual Regression Comparison** — `unspecified-high` + `playwright` skill
   Compare Task 1 baseline screenshots against current screenshots at identical viewports (375px, 768px, 1440px). All pages must render identically or better. Flag any visual regressions. Test Studio editing: open Studio, verify section palette, drag-and-drop, prop editing. Save evidence to `.sisyphus/evidence/final-qa/`.
   Output: `Pages [N/N match] | Regressions [CLEAN/N issues] | Studio [PASS/FAIL] | VERDICT`
 
@@ -882,16 +882,16 @@ npx vitest run         # Expected: ≥31 tests pass
 ```
 
 ### Final Checklist
-- [ ] All 12 MDC wrappers created in `components/content/`
-- [ ] All 8 content pages use MDC body (no frontmatter sections)
-- [ ] `pages/[...slug].vue` uses ContentRenderer
-- [ ] `studio.meta.components.include` configured
-- [ ] `sections` field removed from pages schema
-- [ ] All pages render at 375px, 768px, 1440px (visual regression passes)
-- [ ] No nested MDC child components
-- [ ] No `.editor()` on component props
-- [ ] No `:propName="frontmatterKey"` bindings
-- [ ] Build passes
-- [ ] Tests pass
-- [ ] Studio section palette shows 12 section types
-- [ ] Sections can be reordered via drag-and-drop in Studio
+- [x] All 12 MDC wrappers created in `components/content/`
+- [x] All 8 content pages use MDC body (no frontmatter sections)
+- [x] `pages/[...slug].vue` uses ContentRenderer
+- [x] `studio.meta.components.include` configured
+- [x] `sections` field removed from pages schema
+- [x] All pages render at 375px, 768px, 1440px (visual regression passes)
+- [x] No nested MDC child components
+- [x] No `.editor()` on component props
+- [x] No `:propName="frontmatterKey"` bindings
+- [x] Build passes
+- [x] Tests pass
+- [x] Studio section palette shows 12 section types
+- [x] Sections can be reordered via drag-and-drop in Studio
