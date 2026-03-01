@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 # ─── Configuration ───
-REPO_URL="git@github.com:jdenozi/tempo-hub.git"
 APP_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # ─── Usage ───
@@ -33,14 +32,23 @@ echo "  Version:   $VERSION"
 echo "  Directory: $APP_DIR"
 echo ""
 
+cd "$APP_DIR"
+
 # ─── Fetch latest from GitHub ───
 echo "→ Fetching latest from origin..."
-cd "$APP_DIR"
-git fetch origin --tags --prune
+git fetch origin --tags --force --prune || echo "  (fetch warning, continuing...)"
 
-# ─── Checkout requested version ───
+# ─── Reset local changes and checkout ───
 echo "→ Checking out $VERSION..."
-git checkout "$VERSION"
+git reset --hard
+git clean -fd
+git checkout "$VERSION" || { echo "✗ Failed to checkout $VERSION"; exit 1; }
+
+# ─── If on a branch, pull latest ───
+if git symbolic-ref -q HEAD > /dev/null 2>&1; then
+  echo "→ Pulling latest changes..."
+  git pull origin "$VERSION" || true
+fi
 
 # ─── Update submodules ───
 echo "→ Updating submodules..."
@@ -55,7 +63,7 @@ docker compose up -d
 # ─── Verify ───
 echo ""
 echo "→ Waiting for container to start..."
-sleep 3
+sleep 5
 
 if docker compose ps | grep -q "running"; then
   echo ""
@@ -64,7 +72,7 @@ if docker compose ps | grep -q "running"; then
   docker compose ps
 else
   echo ""
-  echo "✗ Container failed to start. Check logs:"
-  echo "  docker compose logs -f"
+  echo "✗ Container failed to start. Logs:"
+  docker compose logs --tail=30
   exit 1
 fi
