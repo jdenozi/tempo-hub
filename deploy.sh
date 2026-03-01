@@ -58,23 +58,23 @@ git submodule update --init --recursive --force
 
 # ─── Rebuild and restart containers ───
 echo "→ Building and restarting containers..."
-docker compose down
-docker compose build --no-cache
-docker compose up -d
+docker-compose down
+docker-compose build --no-cache
+docker-compose up -d
 
 # ─── Verify ───
 echo ""
 echo "→ Waiting for container to start..."
 sleep 5
 
-if docker compose ps | grep -q "running"; then
+if docker-compose ps | grep -q "running"; then
   echo ""
   echo "✓ Deploy complete — $VERSION is live"
   echo ""
-  docker compose ps
+  docker-compose ps
 else
   echo ""
   echo "✗ Container failed to start. Logs:"
-  docker compose logs --tail=30
+  docker-compose logs --tail=30
   exit 1
 fi
