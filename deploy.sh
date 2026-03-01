@@ -52,7 +52,9 @@ fi
 
 # ─── Update submodules ───
 echo "→ Updating submodules..."
-git submodule update --init --recursive
+git submodule foreach --recursive git reset --hard
+git submodule foreach --recursive git clean -fd
+git submodule update --init --recursive --force
 
 # ─── Rebuild and restart containers ───
 echo "→ Building and restarting containers..."
