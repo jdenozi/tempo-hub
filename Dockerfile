@@ -3,12 +3,13 @@ FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY tempo-core/package.json ./tempo-core/
-RUN npm install
+RUN npm install && npm rebuild
 
 # ── Stage 2: Build ──
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/package-lock.json ./package-lock.json
 COPY tempo-core/ ./tempo-core/
 COPY nuxt.config.ts app.config.ts tailwind.config.ts content.config.ts tsconfig.json package.json ./
 COPY content/ ./content/
@@ -16,6 +17,7 @@ COPY locales/ ./locales/
 COPY public/ ./public/
 COPY components/ ./components/
 COPY assets/ ./assets/
+COPY layouts/ ./layouts/
 COPY pages/ ./pages/
 COPY server/ ./server/
 COPY composables/ ./composables/
