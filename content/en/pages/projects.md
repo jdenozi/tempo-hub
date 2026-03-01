@@ -19,6 +19,39 @@ heroPreset: planet-horizon
 title: Portfolio
 subtitle: Every project is unique, just like your vision
 items:
+  - title: Julie Boulangier — Psychotherapist
+    images:
+      - /images/projects/julie-boulangier-home.png
+      - /images/projects/julie-boulangier-accompagnements.png
+    description: Professional showcase website for a psychotherapist based in
+      Montpellier, built with Nuxt 3 and a clean, warm-toned design. Features an
+      immersive full-screen hero, detailed service pages (addiction, emotional
+      dependency, video consultations), and online booking via Cal.com. Business
+      automations powered by n8n and Stripe integration for session payments.
+      Responsive design and local SEO optimization delivered immediate visibility
+      for therapy searches in Montpellier.
+    tags:
+      - Nuxt 3
+      - Cal.com
+      - n8n
+      - Stripe
+    link: https://julie-boulangier.fr
+  - title: Tempo Budget
+    description: Personal and shared budget management application built with Vue 3,
+      TypeScript and FastAPI. Track income and expenses by category, share budgets
+      between members with automatic split allocation, manage recurring transactions
+      with versioned history, and analyze spending with projections and tag-based
+      breakdowns. Deployed via Docker with Nginx.
+    images:
+      - /images/projects/tempo-budget-dashboard.png
+      - /images/projects/tempo-budget-detail.png
+      - /images/projects/tempo-budget-charts.png
+    tags:
+      - Vue 3
+      - TypeScript
+      - FastAPI
+      - Docker
+    link: https://github.com/jdenozi/TempoBudget
   - title: Fashion E-commerce
     description: Online store built with Nuxt 3 and Stripe, featuring real-time inventory
       management and a custom vendor dashboard. The optimized checkout flow cut cart
@@ -64,15 +97,6 @@ items:
       - Landing
       - Conversion
       - Fintech
-  - title: Tech Blog
-    description: Technical blog powered by Nuxt Content with a Storyblok headless CMS,
-      offering instant full-text search and an automated newsletter pipeline via Mailchimp.
-      Core Web Vitals optimizations (LCP under 1.2s, Lighthouse score 98) pushed the
-      site to page one on its target keywords in under three months.
-    tags:
-      - Blog
-      - CMS
-      - SEO
 animation:
   name: stagger
 ---

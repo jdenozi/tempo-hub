@@ -1,28 +1,32 @@
 <script setup lang="ts">
 /**
- * HeroPresetGridStation — TRON-like perspective grid with station nodes and orbit ring
+ * HeroPresetGridStation — TRON-like perspective grid with energy pulses
  *
- * Layer 1 (CSS):   Dark space gradient with teal tint
- * Layer 2 (SVG):   Perspective grid (vanishing point at 400,210 in 800×600 viewBox)
- *                  — 8 horizontal lines converging toward VP
- *                  — 10 radial lines from VP to bottom edge
- *                  — 5 station nodes at grid intersections
- *                  — Dashed orbit ring ellipse around VP
- * Layer 3 (CSS):   Horizontal scan line overlay
+ * Layer 1 (CSS):   Dark space gradient with purple tint
+ * Layer 2 (SVG):   Perspective grid + station nodes + orbit ring + energy arcs
+ * Layer 3 (Canvas): Drifting particles via useSpaceParticles
+ * Layer 4 (CSS):   Scan line overlay
  *
- * GSAP animations: grid line pulse, station node stagger, orbit ring rotation
- * Reduced motion:  static grid visible, no pulse/rotation
+ * GSAP: grid pulse, station node stagger, orbit ring rotation, energy arc pulse
  */
 
 const containerRef = ref<HTMLElement | null>(null)
 const orbitRingRef = ref<SVGEllipseElement | null>(null)
+const canvasRef = ref<HTMLCanvasElement | null>(null)
+const vpGlowRef = ref<HTMLDivElement | null>(null)
 
 const { isPaused, isReducedMotion } = useAnimationLifecycle(containerRef)
 
+useSpaceParticles(canvasRef, {
+  count: 80,
+  colors: ['#7e9eff', '#c87aff', '#ffffff'],
+  speedMultiplier: 0.2,
+  maxSize: 1.0,
+  glowIntensity: 2,
+})
+
 onMounted(async () => {
   if (!import.meta.client) return
-
-  // Guard reduced motion BEFORE loading GSAP
   if (isReducedMotion.value) return
 
   const gsapModule = await useGsap()
@@ -32,44 +36,67 @@ onMounted(async () => {
   const tweens: gsap.core.Tween[] = []
 
   const ctx = gsap.context(() => {
-    // Grid line subtle pulse
+    // Grid lines — breathing pulse
     tweens.push(gsap.to('.grid-line', {
-      opacity: 0.25,
-      duration: 6,
+      opacity: 0.3,
+      duration: 4,
       ease: 'sine.inOut',
       repeat: -1,
       yoyo: true,
-      stagger: 0.3,
+      stagger: 0.2,
       paused: true,
     }))
 
-    // Station nodes stagger pulse
+    // Station nodes — staggered scale pulse
     tweens.push(gsap.to('.station-node', {
-      opacity: 0.8,
-      scale: 1.5,
+      opacity: 0.9,
+      scale: 1.8,
       duration: 2,
       ease: 'sine.inOut',
       repeat: -1,
       yoyo: true,
-      stagger: 0.5,
+      stagger: 0.4,
       transformOrigin: 'center',
       paused: true,
     }))
 
-    // Orbit ring continuous rotation
+    // Energy arcs — opacity wave
+    tweens.push(gsap.to('.energy-arc', {
+      opacity: 0.4,
+      duration: 3,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+      stagger: 0.8,
+      paused: true,
+    }))
+
+    // Orbit ring — continuous rotation
     if (orbitRingRef.value) {
       tweens.push(gsap.to(orbitRingRef.value, {
         rotation: 360,
-        duration: 40,
+        duration: 30,
         ease: 'none',
         repeat: -1,
         transformOrigin: '400px 210px',
         paused: true,
       }))
     }
+
+    // VP glow pulse
+    if (vpGlowRef.value) {
+      tweens.push(gsap.to(vpGlowRef.value, {
+        opacity: 0.8,
+        scale: 1.4,
+        duration: 5,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+        paused: true,
+      }))
+    }
   }, containerRef.value)
 
-  // Watch isPaused to control playback
   watch(isPaused, (paused) => {
     tweens.forEach(t => paused ? t.pause() : t.resume())
   }, { immediate: true })
@@ -80,26 +107,31 @@ onMounted(async () => {
   })
 })
 
-// --- Perspective grid geometry ---
-// Vanishing point at (400, 210) in 800×600 viewBox
-
-// 8 horizontal lines at increasing y positions
-const horizontalYs = [280, 320, 360, 400, 440, 480, 520, 560]
-
-// 10 radial lines from VP to bottom edge
-const radialXs = [0, 90, 180, 270, 360, 440, 530, 620, 710, 800]
-
-// Vanishing point
+const horizontalYs = [260, 300, 340, 380, 420, 460, 500, 540, 570]
+const radialXs = [0, 80, 160, 250, 340, 460, 550, 640, 720, 800]
 const vpX = 400
 const vpY = 210
 </script>
 
 <template>
   <div ref="containerRef" class="absolute inset-0 overflow-hidden">
-    <!-- L1: Dark space gradient with teal tint -->
+    <!-- L1: Dark space gradient -->
     <div
       class="absolute inset-0"
-      style="background: linear-gradient(180deg, #020818 0%, #031020 60%, #041828 100%);"
+      style="background: linear-gradient(180deg, #0e0616 0%, #120820 60%, #150a28 100%);"
+    />
+
+    <!-- VP glow -->
+    <div
+      ref="vpGlowRef"
+      class="absolute pointer-events-none"
+      style="
+        width: 200px; height: 200px;
+        top: 25%; left: 50%;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(ellipse at center, rgba(120,160,255,0.12) 0%, transparent 70%);
+        filter: blur(20px);
+      "
     />
 
     <!-- L2: Perspective grid SVG -->
@@ -110,7 +142,7 @@ const vpY = 210
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <!-- Horizontal lines spanning full width -->
+      <!-- Horizontal lines -->
       <line
         v-for="y in horizontalYs"
         :key="'h-' + y"
@@ -119,11 +151,11 @@ const vpY = 210
         :y1="y"
         x2="800"
         :y2="y"
-        stroke="rgba(74,158,255,0.15)"
+        stroke="rgba(120,140,255,0.15)"
         stroke-width="0.5"
       />
 
-      <!-- Radial lines from vanishing point to bottom edge -->
+      <!-- Radial lines from VP -->
       <line
         v-for="x in radialXs"
         :key="'r-' + x"
@@ -132,62 +164,47 @@ const vpY = 210
         :y1="vpY"
         :x2="x"
         y2="600"
-        stroke="rgba(74,158,255,0.15)"
+        stroke="rgba(120,140,255,0.15)"
         stroke-width="0.5"
       />
 
-      <!-- Station nodes at grid intersections -->
-      <circle
-        class="station-node"
-        :cx="vpX"
-        :cy="vpY"
-        r="4"
-        fill="rgba(74,158,255,0.4)"
-      />
-      <circle
-        class="station-node"
-        cx="200"
-        cy="360"
-        r="3"
-        fill="rgba(74,158,255,0.3)"
-      />
-      <circle
-        class="station-node"
-        cx="600"
-        cy="360"
-        r="3"
-        fill="rgba(74,158,255,0.3)"
-      />
-      <circle
-        class="station-node"
-        cx="100"
-        cy="480"
-        r="2"
-        fill="rgba(74,158,255,0.2)"
-      />
-      <circle
-        class="station-node"
-        cx="700"
-        cy="480"
-        r="2"
-        fill="rgba(74,158,255,0.2)"
-      />
+      <!-- Energy arcs connecting nodes -->
+      <path class="energy-arc" d="M200,360 Q300,300 400,210" fill="none" stroke="rgba(200,122,255,0.15)" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.1" />
+      <path class="energy-arc" d="M600,360 Q500,300 400,210" fill="none" stroke="rgba(200,122,255,0.15)" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.1" />
+      <path class="energy-arc" d="M100,480 Q250,400 400,210" fill="none" stroke="rgba(120,160,255,0.10)" stroke-width="0.6" stroke-dasharray="3 5" opacity="0.1" />
+      <path class="energy-arc" d="M700,480 Q550,400 400,210" fill="none" stroke="rgba(120,160,255,0.10)" stroke-width="0.6" stroke-dasharray="3 5" opacity="0.1" />
 
-      <!-- Orbit ring (dashed ellipse around VP) -->
+      <!-- Station nodes -->
+      <circle class="station-node" :cx="vpX" :cy="vpY" r="5" fill="rgba(120,160,255,0.5)" />
+      <circle class="station-node" cx="200" cy="360" r="3.5" fill="rgba(200,122,255,0.4)" />
+      <circle class="station-node" cx="600" cy="360" r="3.5" fill="rgba(200,122,255,0.4)" />
+      <circle class="station-node" cx="100" cy="480" r="2.5" fill="rgba(120,160,255,0.25)" />
+      <circle class="station-node" cx="700" cy="480" r="2.5" fill="rgba(120,160,255,0.25)" />
+      <circle class="station-node" cx="300" cy="420" r="2" fill="rgba(200,122,255,0.2)" />
+      <circle class="station-node" cx="500" cy="420" r="2" fill="rgba(200,122,255,0.2)" />
+
+      <!-- Orbit ring -->
       <ellipse
         ref="orbitRingRef"
         :cx="vpX"
         :cy="vpY"
-        rx="120"
-        ry="40"
+        rx="140"
+        ry="45"
         fill="none"
-        stroke="rgba(74,158,255,0.2)"
+        stroke="rgba(120,160,255,0.2)"
         stroke-width="1"
         stroke-dasharray="8 4"
       />
     </svg>
 
-    <!-- L3: Scan line overlay -->
+    <!-- L3: Canvas particles -->
+    <canvas
+      v-if="!isReducedMotion"
+      ref="canvasRef"
+      class="absolute inset-0 w-full h-full"
+    />
+
+    <!-- L4: Scan line overlay -->
     <div
       class="absolute inset-0 pointer-events-none grid-scanlines"
       aria-hidden="true"
@@ -201,8 +218,8 @@ const vpY = 210
     0deg,
     transparent,
     transparent 3px,
-    rgba(74, 158, 255, 0.02) 3px,
-    rgba(74, 158, 255, 0.02) 4px
+    rgba(120, 140, 255, 0.02) 3px,
+    rgba(120, 140, 255, 0.02) 4px
   );
 }
 </style>

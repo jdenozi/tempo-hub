@@ -1,22 +1,33 @@
 <script setup lang="ts">
 /**
- * HeroPresetPlanetHorizon — Sci-fi 70s planet horizon with warm atmosphere glow
+ * HeroPresetPlanetHorizon — Planet seen from orbit with warm atmosphere
  *
  * Layer 1 (CSS):   Deep space → warm horizon gradient
- * Layer 2 (SVG):   Sparse star field (data-URI, applied in onMounted)
- * Layer 3 (CSS):   Oversized dark planet curve at bottom
- * Layer 4 (CSS+GSAP): Atmosphere halo — radial gradient with slow pulse
- * Layer 5 (CSS):   Lens flare at horizon point
+ * Layer 2 (SVG):   Star field (tiled)
+ * Layer 3 (CSS):   Oversized dark planet at bottom
+ * Layer 4 (GSAP):  Atmosphere halo pulse + corona flicker
+ * Layer 5 (Canvas): Drifting particles
+ * Layer 6 (CSS):   Lens flares at horizon
  *
- * Reduced motion: static planet + static atmosphere (no GSAP pulse)
+ * Reduced motion: static planet + atmosphere
  */
 
 const starsRef = ref<HTMLDivElement | null>(null)
 const atmosphereRef = ref<HTMLDivElement | null>(null)
+const coronaRef = ref<HTMLDivElement | null>(null)
+const lensFlareRef = ref<HTMLDivElement | null>(null)
+const canvasRef = ref<HTMLCanvasElement | null>(null)
 const containerRef = ref<HTMLElement | null>(null)
 const { isPaused, isReducedMotion } = useAnimationLifecycle(containerRef)
 
-// --- SVG star field generator ---
+useSpaceParticles(canvasRef, {
+  count: 80,
+  colors: ['#ffffff', '#ffe8c0', '#c8d8ff', '#ffb060'],
+  speedMultiplier: 0.25,
+  maxSize: 1.2,
+  glowIntensity: 2,
+})
+
 function generateStarSVG(width: number, height: number, count: number): string {
   const colors = ['#ffffff', '#ffffff', '#c8d8ff', '#ffe8c0', '#7ec8e3']
   const stars = Array.from({ length: count }, () => {
@@ -35,14 +46,12 @@ function generateStarSVG(width: number, height: number, count: number): string {
 onMounted(async () => {
   if (!import.meta.client) return
 
-  // L2: Apply star field as tiled SVG background
   if (starsRef.value) {
-    starsRef.value.style.backgroundImage = generateStarSVG(250, 250, 50)
+    starsRef.value.style.backgroundImage = generateStarSVG(250, 250, 60)
     starsRef.value.style.backgroundRepeat = 'repeat'
   }
 
-  // L4: GSAP atmosphere pulse (skipped for reduced motion)
-  if (isReducedMotion.value || !atmosphereRef.value) return
+  if (isReducedMotion.value) return
 
   const gsapModule = await useGsap()
   if (!gsapModule || !containerRef.value) return
@@ -51,17 +60,59 @@ onMounted(async () => {
   const tweens: gsap.core.Tween[] = []
 
   const ctx = gsap.context(() => {
-    tweens.push(gsap.to(atmosphereRef.value, {
-      opacity: 0.6,
-      duration: 8,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
-      paused: true,
-    }))
+    // Atmosphere halo pulse
+    if (atmosphereRef.value) {
+      tweens.push(gsap.to(atmosphereRef.value, {
+        opacity: 0.7,
+        duration: 6,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+        paused: true,
+      }))
+    }
+
+    // Corona shimmer — faster subtle flicker
+    if (coronaRef.value) {
+      tweens.push(gsap.to(coronaRef.value, {
+        opacity: 0.6,
+        scaleX: 1.1,
+        duration: 3,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+        delay: 1,
+        paused: true,
+      }))
+    }
+
+    // Lens flare scale pulse
+    if (lensFlareRef.value) {
+      tweens.push(gsap.to(lensFlareRef.value, {
+        scale: 1.3,
+        opacity: 0.8,
+        duration: 5,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+        delay: 2,
+        paused: true,
+      }))
+    }
+
+    // Star layer subtle twinkle
+    if (starsRef.value) {
+      tweens.push(gsap.to(starsRef.value, {
+        opacity: 0.7,
+        duration: 5,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+        paused: true,
+      }))
+    }
   }, containerRef.value)
 
-  // Watch isPaused to control playback
   watch(isPaused, (paused) => {
     tweens.forEach(t => paused ? t.pause() : t.resume())
   }, { immediate: true })
@@ -78,13 +129,13 @@ onMounted(async () => {
     <!-- L1: Deep space → warm horizon gradient -->
     <div
       class="absolute inset-0"
-      style="background: linear-gradient(180deg, #020818 0%, #0a1a3a 50%, #1a0a05 85%, #2a1505 100%);"
+      style="background: linear-gradient(180deg, #0e0616 0%, #1a1038 45%, #2a1520 75%, #3a1808 100%);"
     />
 
-    <!-- L2: SVG star field (applied via JS in onMounted for SSR safety) -->
+    <!-- L2: SVG star field -->
     <div ref="starsRef" class="absolute inset-0" />
 
-    <!-- L3: Planet curve — oversized dark circle at bottom -->
+    <!-- L3: Planet curve -->
     <div
       class="absolute pointer-events-none"
       style="
@@ -95,35 +146,69 @@ onMounted(async () => {
         left: 50%;
         transform: translateX(-50%);
         background: radial-gradient(ellipse at 50% 30%, #1a1535 0%, #0d0d25 50%, #080818 100%);
-        border: 1px solid rgba(100,150,255,0.15);
-        box-shadow: 0 0 60px rgba(100,150,255,0.08), inset 0 0 80px rgba(0,0,0,0.5);
+        border: 1px solid rgba(200,120,50,0.15);
+        box-shadow: 0 0 80px rgba(200,120,50,0.10), 0 0 30px rgba(100,150,255,0.05), inset 0 0 80px rgba(0,0,0,0.5);
       "
     />
 
-    <!-- L4: Atmosphere halo — warm radial glow above planet curve -->
+    <!-- L4: Atmosphere halo -->
     <div
       ref="atmosphereRef"
       class="absolute pointer-events-none"
       style="
         width: 100%;
-        height: 30%;
+        height: 35%;
         bottom: 0;
         left: 0;
-        background: radial-gradient(ellipse at 50% 100%, rgba(255,140,50,0.25) 0%, rgba(200,100,30,0.12) 30%, transparent 70%);
+        background: radial-gradient(ellipse at 50% 100%, rgba(255,140,50,0.30) 0%, rgba(200,100,30,0.15) 30%, transparent 70%);
       "
     />
 
-    <!-- L5: Lens flare at horizon center -->
+    <!-- Corona — thin bright line at planet edge -->
+    <div
+      ref="coronaRef"
+      class="absolute pointer-events-none"
+      style="
+        width: 80%;
+        height: 4px;
+        bottom: 18%;
+        left: 10%;
+        background: radial-gradient(ellipse at 50% 50%, rgba(255,180,80,0.35) 0%, rgba(255,140,50,0.15) 40%, transparent 80%);
+        filter: blur(3px);
+      "
+    />
+
+    <!-- L5: Canvas particles -->
+    <canvas
+      v-if="!isReducedMotion"
+      ref="canvasRef"
+      class="absolute inset-0 w-full h-full"
+    />
+
+    <!-- L6: Lens flare at horizon center -->
+    <div
+      ref="lensFlareRef"
+      class="absolute pointer-events-none"
+      style="
+        width: 250px;
+        height: 250px;
+        bottom: 8%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse at center, rgba(255,220,100,0.18) 0%, rgba(255,160,60,0.06) 40%, transparent 70%);
+        filter: blur(15px);
+      "
+    />
+
+    <!-- Secondary flare -->
     <div
       class="absolute pointer-events-none"
       style="
-        width: 200px;
-        height: 200px;
-        bottom: 5%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: radial-gradient(ellipse at center, rgba(255,220,100,0.15) 0%, transparent 70%);
-        filter: blur(15px);
+        width: 100%;
+        height: 2px;
+        bottom: 19%;
+        left: 0;
+        background: linear-gradient(90deg, transparent 10%, rgba(255,180,80,0.12) 35%, rgba(255,200,100,0.20) 50%, rgba(255,180,80,0.12) 65%, transparent 90%);
       "
     />
   </div>

@@ -1,65 +1,28 @@
 <template>
-  <footer class="gradient-section-alt text-gray-400 border-t border-primary-500/10">
-    <div class="container-page py-12 md:py-16">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-        <!-- Brand -->
-        <div class="space-y-4">
-          <span class="font-heading text-lg font-semibold text-primary-500 text-glow-subtle">
-            {{ client.name }}
-          </span>
-          <p class="text-sm leading-relaxed text-gray-400">
-            {{ client.profession }}
-          </p>
-        </div>
+  <footer class="relative overflow-hidden border-t border-primary-500/20">
+    <div class="absolute inset-0 footer-bg" />
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] bg-gradient-to-r from-transparent via-primary-500/40 to-transparent" />
 
-        <!-- Contact -->
-        <div class="space-y-3">
-          <h3 class="text-sm font-semibold text-white uppercase tracking-wider">
-            {{ $t('contact.title') }}
-          </h3>
-          <ul class="space-y-2 text-sm">
-            <li v-if="contact.email">
-              <a :href="`mailto:${contact.email}`" class="text-gray-400 hover:text-primary-500 transition-colors">
-                {{ contact.email }}
-              </a>
-            </li>
-            <li v-if="contact.phone">
-              <a :href="`tel:${contact.phone}`" class="text-gray-400 hover:text-primary-500 transition-colors">
-                {{ contact.phone }}
-              </a>
-            </li>
-            <li v-if="contact.address" class="text-gray-500">
-              {{ contact.address }}
-            </li>
-          </ul>
+    <div class="relative z-10 container-page py-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs text-gray-600">
+          &copy; {{ currentYear }} {{ client.name }} &mdash; {{ $t('footer.rights') }}
+        </p>
+        <div class="flex items-center gap-4 text-xs text-gray-600">
+          <a v-if="contact.email" :href="`mailto:${contact.email}`" class="hover:text-primary-500 transition-colors">
+            {{ contact.email }}
+          </a>
+          <a
+            v-for="(url, platform) in activeSocials"
+            :key="platform"
+            :href="url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-primary-500 transition-colors capitalize"
+          >
+            {{ platform }}
+          </a>
         </div>
-
-        <!-- Social -->
-        <div class="space-y-3">
-          <h3 class="text-sm font-semibold text-white uppercase tracking-wider">
-            {{ $t('footer.social') }}
-          </h3>
-          <div class="flex gap-4">
-            <a
-              v-for="(url, platform) in activeSocials"
-              :key="platform"
-              :href="url"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-400 hover:text-primary-500 transition-colors capitalize text-sm"
-            >
-              {{ platform }}
-            </a>
-          </div>
-          <p v-if="Object.keys(activeSocials).length === 0" class="text-sm text-gray-600">
-            —
-          </p>
-        </div>
-      </div>
-
-      <!-- Bottom bar -->
-      <div class="mt-12 pt-8 border-t border-primary-500/10 text-center text-xs text-gray-600">
-        &copy; {{ currentYear }} {{ client.name }} — {{ $t('footer.rights') }}
       </div>
     </div>
   </footer>
@@ -74,3 +37,9 @@ const activeSocials = computed(() => {
   return Object.fromEntries(entries)
 })
 </script>
+
+<style scoped>
+.footer-bg {
+  background: linear-gradient(180deg, #150a20 0%, #0e0616 40%, #0a0410 100%);
+}
+</style>

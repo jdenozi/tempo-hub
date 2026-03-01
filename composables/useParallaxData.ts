@@ -122,6 +122,9 @@ export function useParallaxData() {
     { icon: 'diamond', title: 'Design', desc: 'Sites web sur-mesure, modernes et performants.' },
     { icon: 'bolt', title: 'Performance', desc: 'Optimisation SEO et temps de chargement minimal.' },
     { icon: 'orbit', title: 'Accompagnement', desc: 'Suivi personnalisé et formation à la gestion du site.' },
+    { icon: 'code', title: 'Développement', desc: 'Applications web robustes avec Vue, Nuxt et TypeScript.' },
+    { icon: 'shield', title: 'Hébergement', desc: 'Déploiement, maintenance et sécurité de votre site.' },
+    { icon: 'connect', title: 'Intégrations', desc: 'Stripe, Cal.com, n8n et outils métier connectés.' },
   ])
 
   return {

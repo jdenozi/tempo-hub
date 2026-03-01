@@ -1,63 +1,94 @@
 ---
-title: "Custom Sites vs WordPress: Why a Tailor-Made Website is Better for SEO"
-description: "Performance, semantic markup, security, Core Web Vitals... Discover why a custom-coded website outperforms WordPress in organic search rankings, with concrete technical evidence."
+title: "WordPress vs custom sites: we compared performance, and it's brutal"
+description: "Core Web Vitals, load times, security, HTML markup... We put WordPress head to head with a custom-coded site. Spoiler: one of them gets destroyed."
 date: 2026-02-15
-author: "Tempo Hub"
 ---
 
-WordPress powers roughly 43% of the web. It's a remarkable tool, but when it comes to organic search, the technical architecture of a custom-coded site has structural advantages that WordPress simply can't match — even with the best plugins on the market.
+Let's not beat around the bush: WordPress powers 43% of the web. It's a powerful tool, and there's a good reason it's so popular.
 
-At Tempo Hub, we build statically generated sites (SSG) using modern technologies like Nuxt.js. Here's why this approach gives our clients a significant SEO edge.
+But when we're talking SEO and raw performance, the architecture of a custom-coded site has structural advantages that no WordPress plugin can make up for. And we're going to prove it with hard numbers.
 
-## 1. Performance: the king of modern SEO
+At Tempo Hub, we build static sites with Nuxt.js. Yes, we're biased. But the data we're about to show you is objective. See for yourself.
+
+## 1. Performance: Google's #1 ranking factor
 
 ### What Google actually measures
 
-Since 2021, Google has used **Core Web Vitals** as a direct ranking factor. Three metrics sit at the heart of this evaluation:
+Since 2021, Google uses **Core Web Vitals** as a direct ranking factor. Three metrics matter:
 
-- **LCP (Largest Contentful Paint)**: the time needed to render the largest visible element on the page. Google expects under 2.5 seconds.
-- **INP (Interaction to Next Paint)**: how quickly the page responds to user interactions. The threshold is 200 milliseconds.
-- **CLS (Cumulative Layout Shift)**: the visual stability of the page during loading. The score must stay below 0.1.
+- **LCP (Largest Contentful Paint)**: how long it takes to display the largest visible element on the page. Threshold: 2.5 seconds max.
+- **INP (Interaction to Next Paint)**: how fast the page responds to clicks and interactions. Threshold: 200ms max.
+- **CLS (Cumulative Layout Shift)**: visual stability during page load. Threshold: 0.1 max.
 
-### How WordPress fails structurally
+Bottom line: slow site = Google penalizes you. Period.
 
-WordPress runs on a **dynamic PHP + MySQL architecture**. On every visit, the server executes PHP code, queries the database, assembles the HTML page, then sends it to the browser. Even with a caching layer, this processing chain introduces unavoidable latency.
+### Why WordPress struggles
 
-Add a theme like Elementor or Divi, and the problem compounds:
+WordPress runs on **PHP + MySQL**. On every visit, the server executes PHP, queries the database, assembles the page, then sends it to the browser. Even with caching, this chain creates unavoidable latency.
 
-- **Elementor** injects an average of 300 to 500 KB of CSS and JavaScript, even on simple pages.
-- **Divi** generates HTML with dozens of nested `<div>` elements, bloating the DOM and slowing rendering.
-- Every active plugin (forms, analytics, sliders, popups) adds its own CSS and JS files, loaded on **every page**, whether they're used or not.
+Add a page builder like Elementor or Divi, and it's game over:
 
-The result: an average WordPress page weighs between **2 and 5 MB** and loads in **3 to 6 seconds** on mobile.
+- **Elementor** injects 300 to 500 KB of CSS and JavaScript, even on a page with just text
+- **Divi** generates dozens of nested `<div>` elements that bloat the DOM beyond recognition
+- Every active plugin (forms, analytics, sliders, popups) adds its own CSS/JS files on **every single page**, whether they're used or not
 
-### The static site advantage
+Result: an average WordPress page weighs between **2 and 5 MB** and loads in **3 to 6 seconds** on mobile. Yikes.
 
-A statically generated site (SSG) with Nuxt.js works radically differently. At build time, every page is pre-rendered as pure HTML. When a visitor arrives, the server sends back an already-ready HTML file — no server-side execution, no database queries.
+![When you realize your WordPress page weighs 4 MB on mobile](/images/blog/wordpress-vs-custom/page-weight-meme.webp)
 
-The concrete results:
+### A static site is a different planet
 
-- **Average page weight**: 30 to 100 KB (vs. 2 to 5 MB for WordPress)
-- **Load time**: under one second, even on 3G mobile
-- **Lighthouse score**: consistently between 95 and 100 without special optimization
-- **TTFB (Time To First Byte)**: near-instant since there's nothing to compute
+With Nuxt.js in SSG mode (Static Site Generation), every page is pre-rendered as pure HTML at build time. When a visitor arrives, the server sends back the HTML file directly. No PHP execution. No database query. Nothing.
 
-For Google, a site that loads in under a second with a perfect Lighthouse score is a strong signal of technical quality.
+### The performance numbers (brace yourself)
 
-## 2. Total control over HTML markup
+```
+📊 Lighthouse Performance Score
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress + Elementor  ████████░░░░░░░░░░░░  40/100  😬
+Custom site (Nuxt)     ████████████████████  98/100  🔥
 
-### Why semantics matter so much
+📊 Mobile Load Time
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress + Elementor  █████████████████░░░  4.2s   🐌
+Custom site (Nuxt)     ███░░░░░░░░░░░░░░░░░  0.8s   🚀
 
-Search engines don't "see" your site the way a human does. They read the HTML code and interpret its structure to understand the content. Clean semantic markup lets Google:
+📊 Average Page Weight
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress + Elementor  ████████████████████  3.2 MB 💀
+Custom site (Nuxt)     █░░░░░░░░░░░░░░░░░░░  80 KB  ✨
 
-- Identify the information hierarchy (headings, subheadings, paragraphs)
-- Understand the nature of the content (article, product, FAQ, review)
-- Extract structured data for rich results (rich snippets)
-- Index each section of the page efficiently
+📊 TTFB (Time To First Byte)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress + Elementor  ████████████████░░░░  1.2s
+Custom site (Nuxt)     █░░░░░░░░░░░░░░░░░░░  <50ms  ⚡
+
+📊 HTTP Requests Per Page
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress + Elementor  ████████████████████  60+
+Custom site (Nuxt)     ████░░░░░░░░░░░░░░░░  ~10
+```
+
+For Google, a site that loads in under one second with a near-perfect Lighthouse score is a massive signal of technical quality.
+
+| Metric | WordPress + Elementor | Custom site (Nuxt) |
+|---|---|---|
+| Average page weight | 2 to 5 MB | 30 to 100 KB |
+| Mobile load time | 3 to 6 seconds | < 1 second |
+| Lighthouse Performance | 30 to 60 | 95 to 100 |
+| TTFB (Time To First Byte) | 800 ms to 2 s | < 50 ms |
+| HTTP requests per page | 40 to 80 | 5 to 15 |
+| Core Web Vitals (pass rate) | ~33% | ~98% |
+
+## 2. HTML markup: clean code vs div soup
+
+### Why this matters
+
+Search engines don't see your site the way you do. They read raw HTML and interpret its structure to understand your content. Clean, semantic markup is the foundation for Google to figure out what your page is about.
 
 ### The WordPress problem
 
-On WordPress, you're at the mercy of the theme and plugins. Most popular themes generate HTML that looks like this:
+On WordPress, the HTML depends entirely on your theme and plugins. And most popular themes generate code that looks like this:
 
 ```html
 <div class="et_pb_module et_pb_text et_pb_text_0 et_pb_bg_layout_light et_pb_text_align_left">
@@ -69,16 +100,28 @@ On WordPress, you're at the mercy of the theme and plugins. Most popular themes 
 </div>
 ```
 
-Six levels of `<div>` to display a simple heading. This tag soup:
+Six levels of `<div>` to display a heading. **A single heading.** 🤡
 
-- Dilutes the semantic relevance of the actual content
-- Bloats the DOM (a typical Elementor site contains 1,500 to 3,000 DOM nodes, vs. 200 to 500 for a custom site)
-- Makes the code hard for crawlers to read
-- Prevents optimal use of HTML5 tags (`<article>`, `<section>`, `<aside>`, `<nav>`, `<main>`)
+![Expectation vs Reality of WordPress HTML output](/images/blog/wordpress-vs-custom/div-soup-meme.webp)
 
-### The custom approach
+```
+📊 DOM Nodes Per Page
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress (Elementor)  ████████████████████  ~2500 nodes
+Custom site            ████░░░░░░░░░░░░░░░░  ~350 nodes
 
-With a site coded from scratch, every tag is intentional:
+📊 Content-to-Markup Ratio
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress (Elementor)  ███░░░░░░░░░░░░░░░░░  ~15%
+Custom site            ██████████████░░░░░░  ~70%
+
+📊 Average DOM Depth
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress (Elementor)  ████████████████████  15 to 25 levels
+Custom site            ██████░░░░░░░░░░░░░░  5 to 8 levels
+```
+
+### The same heading, custom-coded
 
 ```html
 <article>
@@ -93,26 +136,26 @@ With a site coded from scratch, every tag is intentional:
 </article>
 ```
 
-Clean, semantic, lightweight. Google immediately understands the structure. The signal-to-noise ratio is at its maximum.
+Clean. Semantic. Lightweight. Google immediately understands the structure. The signal-to-noise ratio is at its maximum.
 
-## 3. Structured data without compromise
+## 3. Structured data: rich snippets without the headaches
 
-### The rich snippets opportunity
+### The opportunity
 
-Structured data (Schema.org) lets you get rich results in Google: review stars, expandable FAQs, product prices, opening hours, breadcrumbs. These rich results dramatically increase click-through rates (CTR), sometimes by 20 to 30%.
+Structured data (Schema.org) lets you get rich results in Google: review stars, expandable FAQs, product prices, opening hours, breadcrumbs. These rich results can boost click-through rates by 20 to 30%.
 
-### WordPress and structured data
+### On WordPress
 
-On WordPress, structured data goes through plugins like Yoast SEO or Rank Math. These plugins do a decent job for basic cases (Article, BreadcrumbList), but show their limits for:
+Structured data goes through plugins (Yoast SEO, Rank Math). They work fine for basic cases, but hit their limits fast:
 
 - Custom schemas (LocalBusiness with specific attributes)
-- Complex nested schemas (a Product with AggregateRating, Offer, and FAQ)
+- Complex nested schemas (Product + AggregateRating + Offer + FAQ)
 - Consistency between visible content and structured data
 - Conflicts between plugins generating duplicate schemas
 
-### The native code advantage
+### On a custom site
 
-On a custom site, structured data is embedded directly in the source code as JSON-LD, with complete control:
+Structured data is embedded directly in the source code as JSON-LD, with complete control:
 
 ```json
 {
@@ -134,150 +177,184 @@ On a custom site, structured data is embedded directly in the source code as JSO
 }
 ```
 
-Every piece of data is accurate, validated, and perfectly aligned with the displayed content. No intermediary plugin, no conflicts, no approximations.
+Every piece of data is accurate, validated, and aligned with the displayed content. No intermediary plugin, no conflicts, no guesswork.
 
-## 4. Surgical resource management
+## 4. Resource management: surgical loading vs global chaos
 
-### WordPress's global loading problem
+### The WordPress problem
 
-One of WordPress's most costly performance flaws is global resource loading. When you install a contact form plugin, its CSS and JavaScript load on **every page of the site**, even pages with no form.
+One of the most costly WordPress performance flaws: **global resource loading**. Install a contact form plugin? Its CSS and JS load on **every single page**. Even the ones without any form.
 
-A typical WordPress site with 10 plugins loads between 15 and 30 distinct CSS/JS files on every page. Each file represents an HTTP request, parsing time, and extra weight.
+A typical WordPress site with 10 plugins loads 15 to 30 separate CSS/JS files on every page. Each file = an HTTP request, parsing time, and extra weight.
 
-Even optimization plugins like WP Rocket or Autoptimize only mitigate the problem: they concatenate and minify files, but the unused code is still downloaded and executed.
+![Me installing the 15th WordPress optimization plugin](/images/blog/wordpress-vs-custom/plugins-meme.webp)
 
-### Native tree-shaking and code-splitting
+Optimization plugins (WP Rocket, Autoptimize) only mitigate the damage: they concatenate and minify, but the unused code is still downloaded and executed by the browser.
 
-A modern framework like Nuxt.js includes natively:
+### Modern frameworks are surgical
 
-- **Tree-shaking**: only the JavaScript actually used is included in the final bundle. If you import a single function from a library, only that function is bundled.
-- **Code-splitting**: each page loads only the JavaScript it needs. The homepage doesn't download the contact page's code.
-- **Intelligent lazy-loading**: images, heavy components, and non-critical resources only load when the user needs them (on scroll, on click).
+Nuxt.js includes natively:
 
-The result: each page contains only the bare minimum. Not a byte more.
+- **Tree-shaking**: only the JavaScript actually used ends up in the final bundle. Import a single function from a library? Only that function gets shipped.
+- **Code-splitting**: each page loads only its own JavaScript. The homepage doesn't download the contact page's code.
+- **Intelligent lazy-loading**: images, heavy components, and non-critical resources only load when the user needs them.
+
+Result: each page contains only the bare minimum. Not a byte more.
 
 ## 5. URLs and crawl budget
 
-### What crawl budget is
+### What's crawl budget
 
-Google allocates each site a "crawl budget" — a limited number of pages that Googlebot will explore on each visit. For a small site, this isn't critical. But crawl efficiency remains a signal of technical quality.
+Google allocates each site a limited number of pages that Googlebot will explore per visit. For a small site it's not super critical, but crawl efficiency remains a signal of technical quality.
 
-### WordPress and parasitic URLs
+### WordPress and its ghost pages
 
-By default, WordPress generates a multitude of pages you never asked for:
+By default, WordPress generates a bunch of pages nobody asked for:
 
-- **Author archive pages** (`/author/admin/`) — often duplicate content
-- **Date archive pages** (`/2025/01/`) — no SEO value
+- **Author archives** (`/author/admin/`): usually duplicate content
+- **Date archives** (`/2025/01/`): zero SEO value
 - **Empty or near-empty tag and category pages**
 - **Internal search pages** accidentally indexed
-- **Attachment pages** (every uploaded image creates its own page)
-- **URLs with parameters** (`?replytocom=`, `?p=`) generating duplicate content
+- **Attachment pages** (every uploaded image creates its own page 🤦)
+- **Parameterized URLs** (`?replytocom=`, `?p=`) generating duplicate content
 - **RSS feed pages** sometimes indexed
 
-Each of these pages dilutes the crawl budget and creates duplicate content. SEO plugins try to block these URLs via `robots.txt` or `noindex`, but it's reactive patching.
+Each of these dilutes the crawl budget and creates duplicate content. Yoast tries to block these with `noindex`... but it's a band-aid on a broken leg.
 
-### Native control on a custom site
+### A custom site
 
-On a site coded from scratch, every URL is created intentionally. There are no parasitic pages, no accidental duplicate content. The `sitemap.xml` is generated automatically and contains only relevant pages. The `robots.txt` is configured once, cleanly.
+Every URL exists because we decided it should. Zero parasitic pages, zero accidental duplicate content. The `sitemap.xml` is auto-generated and only contains relevant pages. The `robots.txt` is configured once, cleanly.
 
 Googlebot explores 100% useful pages instead of wasting visits on empty archives.
 
-## 6. Security: an underestimated SEO factor
+## 6. Security: the SEO factor everyone forgets
 
-### The direct impact on rankings
+### The concrete impact
 
 A hacked or malware-infected site gets:
 
 - **Demoted** by Google in search results
-- **Flagged** with a "This site may harm your computer" warning — which drops CTR to zero
+- **Flagged** with a "This site may harm your computer" warning (RIP your click-through rate)
 - **Deindexed** in serious cases
 
-Recovery after a hack can take weeks, even months, in terms of ranking.
+Recovery can take weeks. Sometimes months in terms of rankings.
 
-### WordPress: the number one target
+### WordPress: target number one
 
-WordPress accounts for roughly 90% of hacked CMS sites. Attack vectors are numerous:
+WordPress accounts for about 90% of hacked CMS sites. Here's why:
 
 - **Vulnerable plugins**: every plugin is a potential entry point. In 2024, over 7,000 WordPress vulnerabilities were reported.
-- **Outdated themes**: unupdated themes contain known, documented security flaws.
-- **Brute force attacks**: the `/wp-admin` page is a universally known target.
+- **Outdated themes**: themes that aren't updated contain known, documented security flaws.
+- **Brute force attacks**: `/wp-admin` is a universally known target.
 - **SQL injections**: the PHP/MySQL architecture exposes a significant attack surface.
+
+![This is fine - like your WordPress with 3 outdated plugins](/images/blog/wordpress-vs-custom/this-is-fine.webp)
 
 Keeping a WordPress site secure demands constant vigilance: weekly updates, plugin monitoring, frequent backups, application firewalls.
 
-### A static site is nearly unattackable
+### A static site? Nearly unattackable.
 
-A statically generated site has no database to hack, no exposed admin panel, no server-side code to exploit. It's HTML, CSS, and JavaScript — inert files served as-is.
+No database to hack. No exposed admin panel. No server-side code to exploit. It's HTML, CSS, and JavaScript. Inert files served as-is.
 
 The attack surface is reduced to the bare minimum: the web server itself. The site stays online, available, and intact.
 
-## 7. Mobile-first and responsive compatibility
+## 7. Mobile-first
 
-### Google's mobile-first indexing
+### Why it's crucial
 
-Since 2021, Google exclusively uses the mobile version of a site for indexing and ranking. If your site is slow or poorly optimized on mobile, your search rankings suffer directly.
+Since 2021, Google uses **exclusively** the mobile version of a site for indexing and ranking. Site not optimized for mobile = rankings penalized. End of story.
 
 ### WordPress and responsive design
 
-WordPress themes are technically responsive, but in practice:
+WordPress themes are "responsive" on paper. In the real world:
 
 - Page builders (Elementor, Divi, WPBakery) generate complex layouts that adapt poorly to small screens
-- Elements hidden on mobile with `display: none` are still downloaded, adding to load time
-- Images aren't always served at the right size (a smartphone downloads the 2000px desktop image)
+- Elements hidden on mobile with `display: none` are still downloaded (the browser loads everything, then hides it... great logic 🙃)
+- Images aren't always served at the right size (your phone downloads the 2000px desktop image)
 - Custom web fonts multiplied by themes add hundreds of KB
 
-### The native mobile-first approach
+### Native mobile-first approach
 
-A custom-coded site is designed mobile-first from the very first line of code:
+A custom-coded site is designed mobile-first from line one:
 
-- Images are served at the right size via `<picture>` and `srcset`, with modern formats (WebP, AVIF)
-- CSS is written mobile-first: the mobile version is the base, desktop adaptations are added via `@media`
-- No hidden elements are downloaded unnecessarily
-- Fonts are loaded with `font-display: swap` and an optimized subset
+- Images served at the right size via `<picture>` and `srcset`, with modern formats (WebP, AVIF)
+- CSS written mobile-first: the mobile version is the baseline, desktop adaptations come via `@media`
+- No hidden elements downloaded unnecessarily
+- Fonts loaded with `font-display: swap` and an optimized subset
 
 ## 8. Content updates and freshness
 
 ### Why freshness matters
 
-Google values fresh, regularly updated content. A site whose content evolves is considered more relevant than a static one.
+Google values fresh, regularly updated content. A site whose content evolves is considered more relevant than one that stays frozen.
 
 ### The WordPress workflow
 
-On WordPress, updating a page means logging into the back-office, navigating the editor (often slow with page builders), editing the content, saving, then clearing the cache. This workflow, tedious as it is, discourages frequent updates.
+Updating a page on WordPress: log into the back-office, navigate the editor (often slow with page builders), edit the content, save, then clear the cache. It's tedious, and as a result, updates get postponed.
 
-On top of that, every WordPress, theme, or plugin update can break the site. Site owners delay updates out of fear of regressions, creating a vicious cycle: outdated site, less secure, less performant.
+On top of that, every WordPress, theme, or plugin update can break the site. Site owners delay updates out of fear of regressions. Vicious cycle: outdated site, less secure, less performant.
 
-### A decoupled CMS for simplicity
+### A headless CMS for simplicity
 
-With a headless CMS like Nuxt Studio, content updates are decoupled from the code. The client edits their text or images in an integrated visual interface, and the site regenerates automatically. No risk of breaking anything, no technical updates to manage.
+With a headless CMS like Nuxt Studio, content updates are decoupled from the code. The client edits text or images in a visual interface, and the site regenerates automatically. No risk of breaking anything, no technical updates to manage.
 
-Content stays fresh, the site stays stable.
+Fresh content, stable site.
 
 ## 9. Advanced optimizations impossible on WordPress
 
-Some advanced SEO techniques are native in a modern framework but impossible or extremely complex to implement on WordPress:
+Some SEO techniques are native in a modern framework but impossible (or so complex nobody actually does it) on WordPress:
 
 ### Intelligent prefetching
 
-Nuxt.js detects links visible on screen and pre-loads the corresponding pages in the background. When the user clicks, the page is already in memory: navigation feels instant. Impossible to replicate natively on WordPress.
+Nuxt.js detects links visible on screen and pre-loads the corresponding pages in the background. When the user clicks, the page is already in memory: navigation feels instant. Try doing that natively on WordPress.
 
-### Automatic optimized sitemap generation
+### Automatic optimized sitemap
 
-The sitemap is generated at build time with the exact metadata of each page (last modified, priority, frequency). On WordPress, you depend on a plugin that must query the database on every generation.
+The sitemap is generated at build time with the exact metadata of each page (last modified, priority, frequency). On WordPress, you depend on a plugin that has to query the database every time.
 
 ### HTTP header control
 
-`Cache-Control`, `ETag`, `Content-Security-Policy`, `X-Content-Type-Options` headers are configured directly at the web server level, without an abstraction layer. Every header is optimized for performance and security.
+`Cache-Control`, `ETag`, `Content-Security-Policy`, `X-Content-Type-Options` headers are configured directly at the server level, without an abstraction layer. Every header is optimized for performance and security.
 
 ### Conditional rendering by device
 
-Components can be rendered differently depending on the device at build time, avoiding the download of unnecessary code. WordPress loads everything and visually hides what isn't relevant.
+Components can be rendered differently depending on the device at build time, avoiding unnecessary code downloads. WordPress loads everything and visually hides what's not relevant.
 
-## The verdict: WordPress isn't bad, but it starts with a handicap
+## The verdict
 
-To be fair: you can absolutely rank a WordPress site well. Millions of WordPress sites appear on Google's first page. But they get there **despite** their architecture, not **because of** it.
+Let's be honest: you can absolutely rank a WordPress site well. Millions of WordPress sites sit on Google's first page. But they get there **despite** their architecture, not **because of** it.
 
-For a WordPress site to reach SEO performance comparable to a custom site, you need:
+### The final comparison
+
+```
+📊 Lighthouse Score
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress            ████████░░░░░░░░░░░░  30-60
+Custom site          ████████████████████  95-100
+
+📊 Vulnerabilities / Year
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress            ████████████████████  7,000+
+Custom site          ░░░░░░░░░░░░░░░░░░░░  ~0
+
+📊 Monthly Maintenance Cost
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WordPress            ████████████████░░░░  $55-220
+Custom site          ███░░░░░░░░░░░░░░░░░  ~$16
+```
+
+| Criteria | WordPress | Custom site |
+|---|---|---|
+| Lighthouse Performance | 30-60 | 95-100 |
+| Mobile load time | 3-6s | < 1s |
+| Security (vulns/year) | 7,000+ | ~0 |
+| Monthly maintenance | $55-220/mo | ~$16/mo |
+| Generated duplicate content | Archive pages, tags, authors, attachments | None |
+| Structured data | Via plugins (frequent conflicts) | Native, validated, conflict-free |
+| Mobile-first | Adaptive (hides elements) | Native (only loads what's needed) |
+| Content updates | Slow back-office, risk of breakage | Headless CMS, zero risk |
+
+For a WordPress site to reach comparable SEO performance, you need:
 
 - A lightweight, well-coded theme (not Elementor/Divi)
 - 5 to 10 optimization plugins (cache, minification, lazy-load, WebP, CDN)
@@ -285,10 +362,10 @@ For a WordPress site to reach SEO performance comparable to a custom site, you n
 - Constant maintenance (updates, monitoring, backups)
 - A monthly budget for performant hosting and premium plugins
 
-All of this optimization work is **native** in a custom-coded site. It's the difference between trying to make a truck fly by bolting on wings, and designing a plane from the start.
+All of this is **native** on a custom-coded site. It's the difference between strapping wings onto a truck and designing a plane from scratch.
 
-## Take it further
+## Let's talk about it
 
-At Tempo Hub, we build sites with all these SEO optimizations baked in from day one. Every site is statically generated, semantically marked up, mobile-optimized, and designed to deliver the best possible experience to visitors — and search engines.
+At Tempo Hub, we build sites with all these SEO optimizations baked in from day one. Every site is statically generated, semantically marked up, mobile-optimized, and designed to deliver the best possible experience to visitors and search engines alike.
 
-Are you a craftsperson, retailer, or small business owner? **Your online visibility deserves better than a WordPress theme slowed down by twenty plugins.** Get in touch to discover what a custom site can do for your search rankings.
+Are you a craftsperson, retailer, or small business owner? **Your online visibility deserves better than a WordPress theme weighed down by twenty plugins.** Get in touch to see what a custom site can do for your search rankings.

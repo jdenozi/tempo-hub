@@ -20,19 +20,19 @@ export default {
           900: '#553c18',
           950: '#2e200c',
         },
-        // Secondary: Space blue — backgrounds, text, structure
+        // Secondary: Deep plum — backgrounds, text, structure (charte graphique)
         secondary: {
-          50: '#e8eaf2',
-          100: '#bcc5d8',
-          200: '#96a4bf',
-          300: '#8898b8',
-          400: '#6878a0',
-          500: '#556385',
-          600: '#434f6a',
-          700: '#333c52',
-          800: '#1a2545',
-          900: '#0a0e24',
-          950: '#050816',
+          50: '#f0e8f2',
+          100: '#d8bce0',
+          200: '#bf96cc',
+          300: '#a878b8',
+          400: '#8a5ea0',
+          500: '#6e4685',
+          600: '#56366a',
+          700: '#3e2850',
+          800: '#2a1540',
+          900: '#180a28',
+          950: '#0e0616',
         },
         // Accent: Fire/orange — warm highlights, engine glow
         accent: {

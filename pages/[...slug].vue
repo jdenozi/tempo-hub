@@ -1,19 +1,15 @@
 <template>
   <div>
-    <!-- MDC body: page has markdown body content (new MDC format) -->
-    <ContentRenderer
-      v-if="hasMdcBody"
-      :value="page"
-    />
     <!-- Frontmatter sections: legacy format (backward compat during migration) -->
     <PageRenderer
-      v-else-if="page?.sections"
+      v-if="page?.sections"
       :sections="page.sections"
     />
-    <!-- Prose fallback -->
-    <div v-else-if="page" class="container-page section-padding">
-      <ContentRenderer :value="page" />
-    </div>
+    <!-- MDC / prose content rendered by ContentRenderer (sections handle their own layout) -->
+    <ContentRenderer
+      v-else-if="page"
+      :value="page"
+    />
   </div>
 </template>
 
@@ -42,15 +38,6 @@ const { data: page } = await useAsyncData(`page-${contentPath}`, () =>
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
-
-// Detect if page has MDC body content (array of AST nodes)
-// In Nuxt Content v3, body is an AST object with type 'root' and children array
-const hasMdcBody = computed(() => {
-  const body = page.value?.body
-  if (!body) return false
-  // body.children exists and has at least one non-empty node
-  return Array.isArray(body.children) && body.children.length > 0
-})
 
 // SEO meta from frontmatter
 useHead({

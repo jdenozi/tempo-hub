@@ -68,12 +68,6 @@
 .vehicle-right { animation: vehicle-drift-right 18s linear infinite; }
 .vehicle-left { animation: vehicle-drift-left 22s linear infinite 4s; }
 
-/* Asteroid slow rotation */
-@keyframes asteroid-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 /* Countdown overlay typography */
 .countdown-overlay {
   font-family: 'Poppins', system-ui, sans-serif;
@@ -83,20 +77,6 @@
   text-shadow: 0 0 20px rgba(212, 168, 83, 0.8), 0 0 40px rgba(212, 168, 83, 0.4);
   letter-spacing: 0.05em;
   user-select: none;
-}
-
-/* Countdown shake */
-@keyframes countdown-shake {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-2px, 1px); }
-  50% { transform: translate(2px, -1px); }
-  75% { transform: translate(-1px, 2px); }
-}
-
-/* Countdown pulse */
-@keyframes countdown-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
 }
 
 /* Data stream flow */
@@ -110,7 +90,6 @@
 .data-stream-a { animation: data-stream 4s linear infinite; }
 .data-stream-b { animation: data-stream 6s linear infinite 1.5s; }
 .data-stream-c { animation: data-stream 5s linear infinite 3s; }
-.data-stream-d { animation: data-stream 7s linear infinite 0.8s; }
 
 
 /* Shooting star streaks (SVG lines — Scene 1) */

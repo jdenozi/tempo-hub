@@ -8,13 +8,55 @@ order: 3
 showInNav: true
 ---
 
-:section-page-banner{hero-preset="planet-horizon" subtitle="Découvrez une sélection de projets qui illustrent notre expertise" title="Nos réalisations"}
+::section-page-banner
+---
+animation:
+  :delay: 4
+  name: fadeDown
+hero-preset: planet-horizon
+subtitle: Découvrez une sélection de projets qui illustrent notre expertise
+title: Nos réalisations
+---
+::
 
 ::section-projects
 ---
 animation:
   name: fadeUp
 items:
+  - title: Julie Boulangier — Psychopraticienne
+    images:
+      - /images/projects/julie-boulangier-home.png
+      - /images/projects/julie-boulangier-accompagnements.png
+    description: Site vitrine professionnel pour une psychopraticienne à Montpellier,
+      conçu avec Nuxt 3 et un design épuré aux tons chaleureux. Hero immersif plein
+      écran, présentation des accompagnements (addiction, dépendance affective,
+      consultation vidéo), et prise de rendez-vous en ligne via Cal.com. Automatisations
+      métier avec n8n et intégration Stripe pour le paiement des séances. Le design
+      responsive et l'optimisation SEO locale ont permis une visibilité immédiate
+      sur les recherches thérapie à Montpellier.
+    tags:
+      - Nuxt 3
+      - Cal.com
+      - n8n
+      - Stripe
+    link: https://julie-boulangier.fr
+  - title: Tempo Budget
+    description: Application de gestion budgétaire personnelle et partagée, construite
+      avec Vue 3, TypeScript et FastAPI. Suivi des revenus et dépenses par catégories,
+      budgets partagés entre membres avec répartition automatique, transactions
+      récurrentes avec historique versionné, et tableaux analytiques avec projections.
+      Déployée via Docker avec Nginx.
+    images:
+      - /images/projects/tempo-budget-dashboard.png
+      - /images/projects/tempo-budget-detail.png
+      - /images/projects/tempo-budget-charts.png
+    tags:
+      - Vue 3
+      - TypeScript
+      - FastAPI
+      - Docker
+    link: https://github.com/jdenozi/TempoBudget
   - title: E-commerce Mode
     description: Boutique en ligne construite avec Nuxt 3 et Stripe, intégrant une
       gestion des stocks en temps réel et un tableau de bord vendeur sur mesure.
@@ -65,16 +107,6 @@ items:
       - Landing
       - Conversion
       - Fintech
-  - title: Blog Tech
-    description: Blog technique propulsé par Nuxt Content avec un CMS headless
-      Storyblok, offrant une recherche full-text instantanée et un pipeline de
-      newsletter automatisé via Mailchimp. Les optimisations Core Web Vitals
-      (LCP sous 1,2s, score Lighthouse 98) ont propulsé le site en première page
-      Google sur ses mots-clés cibles en moins de trois mois.
-    tags:
-      - Blog
-      - CMS
-      - SEO
 subtitle: Chaque projet est unique, comme votre vision
 title: Portfolio
 ---

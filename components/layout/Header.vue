@@ -138,10 +138,7 @@ const dynamicNavItems = computed<NavItem[]>(() => {
     }
   }
 
-  // Always add contact at the end
   items.push({ label: 'nav.blog', to: '/blog' })
-
-  items.push({ label: 'nav.contact', to: '/contact' })
 
   return items
 })

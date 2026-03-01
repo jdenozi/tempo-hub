@@ -8,8 +8,8 @@
     <div ref="viewportRef" class="fixed inset-0 z-0 overflow-hidden">
 
       <!-- Background (deep space → warm transition) -->
-      <div class="absolute inset-0 bg-gradient-to-b from-[#050816] via-[#0a0f2e] to-[#0f0728]" />
-      <div ref="warmBgRef" class="absolute inset-0 opacity-0" style="background: radial-gradient(ellipse at 50% 65%, #2d1a00 0%, #1a0a2e 50%, #050816 100%)" />
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0e0616] via-[#150a28] to-[#180a30]" />
+      <div ref="warmBgRef" class="absolute inset-0 opacity-0" style="background: radial-gradient(ellipse at 50% 65%, #2d1a00 0%, #1a0a2e 50%, #0e0616 100%)" />
 
       <!-- Stars (persistent) -->
       <svg ref="starsRef" class="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -121,7 +121,7 @@
           </g>
 
           <!-- Ring shadow on planet surface -->
-          <ellipse cx="0" cy="-160" rx="550" ry="30" fill="#050816" opacity="0.12" />
+          <ellipse cx="0" cy="-160" rx="550" ry="30" fill="#0e0616" opacity="0.12" />
 
           <!-- ===== ORBITING RING DUST (GSAP animated on elliptical paths) ===== -->
           <g ref="ringDustRef">
@@ -380,9 +380,9 @@
               <stop offset="100%" stop-color="#d4a853" stop-opacity="0.12" />
             </linearGradient>
             <linearGradient id="ground-fog" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0a0f2e" stop-opacity="0" />
-              <stop offset="30%" stop-color="#0a0f2e" stop-opacity="0.5" />
-              <stop offset="100%" stop-color="#050816" stop-opacity="0.98" />
+              <stop offset="0%" stop-color="#150a28" stop-opacity="0" />
+              <stop offset="30%" stop-color="#150a28" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#0e0616" stop-opacity="0.98" />
             </linearGradient>
             <linearGradient id="beam-gold" x1="0" y1="1" x2="0" y2="0">
               <stop offset="0%" stop-color="#d4a853" stop-opacity="0.15" />
@@ -399,16 +399,16 @@
               <stop offset="100%" stop-color="#0c1225" stop-opacity="0.95" />
             </linearGradient>
             <linearGradient id="haze-h" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0a0f2e" stop-opacity="0" />
+              <stop offset="0%" stop-color="#150a28" stop-opacity="0" />
               <stop offset="50%" stop-color="#0e1535" stop-opacity="0.6" />
-              <stop offset="100%" stop-color="#0a0f2e" stop-opacity="0" />
+              <stop offset="100%" stop-color="#150a28" stop-opacity="0" />
             </linearGradient>
             <filter id="city-glow"><feGaussianBlur stdDeviation="8" /></filter>
             <filter id="neon-glow"><feGaussianBlur stdDeviation="4" /></filter>
             <filter id="holo-glow"><feGaussianBlur stdDeviation="6" /></filter>
             <linearGradient id="road-reflection" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stop-color="#d4a853" stop-opacity="0.3"/>
-              <stop offset="100%" stop-color="#050816" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#0e0616" stop-opacity="0"/>
             </linearGradient>
           </defs>
 
@@ -2478,7 +2478,7 @@
           </g>
 
           <!-- Atmospheric haze near ground -->
-          <rect x="0" y="680" width="1440" height="40" fill="#0a0f2e" opacity="0.25" />
+          <rect x="0" y="680" width="1440" height="40" fill="#150a28" opacity="0.25" />
 
           <!-- Ground fog -->
           <rect x="0" y="740" width="1440" height="160" fill="url(#ground-fog)" />
@@ -2496,8 +2496,9 @@
         </div>
 
         <!-- Service cards -->
-        <div class="absolute inset-0 flex items-center justify-center px-4">
-          <div ref="cardsRef" class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 max-w-4xl w-full">
+        <div class="absolute inset-0 flex flex-col items-center justify-center px-4">
+          <h2 class="text-xl sm:text-2xl md:text-3xl uppercase tracking-[0.3em] text-[#d4a853] font-heading font-semibold retro-glow whitespace-nowrap mb-6 md:mb-10">{{ $t('home.scene3Label') }}</h2>
+          <div ref="cardsRef" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl w-full">
             <div v-for="svc in services" :key="svc.icon" class="svc-card" data-anim="card">
               <svg class="w-10 h-10 mb-4 text-[#d4a853]" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
                 <polygon v-if="svc.icon === 'diamond'" points="20,2 38,20 20,38 2,20" />
@@ -2506,13 +2507,22 @@
                 <circle v-if="svc.icon === 'orbit'" cx="20" cy="6" r="3" fill="currentColor" />
                 <circle v-if="svc.icon === 'orbit'" cx="32" cy="26" r="3" fill="currentColor" />
                 <circle v-if="svc.icon === 'orbit'" cx="8" cy="26" r="3" fill="currentColor" />
+                <path v-if="svc.icon === 'code'" d="M14 12L4 20l10 8M26 12l10 8-10 8M18 32l4-24" />
+                <rect v-if="svc.icon === 'shield'" x="6" y="4" width="28" height="32" rx="2" />
+                <path v-if="svc.icon === 'shield'" d="M20 4v32M6 20h28" />
+                <circle v-if="svc.icon === 'shield'" cx="20" cy="20" r="5" />
+                <circle v-if="svc.icon === 'connect'" cx="10" cy="10" r="4" />
+                <circle v-if="svc.icon === 'connect'" cx="30" cy="10" r="4" />
+                <circle v-if="svc.icon === 'connect'" cx="20" cy="30" r="4" />
+                <line v-if="svc.icon === 'connect'" x1="13" y1="12" x2="17" y2="27" />
+                <line v-if="svc.icon === 'connect'" x1="27" y1="12" x2="23" y2="27" />
+                <line v-if="svc.icon === 'connect'" x1="14" y1="10" x2="26" y2="10" />
               </svg>
               <h3 class="text-white font-heading font-semibold text-lg mb-2">{{ svc.title }}</h3>
               <p class="text-gray-400 text-sm leading-relaxed">{{ svc.desc }}</p>
             </div>
           </div>
         </div>
-        <p class="absolute top-[12%] left-1/2 -translate-x-1/2 text-[0.65rem] sm:text-xs uppercase tracking-[0.5em] text-[#d4a853]/70 font-light retro-glow">{{ $t('home.scene3Label') }}</p>
       </div>
 
       <!-- ==================== SCENE 4 : L'ASCENSION (Dawn over city skyline) ==================== -->
@@ -2551,7 +2561,7 @@
             </linearGradient>
             <linearGradient id="terrain-g" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="#0c1228" />
-              <stop offset="100%" stop-color="#050816" />
+              <stop offset="100%" stop-color="#0e0616" />
             </linearGradient>
             <linearGradient id="engine-trail" x1="0.5" y1="0" x2="0.5" y2="1">
               <stop offset="0%" stop-color="#d4a853" stop-opacity="0" />
@@ -2564,11 +2574,11 @@
               <stop offset="100%" stop-color="#d4a853" stop-opacity="0" />
             </linearGradient>
             <linearGradient id="cloud-h" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#0a0f2e" stop-opacity="0" />
+              <stop offset="0%" stop-color="#150a28" stop-opacity="0" />
               <stop offset="30%" stop-color="#1a1535" stop-opacity="0.4" />
               <stop offset="50%" stop-color="#1a1535" stop-opacity="0.6" />
               <stop offset="70%" stop-color="#1a1535" stop-opacity="0.4" />
-              <stop offset="100%" stop-color="#0a0f2e" stop-opacity="0" />
+              <stop offset="100%" stop-color="#150a28" stop-opacity="0" />
             </linearGradient>
             <filter id="s4-glow"><feGaussianBlur stdDeviation="5" /></filter>
             <filter id="s4-glow-lg"><feGaussianBlur stdDeviation="12" /></filter>
@@ -2838,11 +2848,11 @@
 
           <!-- Additional distant building outlines -->
           <g v-once opacity="0.12">
-            <rect x="55" y="566" width="12" height="19" fill="#0a0e24"/>
-            <rect x="78" y="570" width="8" height="15" fill="#0a0e24"/>
-            <rect x="105" y="563" width="10" height="22" fill="#0a0e24"/>
-            <rect x="1285" y="567" width="10" height="18" fill="#0a0e24"/>
-            <rect x="1330" y="571" width="14" height="14" fill="#0a0e24"/>
+            <rect x="55" y="566" width="12" height="19" fill="#150a20"/>
+            <rect x="78" y="570" width="8" height="15" fill="#150a20"/>
+            <rect x="105" y="563" width="10" height="22" fill="#150a20"/>
+            <rect x="1285" y="567" width="10" height="18" fill="#150a20"/>
+            <rect x="1330" y="571" width="14" height="14" fill="#150a20"/>
           </g>
 
           <!-- Spaceport ground detail -->
@@ -3089,7 +3099,7 @@
           </g>
 
           <!-- Foreground terrain -->
-          <path d="M0,660 Q180,648 350,655 Q550,665 720,640 Q900,620 1100,635 Q1300,650 1440,642 L1440,900 L0,900Z" fill="#050816" />
+          <path d="M0,660 Q180,648 350,655 Q550,665 720,640 Q900,620 1100,635 Q1300,650 1440,642 L1440,900 L0,900Z" fill="#0e0616" />
 
           <!-- Terrain texture (alien vegetation) -->
           <g v-once opacity="0.08">
@@ -3129,26 +3139,20 @@
           </g> <!-- /scene4ContainerRef -->
         </svg>
 
-        <!-- Countdown overlay -->
-        <div ref="countdownRef" class="countdown-overlay absolute inset-0 flex items-center justify-center pointer-events-none z-40">5</div>
-
         <!-- Data readout -->
         <div class="data-readout absolute top-16 right-6 sm:right-10 text-right">
           <span class="beacon-dot" /> TRAJECTORY SET <span class="mx-1 text-[#d4a853]/15">//</span> LAUNCH READY
         </div>
 
+        <!-- Countdown overlay -->
+        <div ref="countdownRef" class="countdown-overlay absolute inset-0 flex items-center justify-center pointer-events-none z-40">5</div>
+
         <!-- Text + CTA -->
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-50" style="margin-top: -14%"> <!-- z-50: ensures CTA stays above countdown-overlay (z-40) -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-50" style="margin-top: -14%">
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4 retro-title">{{ $t('home.scene4Title') }}</h2>
           <p class="text-gray-300 text-sm sm:text-base max-w-lg mb-10 font-light" v-html="$t('home.scene4Subtitle')"></p>
           <NuxtLinkLocale to="/rendez-vous" class="cta-btn">
             {{ $t('home.ctaButton') }}
-          </NuxtLinkLocale>
-          <NuxtLinkLocale
-            :to="locale === 'fr' ? '/blog/site-sur-mesure-vs-wordpress-seo' : '/blog/custom-sites-vs-wordpress-seo'"
-            class="mt-6 inline-block text-sm text-[#d4a853]/60 hover:text-[#d4a853] transition-colors"
-          >
-            {{ $t('home.wordpressPromo') }}
           </NuxtLinkLocale>
         </div>
         <!-- Footer -->
@@ -3406,7 +3410,7 @@ onUnmounted(() => {
 /* ===== SERVICE CARDS ===== */
 
 .svc-card {
-  background: rgba(5, 8, 22, 0.65);
+  background: rgba(5, 8, 22, 0.85);
   border: 1px solid rgba(212, 168, 83, 0.1);
   backdrop-filter: blur(16px);
   border-radius: 2px;
@@ -3479,7 +3483,7 @@ onUnmounted(() => {
   border-radius: 2px;
   text-decoration: none;
   background: linear-gradient(135deg, #d4a853, #c4943f);
-  color: #050816;
+  color: #0e0616;
   transition: all 0.3s ease;
   position: relative;
 }

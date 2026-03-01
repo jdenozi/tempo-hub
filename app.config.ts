@@ -26,8 +26,9 @@ export default defineAppConfig({
 
   // === INTEGRATIONS ===
   calcom: {
-    username: 'tempo-hub',
-    defaultEvent: 'consultation',
+    baseUrl: 'https://calcom.tempo-finance.com',
+    username: 'tempohub',
+    defaultEvent: '',
   },
 
   n8n: {

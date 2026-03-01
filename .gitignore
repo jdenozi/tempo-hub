@@ -33,3 +33,6 @@ output/
 # Playwright
 playwright-report/
 blob-report/
+
+# Planning artifacts
+.sisyphus/

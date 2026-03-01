@@ -1,13 +1,14 @@
 <template>
-  <section :class="[spacingClass, bgClass, borderClass]">
-    <div class="container-page">
+  <section :class="[spacingClass, bgClass, borderClass, 'relative overflow-hidden']">
+    <AnimationsSolarSystemBackground class="z-0" />
+    <div class="container-page relative z-10">
       <div class="text-center mb-12 md:mb-16">
         <h2 :class="titleClass">{{ title }}</h2>
         <p v-if="subtitle" class="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
           {{ subtitle }}
         </p>
       </div>
-      <div class="glass-card p-6 md:p-8 max-w-3xl mx-auto">
+      <div class="glass-card p-6 md:p-8 max-w-6xl mx-auto">
         <IntegrationsCalEmbed :theme="theme" />
       </div>
     </div>

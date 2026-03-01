@@ -6,15 +6,15 @@
 
 :root {
   /* Background & foreground */
-  --color-background: #050816;
-  --color-foreground: #bcc5d8;
+  --color-background: #0e0616;
+  --color-foreground: #e0dce8;
 
   /* Muted surfaces (cards, sections) */
-  --color-muted: #0a0e24;
-  --color-muted-foreground: #6878a0;
+  --color-muted: #150a20;
+  --color-muted-foreground: #8068a0;
 
   /* Borders */
-  --color-border: #1a2545;
+  --color-border: #2a1540;
 
   /* Primary brand color — gold */
   --color-primary: #d4a853;
@@ -27,41 +27,44 @@
   /* Section spacing */
   --section-padding-y: clamp(4rem, 10vw, 8rem);
 
+  /* Card radius */
+  --radius-card: 0.75rem;
+
   /* Theme-color for browser chrome */
   --theme-color: #d4a853;
 }
 
-/* Prose (markdown content) — dark theme overrides */
+/* Prose (markdown content) — high-contrast dark theme */
 .prose {
-  --tw-prose-body: #bcc5d8;
-  --tw-prose-headings: #e8eaf2;
-  --tw-prose-lead: #96a4bf;
-  --tw-prose-links: #d4a853;
-  --tw-prose-bold: #e8eaf2;
-  --tw-prose-counters: #6878a0;
-  --tw-prose-bullets: #6878a0;
-  --tw-prose-hr: #1a2545;
-  --tw-prose-quotes: #96a4bf;
+  --tw-prose-body: #f0ecf5;
+  --tw-prose-headings: #ffffff;
+  --tw-prose-lead: #e0dae8;
+  --tw-prose-links: #e8c06a;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-counters: #c8b8d8;
+  --tw-prose-bullets: #c8b8d8;
+  --tw-prose-hr: #3a2558;
+  --tw-prose-quotes: #e0dae8;
   --tw-prose-quote-borders: #d4a853;
-  --tw-prose-captions: #6878a0;
-  --tw-prose-code: #dea95a;
-  --tw-prose-pre-code: #bcc5d8;
-  --tw-prose-pre-bg: #0a0e24;
-  --tw-prose-th-borders: #1a2545;
-  --tw-prose-td-borders: #1a2545;
+  --tw-prose-captions: #c8b8d8;
+  --tw-prose-code: #e8c06a;
+  --tw-prose-pre-code: #f0ecf5;
+  --tw-prose-pre-bg: #1a0e2a;
+  --tw-prose-th-borders: #3a2558;
+  --tw-prose-td-borders: #3a2558;
 }
 
 /* === DARK PREMIUM DESIGN TOKENS === */
 
 .glass {
-  background: rgba(5, 8, 22, 0.65);
+  background: rgba(14, 6, 22, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(212, 168, 83, 0.1);
 }
 
 .glass-card {
-  background: rgba(5, 8, 22, 0.65);
+  background: rgba(14, 6, 22, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(212, 168, 83, 0.1);
@@ -89,11 +92,42 @@
 }
 
 .gradient-section {
-  background: linear-gradient(180deg, var(--color-muted) 0%, #0d1230 50%, var(--color-muted) 100%);
+  background: linear-gradient(180deg, #150a20 0%, #1e1030 50%, #150a20 100%);
 }
 
 .gradient-section-alt {
-  background: linear-gradient(180deg, #050816 0%, #0a1028 50%, #050816 100%);
+  background: linear-gradient(180deg, #0e0616 0%, #180a28 50%, #0e0616 100%);
+}
+
+.gradient-section,
+.gradient-section-alt {
+  position: relative;
+}
+
+.gradient-section::before,
+.gradient-section-alt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--color-background), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gradient-section::after,
+.gradient-section-alt::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top, var(--color-background), transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .border-glow {
