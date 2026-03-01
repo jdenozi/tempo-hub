@@ -67,7 +67,7 @@ echo ""
 echo "→ Waiting for container to start..."
 sleep 5
 
-if docker-compose ps | grep -q "running"; then
+if docker-compose ps | grep -qE "running|Up"; then
   echo ""
   echo "✓ Deploy complete — $VERSION is live"
   echo ""
