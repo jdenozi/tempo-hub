@@ -1,9 +1,9 @@
 # ── Stage 1: Install dependencies ──
 FROM node:20-alpine AS deps
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package.json ./
 COPY tempo-core/package.json ./tempo-core/
-RUN npm install && npm rebuild
+RUN npm install --ignore-scripts && npm rebuild
 
 # ── Stage 2: Build ──
 FROM node:20-alpine AS builder
@@ -22,7 +22,7 @@ COPY pages/ ./pages/
 COPY server/ ./server/
 COPY composables/ ./composables/
 COPY utils/ ./utils/
-RUN npm run build
+RUN npx nuxt prepare && npm run build
 
 # ── Stage 3: Production ──
 FROM node:20-alpine AS runner
