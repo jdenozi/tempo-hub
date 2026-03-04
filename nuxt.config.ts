@@ -11,18 +11,26 @@ export default defineNuxtConfig({
     },
   },
 
+  // Resource hints — preconnect to external runtime domains only
+  // NOTE: fonts.googleapis.com NOT included — @nuxt/fonts self-hosts in production
+  app: {
+    head: {
+      link: [
+        { rel: 'preconnect', href: 'https://js.stripe.com' },
+        { rel: 'preconnect', href: 'https://app.cal.com' },
+        { rel: 'dns-prefetch', href: 'https://js.stripe.com' },
+        { rel: 'dns-prefetch', href: 'https://app.cal.com' },
+      ],
+    },
+  },
+
   // Client-level theme (loaded after core CSS)
   css: ['~/assets/css/theme.css'],
 
   // Nuxt Studio — full config
   studio: {
-    // Enable dev mode overlay (auto in nuxt dev)
     dev: true,
-
-    // Login route for production auth
     route: '/_studio',
-
-    // Git repository
     repository: {
       provider: 'github',
       owner: 'jdenozi',
@@ -31,16 +39,12 @@ export default defineNuxtConfig({
       rootDir: '',
       private: true,
     },
-
-    // Auth providers (credentials via .env)
     auth: {
       github: {
         clientId: process.env.STUDIO_GITHUB_CLIENT_ID,
         clientSecret: process.env.STUDIO_GITHUB_CLIENT_SECRET,
       },
     },
-
-    // AI assistant for content generation
     ai: {
       apiKey: process.env.AI_GATEWAY_API_KEY || '',
       context: {
@@ -57,13 +61,9 @@ export default defineNuxtConfig({
         collectionContext: true,
       },
     },
-
-    // i18n config for Studio UI
     i18n: {
       defaultLocale: 'fr',
     },
-
-    // Component filtering in the Studio editor
     meta: {
       components: {
         include: [
@@ -85,10 +85,22 @@ export default defineNuxtConfig({
     },
   },
 
-  // Ensure studio routes are server-rendered
+  // SSG: prerender all routes at build time
+  nitro: {
+    prerender: {
+      routes: ['/', '/en'],
+      crawlLinks: true,
+      failOnError: false,
+    },
+  },
+
+  // Route rules: Studio stays SSR; static assets get long-lived cache headers
   routeRules: {
     '/_studio/**': { ssr: true },
     '/__nuxt_studio/**': { ssr: true },
+    '/_nuxt/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
+    '/images/**': { headers: { 'Cache-Control': 'public, max-age=604800' } },
+    '/fonts/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
   },
 
   i18n: {

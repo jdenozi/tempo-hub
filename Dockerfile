@@ -21,7 +21,7 @@ COPY layouts/ ./layouts/
 COPY pages/ ./pages/
 COPY server/ ./server/
 COPY composables/ ./composables/
-RUN npx nuxt prepare && npm run build
+RUN npx nuxt prepare && npx nuxt generate
 
 # ── Stage 3: Production ──
 FROM node:20-alpine AS runner

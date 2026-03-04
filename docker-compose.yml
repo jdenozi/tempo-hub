@@ -17,6 +17,9 @@ services:
       - "traefik.http.routers.${APP_NAME:-tempo-hub}.entrypoints=websecure"
       - "traefik.http.routers.${APP_NAME:-tempo-hub}.tls.certresolver=letsencrypt"
       - "traefik.http.services.${APP_NAME:-tempo-hub}.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.${APP_NAME:-tempo-hub}-compress.compress=true"
+      - "traefik.http.middlewares.${APP_NAME:-tempo-hub}-compress.compress.excludedcontenttypes=image/png,image/jpeg,image/gif,image/webp"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}.middlewares=${APP_NAME:-tempo-hub}-compress"
     deploy:
       resources:
         limits:
