@@ -15,6 +15,8 @@ export default defineNuxtConfig({
   // NOTE: fonts.googleapis.com NOT included — @nuxt/fonts self-hosts in production
   app: {
     head: {
+      title: 'Agence web sur mesure',
+      titleTemplate: '%s — Tempo Hub',
       link: [
         { rel: 'preconnect', href: 'https://js.stripe.com' },
         { rel: 'preconnect', href: 'https://app.cal.com' },
@@ -88,7 +90,7 @@ export default defineNuxtConfig({
   // SSG: prerender all routes at build time
   nitro: {
     prerender: {
-      routes: ['/', '/en'],
+      routes: ['/'],
       crawlLinks: true,
       failOnError: false,
     },
@@ -107,7 +109,6 @@ export default defineNuxtConfig({
     baseUrl: 'https://tempo-hub.fr',
     locales: [
       { code: 'fr', iso: 'fr-FR', file: 'fr.json', name: 'Français' },
-      { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' },
     ],
     lazy: true,
     langDir: '../locales/',

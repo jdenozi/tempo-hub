@@ -6,13 +6,42 @@
     <!-- ====== FIXED VIEWPORT ====== -->
     <ClientOnly>
       <template #fallback>
-        <div class="fixed inset-0 z-0 overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-b from-[#0e0616] via-[#150a28] to-[#180a30]" />
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-center">
-              <div class="w-12 h-12 border-2 border-primary-500/30 border-t-primary-500 rounded-full animate-spin mx-auto mb-4" />
-              <p class="text-gray-400 text-sm font-sans">Chargement...</p>
+        <div class="min-h-screen bg-gradient-to-b from-[#0e0616] via-[#150a28] to-[#180a30]">
+          <!-- Hero Section -->
+          <section class="min-h-screen flex flex-col items-center justify-center text-center px-4">
+            <p class="text-[0.65rem] sm:text-xs uppercase tracking-[0.5em] text-[#d4a853] mb-4 font-light">{{ client.profession }}</p>
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-bold text-white uppercase tracking-wider leading-none">{{ client.name }}</h1>
+            <div class="w-20 sm:w-28 h-px bg-gradient-to-r from-transparent via-[#d4a853] to-transparent mt-6 mb-6" />
+            <p class="text-sm sm:text-base md:text-lg text-gray-300 font-light tracking-wide max-w-lg">{{ $t('home.scene1Subtitle') }}</p>
+          </section>
+
+          <!-- Mission -->
+          <section class="py-20 flex flex-col items-center justify-center text-center px-4">
+            <p class="text-[0.65rem] sm:text-xs uppercase tracking-[0.5em] text-[#d4a853]/70 mb-6 font-light">{{ $t('home.scene2Label') }}</p>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white max-w-3xl leading-tight" v-html="$t('home.scene2Title')"></h2>
+          </section>
+
+          <!-- Expertise -->
+          <section class="py-20 flex flex-col items-center justify-center px-4">
+            <h2 class="text-xl sm:text-2xl md:text-3xl uppercase tracking-[0.3em] text-[#d4a853] font-heading font-semibold mb-6 md:mb-10">{{ $t('home.scene3Label') }}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl w-full">
+              <div v-for="svc in services" :key="svc.icon" class="svc-card">
+                <h3 class="text-white font-heading font-semibold text-lg mb-2">{{ svc.title }}</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">{{ svc.desc }}</p>
+              </div>
             </div>
+          </section>
+
+          <!-- CTA -->
+          <section class="py-20 flex flex-col items-center justify-center text-center px-4">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4">{{ $t('home.scene4Title') }}</h2>
+            <p class="text-gray-300 text-sm sm:text-base max-w-lg mb-10 font-light" v-html="$t('home.scene4Subtitle')"></p>
+            <NuxtLinkLocale to="/rendez-vous" class="cta-btn">{{ $t('home.ctaButton') }}</NuxtLinkLocale>
+          </section>
+
+          <!-- Footer -->
+          <div class="text-center pb-6">
+            <p class="text-[0.6rem] text-gray-600 tracking-wider">&copy; {{ new Date().getFullYear() }} {{ client.name }} &mdash; {{ contact.email }}</p>
           </div>
         </div>
       </template>
@@ -3214,7 +3243,9 @@
     </ClientOnly>
 
     <!-- ====== SCROLL DRIVER ====== -->
-    <div ref="driverRef" style="height: 600vh" />
+    <ClientOnly>
+      <div ref="driverRef" style="height: 600vh" />
+    </ClientOnly>
   </div>
 </template>
 
