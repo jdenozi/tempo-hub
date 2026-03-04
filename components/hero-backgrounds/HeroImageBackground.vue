@@ -5,7 +5,10 @@
       :src="image"
       alt=""
       class="absolute inset-0 h-full w-full object-cover"
-      loading="lazy"
+      loading="eager"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
     >
 
     <!-- Dark gradient overlay for text readability -->

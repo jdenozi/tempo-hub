@@ -28,6 +28,8 @@
               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
               :class="activeSlides[i] === imgIdx ? 'opacity-80 group-hover:opacity-100' : 'opacity-0'"
               loading="lazy"
+              width="640"
+              height="192"
             >
             <!-- Carousel dots -->
             <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
@@ -46,6 +48,8 @@
             :alt="item.title"
             class="w-full h-48 object-cover opacity-80 group-hover:opacity-100 transition-opacity"
             loading="lazy"
+            width="640"
+            height="192"
           >
           <!-- No image fallback -->
           <div
