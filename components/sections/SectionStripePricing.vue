@@ -8,6 +8,16 @@
         {{ subtitle }}
       </p>
       <ClientOnly>
+        <template #fallback>
+          <div class="space-y-16">
+            <div class="glass-card p-4 animate-pulse">
+              <div class="h-8 bg-gray-700/50 rounded w-1/3 mx-auto mb-6" />
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div v-for="n in 3" :key="n" class="h-64 bg-gray-700/30 rounded-lg" />
+              </div>
+            </div>
+          </div>
+        </template>
         <div class="space-y-16">
           <div v-for="(table, i) in tables" :key="i">
             <h3 v-if="table.label" class="text-xl font-heading font-semibold text-primary-500 text-center mb-6 text-glow-subtle">

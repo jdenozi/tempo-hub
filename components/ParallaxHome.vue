@@ -5,14 +5,25 @@
 
     <!-- ====== FIXED VIEWPORT ====== -->
     <ClientOnly>
-    <div ref="viewportRef" class="fixed inset-0 z-0 overflow-hidden">
+      <template #fallback>
+        <div class="fixed inset-0 z-0 overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-b from-[#0e0616] via-[#150a28] to-[#180a30]" />
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-12 h-12 border-2 border-primary-500/30 border-t-primary-500 rounded-full animate-spin mx-auto mb-4" />
+              <p class="text-gray-400 text-sm font-sans">Chargement...</p>
+            </div>
+          </div>
+        </div>
+      </template>
+    <div ref="viewportRef" class="fixed inset-0 z-0 overflow-hidden" style="will-change: transform">
 
       <!-- Background (deep space → warm transition) -->
       <div class="absolute inset-0 bg-gradient-to-b from-[#0e0616] via-[#150a28] to-[#180a30]" />
-      <div ref="warmBgRef" class="absolute inset-0 opacity-0" style="background: radial-gradient(ellipse at 50% 65%, #2d1a00 0%, #1a0a2e 50%, #0e0616 100%)" />
+      <div ref="warmBgRef" class="absolute inset-0 opacity-0" style="background: radial-gradient(ellipse at 50% 65%, #2d1a00 0%, #1a0a2e 50%, #0e0616 100%); will-change: opacity" />
 
       <!-- Stars (persistent) -->
-      <svg ref="starsRef" class="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <svg ref="starsRef" class="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="will-change: transform, opacity">
         <circle v-for="s in stars" :key="s.id" :cx="s.cx" :cy="s.cy" :r="s.r" fill="white" :opacity="s.op" />
         <g v-for="(b, i) in brightStars" :key="'b' + b.id" :class="['twinkle', `tw-${i % 3}`]">
           <circle :cx="b.cx" :cy="b.cy" r="6" fill="white" opacity="0.06" />
@@ -21,7 +32,7 @@
       </svg>
 
       <!-- Floating dust particles -->
-      <svg ref="dustRef" class="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <svg ref="dustRef" class="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="will-change: transform, opacity">
         <circle
           v-for="p in dustParticles"
           :key="'dust' + p.id"
