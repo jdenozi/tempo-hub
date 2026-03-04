@@ -23,6 +23,7 @@ const props = defineProps<{
   heroPreset?: string
   heroImage?: string
   heroOverlay?: string
+  size?: 'full' | 'compact' | 'minimal'
   animation?: {
     name: AnimationName
     delay?: number

@@ -1,5 +1,5 @@
 <template>
-  <section class="relative min-h-[50vh] flex items-center gradient-section-alt -mt-16 md:-mt-20">
+  <section :class="['relative flex items-center gradient-section-alt -mt-16 md:-mt-20', sectionHeightClass]">
     <!-- Dynamic background layer (behind everything) -->
     <div
       v-if="activeBackground"
@@ -9,14 +9,14 @@
     </div>
 
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(212,168,83,0.06)_0%,transparent_60%)] pointer-events-none" />
-    <div class="container-page section-padding pt-16 md:pt-20 text-center">
+    <div :class="['container-page text-center', innerPaddingClass]">
       <h1 class="text-display text-white max-w-4xl mx-auto text-glow">
         {{ title }}
       </h1>
       <p v-if="subtitle" class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto text-glow-subtle">
         {{ subtitle }}
       </p>
-      <div class="mt-6 mx-auto w-24 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent" />
+      <div v-if="size !== 'minimal'" class="mt-6 mx-auto w-24 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent" />
       <div v-if="ctaText" class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
         <UiButton :to="ctaLink" size="lg">
           {{ ctaText }}
@@ -42,6 +42,7 @@ const props = withDefaults(defineProps<{
   heroPreset?: string
   heroImage?: string
   heroOverlay?: string
+  size?: 'full' | 'compact' | 'minimal'
 }>(), {
   subtitle: '',
   ctaText: '',
@@ -51,6 +52,7 @@ const props = withDefaults(defineProps<{
   heroPreset: '',
   heroImage: '',
   heroOverlay: '',
+  size: 'full',
 })
 
 // Lazy-loaded preset background components (SSR-safe, code-split)
@@ -76,6 +78,9 @@ onMounted(() => {
 
 // Resolve active background component
 const activeBackground = computed(() => {
+  // Suppress background for minimal variant
+  if (props.size === 'minimal') return null
+  
   // Image background takes priority
   if (props.heroImage) {
     return HeroImageBackground
@@ -93,6 +98,32 @@ const activeBackground = computed(() => {
   }
 
   return null
+})
+
+// Computed height class for section element
+const sectionHeightClass = computed(() => {
+  switch (props.size) {
+    case 'compact':
+      return 'min-h-[30vh]'
+    case 'minimal':
+      return ''
+    case 'full':
+    default:
+      return 'min-h-[50vh]'
+  }
+})
+
+// Computed padding class for inner container
+const innerPaddingClass = computed(() => {
+  switch (props.size) {
+    case 'compact':
+      return 'py-8 md:py-12 pt-16 md:pt-20'
+    case 'minimal':
+      return 'py-6 md:py-8 pt-16 md:pt-20'
+    case 'full':
+    default:
+      return 'section-padding pt-16 md:pt-20'
+  }
 })
 
 // Props to pass to the active background component

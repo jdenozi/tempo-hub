@@ -8,9 +8,8 @@ showInNav: true
 
 ::section-page-banner
 ---
-ctaLink: /rendez-vous
-ctaText: Prendre rendez-vous
 heroPreset: grid-station
+size: compact
 subtitle: Deux formules claires pour répondre à tous les budgets
 title: Nos services
 ---

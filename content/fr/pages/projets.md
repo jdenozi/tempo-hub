@@ -14,6 +14,7 @@ animation:
   :delay: 4
   name: fadeDown
 hero-preset: planet-horizon
+size: minimal
 subtitle: Découvrez une sélection de projets qui illustrent notre expertise
 title: Nos réalisations
 ---
