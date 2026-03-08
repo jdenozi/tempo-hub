@@ -96,7 +96,7 @@ plans:
       - Intégrations spécifiques (API tierces, outils métier)
       - Architecture technique adaptée à vos contraintes
       - Accompagnement stratégique dédié
-    ctaText: Discutons de votre projet
+    ctaText: Prendre un rendez-vous
     ctaLink: /rendez-vous
 subtitle: Chaque projet commence par un échange gratuit pour définir vos besoins
 title: Nos formules
