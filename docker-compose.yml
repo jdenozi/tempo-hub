@@ -3,6 +3,7 @@ services:
     build: .
     container_name: ${APP_NAME:-tempo-hub}
     restart: unless-stopped
+    env_file: .env
     environment:
       - NITRO_PORT=3000
       - NITRO_HOST=0.0.0.0

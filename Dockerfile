@@ -21,6 +21,7 @@ COPY layouts/ ./layouts/
 COPY pages/ ./pages/
 COPY server/ ./server/
 COPY composables/ ./composables/
+COPY .env ./
 RUN npx nuxt prepare && npm run build
 
 # ── Stage 3: Production ──
