@@ -1,5 +1,10 @@
 <template>
   <div class="relative">
+
+    <!-- ====== PERSISTENT SSR BACKGROUND ====== -->
+    <!-- Always visible (SSR + client). Prevents flash during ClientOnly hydration swap. -->
+    <!-- z-[-1]: sits behind viewport (z-0) but is always present. -->
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-b from-[#0e0616] via-[#150a28] to-[#180a30]" aria-hidden="true" />
     <!-- Progress bar -->
     <div ref="progressRef" class="fixed top-0 left-0 h-[2px] bg-[#d4a853] z-50 origin-left" style="transform: scaleX(0)" />
 
@@ -3244,6 +3249,9 @@
 
     <!-- ====== SCROLL DRIVER ====== -->
     <ClientOnly>
+      <template #fallback>
+        <div style="height: 600vh" />
+      </template>
       <div ref="driverRef" style="height: 600vh" />
     </ClientOnly>
   </div>
