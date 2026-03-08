@@ -31,6 +31,24 @@
             <h2 class="text-xl sm:text-2xl md:text-3xl uppercase tracking-[0.3em] text-[#d4a853] font-heading font-semibold mb-6 md:mb-10">{{ $t('home.scene3Label') }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl w-full">
               <div v-for="svc in services" :key="svc.icon" class="svc-card">
+              <svg class="w-10 h-10 mb-4 text-[#d4a853]" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polygon v-if="svc.icon === 'diamond'" points="20,2 38,20 20,38 2,20" />
+                <path v-if="svc.icon === 'bolt'" d="M22 2L8 22h10l-4 16 16-22H18l4-14z" />
+                <circle v-if="svc.icon === 'orbit'" cx="20" cy="20" r="14" />
+                <circle v-if="svc.icon === 'orbit'" cx="20" cy="6" r="3" fill="currentColor" />
+                <circle v-if="svc.icon === 'orbit'" cx="32" cy="26" r="3" fill="currentColor" />
+                <circle v-if="svc.icon === 'orbit'" cx="8" cy="26" r="3" fill="currentColor" />
+                <path v-if="svc.icon === 'code'" d="M14 12L4 20l10 8M26 12l10 8-10 8M18 32l4-24" />
+                <rect v-if="svc.icon === 'shield'" x="6" y="4" width="28" height="32" rx="2" />
+                <path v-if="svc.icon === 'shield'" d="M20 4v32M6 20h28" />
+                <circle v-if="svc.icon === 'shield'" cx="20" cy="20" r="5" />
+                <circle v-if="svc.icon === 'connect'" cx="10" cy="10" r="4" />
+                <circle v-if="svc.icon === 'connect'" cx="30" cy="10" r="4" />
+                <circle v-if="svc.icon === 'connect'" cx="20" cy="30" r="4" />
+                <line v-if="svc.icon === 'connect'" x1="13" y1="12" x2="17" y2="27" />
+                <line v-if="svc.icon === 'connect'" x1="27" y1="12" x2="23" y2="27" />
+                <line v-if="svc.icon === 'connect'" x1="14" y1="10" x2="26" y2="10" />
+              </svg>
                 <h3 class="text-white font-heading font-semibold text-lg mb-2">{{ svc.title }}</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">{{ svc.desc }}</p>
               </div>
@@ -3191,7 +3209,7 @@
         </div>
 
         <!-- Countdown overlay -->
-        <div ref="countdownRef" class="countdown-overlay absolute inset-0 flex items-center justify-center pointer-events-none z-40">5</div>
+        <div ref="countdownRef" class="countdown-overlay absolute bottom-20 left-8 sm:left-12 pointer-events-none z-40 font-mono text-4xl font-bold text-[#d4a853] retro-glow">5</div>
 
         <!-- Text + CTA -->
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-50" style="margin-top: -14%">
