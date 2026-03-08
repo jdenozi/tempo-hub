@@ -340,6 +340,7 @@
           <svg class="w-4 h-4 text-[#d4a853]/50 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 9l6 6 6-6" /></svg>
         </div>
       </div>
+      <template v-if="scenesReady">
 
       <!-- ==================== SCENE 2 : LA CONSTELLATION (img_2.png - Bioluminescent) ==================== -->
       <div ref="scene2Ref" class="absolute inset-0" style="opacity:0">
@@ -3236,6 +3237,8 @@
         <div class="absolute bottom-8 left-[72px] right-[72px] h-px bg-gradient-to-r from-[#d4a853]/[0.06] via-transparent to-[#d4a853]/[0.06]" />
       </div>
 
+      </template>
+
       <!-- Status indicators -->
       <div class="absolute bottom-10 left-6 sm:left-10 flex items-center gap-1.5 pointer-events-none z-10" aria-hidden="true">
         <span class="indicator-dot indicator-0" />
@@ -3314,6 +3317,7 @@ const {
 
 // === LIFECYCLE ===
 let gsapCtx: { revert: () => void } | null = null
+const scenesReady = ref(false)
 
 onMounted(async () => {
   if (!hasAnimations.value) return
@@ -3322,24 +3326,45 @@ onMounted(async () => {
   const { gsap } = gsapModule
 
   await nextTick()
+
+  // PHASE 1: Background animations — Scene 1 is already in DOM
   gsapCtx = gsap.context(() => {
-    // Scroll-driven background animations (progress, stars, dust, saturn, etc.)
     useScrollAnimations({
       gsap, driverRef, progressRef, starsRef, dustRef, saturnGroupRef,
       warmBgRef, scrollIndRef, raysRef, ringDustRef, planetGridRef,
       ringDustParticles, COS_TILT, SIN_TILT,
     })
+  })
 
-    // Scene fade/slide transitions (scenes 1→2→3→4)
-    useSceneTransitions({
-      gsap, driverRef, scene1Ref, scene2Ref, scene3Ref, scene4Ref,
-      constSvg, buildingsGroup, shipRef, cardsRef, horizonGlow, horizonRaysRef,
+  // PHASE 2: Defer scene mount + scene animations until browser is idle
+  // Safari fallback: requestIdleCallback is not available in Safari
+  const scheduleDeferred = (typeof window !== 'undefined' && 'requestIdleCallback' in window)
+    ? (cb: () => void) => window.requestIdleCallback(cb)
+    : (cb: () => void) => setTimeout(cb, 1)
+
+  scheduleDeferred(async () => {
+    scenesReady.value = true
+    await nextTick() // Wait for Vue to render scenes 2-4
+
+    const sceneCtx = gsap.context(() => {
+      useSceneTransitions({
+        gsap, driverRef, scene1Ref, scene2Ref, scene3Ref, scene4Ref,
+        constSvg, buildingsGroup, shipRef, cardsRef, horizonGlow, horizonRaysRef,
+      })
+
+      useLaunchSequence({
+        gsap, driverRef, ignitionFlashRef, launchBlastRef, saucerRef, exhaustRef, contrailRef, umbilicalArmRef, secondaryArmRef, countdownRef, dustCloudsRef, smokeColumnsRef, scene4ContainerRef,
+      })
     })
 
-    // Launch sequence (ignition, blast, spacecraft, exhaust, contrail)
-    useLaunchSequence({
-      gsap, driverRef, ignitionFlashRef, launchBlastRef, saucerRef, exhaustRef, contrailRef, umbilicalArmRef, secondaryArmRef, countdownRef, dustCloudsRef, smokeColumnsRef, scene4ContainerRef,
-    })
+    // Combine cleanup — both contexts cleaned up on unmount
+    const bgRevert = gsapCtx?.revert.bind(gsapCtx)
+    gsapCtx = {
+      revert() {
+        sceneCtx?.revert()
+        bgRevert?.()
+      },
+    }
   })
 })
 

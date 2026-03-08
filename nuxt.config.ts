@@ -105,6 +105,20 @@ export default defineNuxtConfig({
     '/fonts/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
   },
 
+  // Vendor chunk isolation — separate long-lived cached chunks for heavy lazy-loaded deps
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id: string) {
+            if (id.includes('node_modules/gsap')) return 'vendor-gsap'
+            if (id.includes('node_modules/lenis')) return 'vendor-lenis'
+          },
+        },
+      },
+    },
+  },
+
   i18n: {
     baseUrl: 'https://tempo-hub.fr',
     locales: [
