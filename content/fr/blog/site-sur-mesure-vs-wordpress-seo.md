@@ -8,13 +8,13 @@ On va pas tourner autour du pot : WordPress fait tourner 43% du web. C'est un ou
 
 Mais quand on parle référencement naturel et performance pure, l'architecture d'un site codé sur mesure a des avantages structurels qu'aucun plugin WordPress ne peut compenser. Et on va vous le prouver avec des chiffres concrets.
 
-Chez Tempo Hub, on développe des sites statiques avec Nuxt.js. Oui, on a un parti pris. Mais les données qu'on va vous montrer sont objectives. Jugez par vous-même.
+Chez [Tempo Hub](/a-propos), on développe des sites statiques avec Nuxt.js. Oui, on a un parti pris. Mais les données qu'on va vous montrer sont objectives. Jugez par vous-même.
 
 ## 1. La performance : le critère n°1 de Google
 
 ### Ce que Google mesure vraiment
 
-Depuis 2021, Google utilise les **Core Web Vitals** comme facteur de classement direct. Trois métriques comptent :
+Depuis 2021, Google utilise les **[Core Web Vitals](https://web.dev/articles/vitals)** comme facteur de classement direct. Trois métriques comptent :
 
 - **LCP (Largest Contentful Paint)** : combien de temps pour afficher le plus gros élément visible de la page. Seuil : 2.5 secondes max.
 - **INP (Interaction to Next Paint)** : la réactivité aux clics et interactions. Seuil : 200ms max.
@@ -38,7 +38,7 @@ Résultat : une page WordPress moyenne fait entre **2 et 5 Mo** et charge en **3
 
 ### Un site statique, c'est une autre planète
 
-Avec Nuxt.js en mode SSG (Static Site Generation), chaque page est pré-générée en HTML pur au moment du build. Quand un visiteur arrive, le serveur renvoie directement le fichier HTML tout prêt. Pas d'exécution PHP. Pas de requête en base. Rien.
+Avec [Nuxt.js](https://nuxt.com) en mode SSG (Static Site Generation), chaque page est pré-générée en HTML pur au moment du build. Quand un visiteur arrive, le serveur renvoie directement le fichier HTML tout prêt. Pas d'exécution PHP. Pas de requête en base. Rien.
 
 ### Les chiffres de performance (accrochez-vous)
 
@@ -141,7 +141,7 @@ Propre. Sémantique. Léger. Google comprend immédiatement la structure. Le rap
 
 ### L'enjeu
 
-Les données structurées (Schema.org) permettent d'obtenir des résultats enrichis dans Google : étoiles d'avis, FAQ déroulantes, prix de produits, horaires d'ouverture, fil d'Ariane. Ces résultats enrichis peuvent booster le taux de clic de 20 à 30%.
+Les [données structurées](https://schema.org) (Schema.org) permettent d'obtenir des résultats enrichis dans Google : étoiles d'avis, FAQ déroulantes, prix de produits, horaires d'ouverture, fil d'Ariane. Ces résultats enrichis peuvent booster le taux de clic de 20 à 30%.
 
 ### Sur WordPress
 
@@ -295,7 +295,7 @@ En plus, chaque mise à jour de WordPress, de thème ou de plugin peut casser le
 
 ### Un CMS headless pour la simplicité
 
-Avec un CMS headless comme Nuxt Studio, les mises à jour de contenu sont séparées du code. Le client modifie son texte ou ses images dans une interface visuelle, le site se régénère automatiquement. Aucun risque de casser quoi que ce soit, aucune mise à jour technique à gérer.
+Avec un CMS headless comme [Nuxt Studio](https://nuxt.studio), les mises à jour de contenu sont séparées du code. Le client modifie son texte ou ses images dans une interface visuelle, le site se régénère automatiquement. Aucun risque de casser quoi que ce soit, aucune mise à jour technique à gérer.
 
 Contenu frais, site stable.
 
@@ -365,6 +365,6 @@ Tout ça est **natif** sur un site codé sur mesure. C'est la différence entre 
 
 ## On en discute ?
 
-Chez Tempo Hub, on conçoit des sites qui intègrent toutes ces optimisations dès le jour 1. Chaque site est généré statiquement, balisé sémantiquement, optimisé mobile, et pensé pour offrir la meilleure expérience aux visiteurs et aux moteurs de recherche.
+Chez Tempo Hub, on conçoit des [sites qui intègrent toutes ces optimisations](/services) dès le jour 1. Chaque site est généré statiquement, balisé sémantiquement, optimisé mobile, et pensé pour offrir la meilleure expérience aux visiteurs et aux moteurs de recherche.
 
-Vous êtes artisan, commerçant, ou dirigez une PME ? **Votre visibilité en ligne mérite mieux qu'un thème WordPress ralenti par vingt plugins.** Contactez-nous pour voir ce qu'un site sur mesure peut faire pour votre référencement.
+Vous êtes artisan, commerçant, ou dirigez une PME ? **Votre visibilité en ligne mérite mieux qu'un thème WordPress ralenti par vingt plugins.** [Contactez-nous](/rendez-vous) pour voir ce qu'un site sur mesure peut faire pour votre référencement.
