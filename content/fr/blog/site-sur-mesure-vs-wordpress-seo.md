@@ -34,7 +34,7 @@ Rajoutez un page builder type Elementor ou Divi, et c'est la cata :
 
 Résultat : une page WordPress moyenne fait entre **2 et 5 Mo** et charge en **3 à 6 secondes** sur mobile. Aïe.
 
-![Quand tu découvres que ta page WordPress pèse 4 Mo sur mobile](/images/blog/wordpress-vs-custom/page-weight-meme.webp)
+![Le dilemme de chaque SEO en 2025 : écrire pour les utilisateurs ou pour les moteurs de recherche ?](/images/blog/wordpress-vs-custom/seo-dilemma-meme.webp)
 
 ### Un site statique, c'est une autre planète
 
@@ -102,7 +102,6 @@ Sur WordPress, le HTML dépend entièrement du thème et des plugins. Et la plup
 
 Six niveaux de `<div>` pour afficher un titre. **Un titre.** 🤡
 
-![Expectation vs Reality du HTML WordPress](/images/blog/wordpress-vs-custom/div-soup-meme.webp)
 
 ```
 📊 Nœuds DOM par page
@@ -187,7 +186,7 @@ Un des défauts les plus coûteux de WordPress en termes de performance : le **c
 
 Un WordPress typique avec 10 plugins charge entre 15 et 30 fichiers CSS/JS distincts sur chaque page. Chaque fichier = une requête HTTP, du temps de parsing, du poids en plus.
 
-![Moi en train d'installer le 15ème plugin d'optimisation WordPress](/images/blog/wordpress-vs-custom/plugins-meme.webp)
+![Essayer d'expliquer le SEO à ses proches — un classique](/images/blog/wordpress-vs-custom/explaining-seo-meme.webp)
 
 Les plugins d'optimisation (WP Rocket, Autoptimize) ne font que limiter les dégâts : ils concatènent et minifient, mais le code inutile est toujours téléchargé et exécuté par le navigateur.
 
@@ -248,7 +247,7 @@ WordPress représente environ 90% des CMS piratés. Les raisons sont multiples :
 - **Attaques par force brute** : `/wp-admin` est une cible universellement connue.
 - **Injections SQL** : l'archi PHP/MySQL expose une large surface d'attaque.
 
-![This is fine - comme votre WordPress avec 3 plugins pas mis à jour](/images/blog/wordpress-vs-custom/this-is-fine.webp)
+![L'article IA parfait, Google qui essaie de comprendre, et le SEO qui peaufine ses meta descriptions — bienvenue en 2025](/images/blog/wordpress-vs-custom/ai-vs-google-meme.png)
 
 Maintenir un WordPress sécurisé demande une vigilance constante : mises à jour hebdomadaires, monitoring des plugins, sauvegardes fréquentes, pare-feu applicatif.
 
