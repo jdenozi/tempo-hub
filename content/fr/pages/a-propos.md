@@ -1,6 +1,6 @@
 ---
-title: À propos
-description: En savoir plus sur Tempo Hub
+title: "Agence web experte Vue.js et Nuxt — À propos"
+description: "Tempo Hub, agence web française spécialisée en Nuxt, Vue.js et TypeScript. Expertise technique, transparence totale et résultats mesurables pour votre projet digital."
 navLabel: À propos
 order: 2
 showInNav: true

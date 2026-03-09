@@ -1,6 +1,6 @@
 ---
-title: Services
-description: Découvrez nos services de création web sur-mesure
+title: "Création de site web sur mesure — Services"
+description: "Sites vitrine, e-commerce et applications web sur mesure. Design responsive, SEO optimisé, hébergement inclus. Devis gratuit à partir de 499€ — Tempo Hub, agence web française."
 navLabel: Services
 order: 1
 showInNav: true

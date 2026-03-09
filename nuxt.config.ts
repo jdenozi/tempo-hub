@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   // NOTE: fonts.googleapis.com NOT included — @nuxt/fonts self-hosts in production
   app: {
     head: {
-      title: 'Agence web sur mesure',
+      title: 'Agence web sur mesure à Bordeaux — Sites performants',
       titleTemplate: '%s — Tempo Hub',
       link: [
         { rel: 'preconnect', href: 'https://js.stripe.com' },
@@ -51,7 +51,7 @@ export default defineNuxtConfig({
       apiKey: process.env.AI_GATEWAY_API_KEY || '',
       context: {
         title: 'Tempo Hub',
-        description: 'Agence web spécialisée dans la création de sites vitrines sur mesure, performants et optimisés SEO.',
+        description: 'Tempo Hub, agence web française spécialisée dans la création de sites vitrines sur mesure. Design premium, performances Lighthouse 90+, SEO optimisé et hébergement inclus. Devis gratuit.',
         style: 'Professionnel, moderne, orienté conversion. Ton expert mais accessible.',
         tone: 'Confiant et pédagogique, sans jargon excessif.',
         collection: {
@@ -132,7 +132,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://tempo-hub.fr',
     name: 'Tempo Hub',
-    description: 'Agence web spécialisée dans la création de sites vitrines sur mesure, performants et optimisés SEO.',
+    description: 'Tempo Hub, agence web française spécialisée dans la création de sites vitrines sur mesure. Design premium, performances Lighthouse 90+, SEO optimisé et hébergement inclus. Devis gratuit.',
     defaultLocale: 'fr',
   },
 })

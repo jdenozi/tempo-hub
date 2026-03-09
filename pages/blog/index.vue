@@ -92,10 +92,11 @@ const { data: articles } = await useAsyncData(`blog-list-${locale.value}`, () =>
 )
 
 useHead({
-  title: t('blog.title'),
+  title: 'Conseils web, SEO et comparatifs techniques — Blog',
 })
 
 useSeoMeta({
+  description: 'Articles, comparatifs et conseils pratiques pour votre site web. Performance, SEO, WordPress vs sur mesure, Core Web Vitals — le blog de Tempo Hub, agence web française.',
   ogImage: '/og-image.jpg',
 })
 </script>

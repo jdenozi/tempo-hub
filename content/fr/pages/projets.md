@@ -1,6 +1,6 @@
 ---
-title: Projets
-description: Découvrez nos réalisations et projets clients
+title: "Portfolio et réalisations de sites web sur mesure"
+description: "Découvrez nos réalisations : sites vitrine, applications web et projets sur mesure. Performances Lighthouse 90+, design premium et SEO optimisé — portfolio Tempo Hub."
 heroOverlay: none
 heroPreset: none
 navLabel: Projets
