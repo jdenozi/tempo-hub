@@ -50,4 +50,6 @@ useHead({
 useSeoMeta({
   ogImage: '/og-image.jpg',
 })
+
+defineOgImage({ component: 'NuxtSeo' })
 </script>

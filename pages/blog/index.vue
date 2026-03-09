@@ -99,6 +99,8 @@ useSeoMeta({
   description: 'Articles, comparatifs et conseils pratiques pour votre site web. Performance, SEO, WordPress vs sur mesure, Core Web Vitals — le blog de Tempo Hub, agence web française.',
   ogImage: '/og-image.jpg',
 })
+
+defineOgImage({ component: 'NuxtSeo' })
 </script>
 
 <style scoped>

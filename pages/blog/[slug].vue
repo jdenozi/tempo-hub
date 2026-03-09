@@ -65,6 +65,15 @@ useSeoMeta({
   articlePublishedTime: article.value.date,
 })
 
+defineOgImage({
+  component: 'NuxtSeo',
+  props: {
+    title: article.value.title,
+    description: article.value.description,
+    image: article.value.image || '/og-image.jpg',
+  },
+})
+
 useSchemaOrg([
   defineArticle({
     '@type': 'BlogPosting',
