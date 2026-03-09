@@ -12,6 +12,10 @@ heroPreset: grid-station
 size: compact
 subtitle: Deux formules claires pour répondre à tous les budgets
 title: Nos services
+ctaText: Voir nos réalisations
+ctaLink: /projets
+secondaryCtaText: Qui sommes-nous ?
+secondaryCtaLink: /a-propos
 ---
 ::
 
@@ -157,6 +161,8 @@ animation:
   delay: 0.2
 ctaLink: /rendez-vous
 ctaText: Prendre rendez-vous
+secondaryCtaLink: /faq
+secondaryCtaText: Consulter la FAQ
 subtitle: Discutons-en autour d'un café virtuel, c'est gratuit.
 title: Un projet en tête ?
 ---

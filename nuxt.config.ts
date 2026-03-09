@@ -102,12 +102,23 @@ export default defineNuxtConfig({
   },
 
   // Route rules: Studio stays SSR; static assets get long-lived cache headers
+  // Sitemap priorities: home (1.0) > services/projects/about/blog (0.7-0.9) > secondary (0.5-0.6)
   routeRules: {
     '/_studio/**': { ssr: true },
     '/__nuxt_studio/**': { ssr: true },
     '/_nuxt/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
     '/images/**': { headers: { 'Cache-Control': 'public, max-age=604800' } },
     '/fonts/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
+    // Sitemap priority rules
+    '/': { sitemap: { priority: 1.0, changefreq: 'weekly' } },
+    '/services': { sitemap: { priority: 0.9, changefreq: 'monthly' } },
+    '/projets': { sitemap: { priority: 0.8, changefreq: 'monthly' } },
+    '/a-propos': { sitemap: { priority: 0.8, changefreq: 'monthly' } },
+    '/blog': { sitemap: { priority: 0.8, changefreq: 'weekly' } },
+    '/blog/**': { sitemap: { priority: 0.7, changefreq: 'monthly' } },
+    '/faq': { sitemap: { priority: 0.6, changefreq: 'monthly' } },
+    '/contact': { sitemap: { priority: 0.6, changefreq: 'yearly' } },
+    '/rendez-vous': { sitemap: { priority: 0.5, changefreq: 'yearly' } },
   },
 
   // Vendor chunk isolation — separate long-lived cached chunks for heavy lazy-loaded deps

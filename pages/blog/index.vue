@@ -14,6 +14,10 @@
       </div>
     </section>
 
+    <div class="container-page">
+      <AppBreadcrumb :items="[{ label: 'Accueil', to: '/' }, { label: 'Blog' }]" />
+    </div>
+
     <!-- Articles grid -->
     <section class="container-page pb-20 sm:pb-28">
       <div v-if="articles?.length" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

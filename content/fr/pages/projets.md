@@ -17,6 +17,10 @@ hero-preset: planet-horizon
 size: minimal
 subtitle: Découvrez une sélection de projets qui illustrent notre expertise
 title: Nos réalisations
+ctaText: Lire nos articles
+ctaLink: /blog
+secondaryCtaText: Qui sommes-nous ?
+secondaryCtaLink: /a-propos
 ---
 ::
 

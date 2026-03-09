@@ -10,6 +10,10 @@ showInNav: false
 ---
 title: Questions fréquentes
 subtitle: Tout ce que vous devez savoir avant de lancer votre projet web
+ctaText: Contactez-nous
+ctaLink: /contact
+secondaryCtaText: Lire notre blog
+secondaryCtaLink: /blog
 size: minimal
 ---
 ::
@@ -54,6 +58,8 @@ title: Vous avez d'autres questions ?
 subtitle: Prenez rendez-vous pour un échange gratuit de 30 minutes.
 ctaText: Prendre rendez-vous
 ctaLink: /rendez-vous
+secondaryCtaLink: /services
+secondaryCtaText: Découvrir nos formules
 animation:
   name: fadeUp
   delay: 0.2

@@ -6,7 +6,17 @@ order: 2
 showInNav: true
 ---
 
-:section-page-banner{heroPreset="nebula" subtitle="Passionnés du web, nous créons des sites qui font la différence." title="À propos"}
+::section-page-banner
+---
+heroPreset: nebula
+subtitle: Passionnés du web, nous créons des sites qui font la différence.
+title: À propos
+ctaText: Prendre rendez-vous
+ctaLink: /rendez-vous
+secondaryCtaText: Voir nos réalisations
+secondaryCtaLink: /projets
+---
+::
 
 ::section-features
 ---
@@ -47,5 +57,7 @@ items:
 title: Envie de travailler ensemble ?
 ctaText: Prendre rendez-vous
 ctaLink: /rendez-vous
+secondaryCtaLink: /services
+secondaryCtaText: Voir nos services
 ---
 ::

@@ -10,6 +10,8 @@ showInNav: true
 ---
 title: Prenez rendez-vous
 subtitle: Réservez un créneau gratuit de 30 minutes pour discuter de votre projet
+ctaText: Découvrir nos services
+ctaLink: /services
 size: minimal
 ---
 ::
@@ -30,6 +32,8 @@ title: Vous préférez nous écrire ?
 subtitle: Pas de problème, envoyez-nous un message.
 ctaText: Formulaire de contact
 ctaLink: /contact
+secondaryCtaLink: /faq
+secondaryCtaText: Questions fréquentes
 animation:
   name: fadeUp
   delay: 0.2

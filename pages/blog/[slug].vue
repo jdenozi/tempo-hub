@@ -8,6 +8,12 @@
         &larr; {{ $t('blog.backToList') }}
       </NuxtLink>
 
+      <AppBreadcrumb :items="[
+        { label: 'Accueil', to: '/' },
+        { label: 'Blog', to: '/blog' },
+        { label: article.title },
+      ]" />
+
       <img
         v-if="article.image"
         :src="article.image"
@@ -81,6 +87,12 @@ useSchemaOrg([
     description: article.value.description,
     datePublished: article.value.date,
     image: article.value.image || '/og-image.jpg',
+    author: {
+      '@type': 'Person',
+      name: 'Jonathan Denozi',
+      url: 'https://tempo-hub.fr/a-propos',
+    },
+    publisher: { '@id': 'https://tempo-hub.fr/#identity' },
   }),
 ])
 </script>

@@ -2,6 +2,7 @@
 title: "WordPress vs site sur mesure : on a comparé les perfs, c'est violent"
 description: "Core Web Vitals, temps de chargement, sécurité, balisage HTML... On a mis un WordPress face à un site codé sur mesure. Les résultats sont sans appel."
 date: 2026-02-15
+author: "Jonathan Denozi"
 ---
 
 On va pas tourner autour du pot : WordPress fait tourner 43% du web. C'est un outil puissant, et y'a une raison pour laquelle il est aussi populaire.
@@ -79,6 +80,8 @@ Pour Google, un site qui charge en moins d'une seconde avec un Lighthouse quasi-
 | TTFB (Time To First Byte) | 800 ms à 2 s | < 50 ms |
 | Requêtes HTTP par page | 40 à 80 | 5 à 15 |
 | Core Web Vitals (pass rate) | ~33 % | ~98 % |
+
+Ces résultats sont directement vérifiables sur [nos réalisations clients](/projets), où chaque site affiche un Lighthouse au-dessus de 90.
 
 ## 2. Le balisage HTML : propre vs soupe de `<div>`
 
@@ -199,6 +202,8 @@ Nuxt.js intègre nativement :
 - **Lazy-loading intelligent** : images, composants lourds et ressources non critiques se chargent uniquement quand l'utilisateur en a besoin.
 
 Résultat : chaque page ne contient que le strict nécessaire. Pas un octet de plus.
+
+C'est cette philosophie qui guide [nos offres de création web](/services) : des sites légers, rapides et sans superflu.
 
 ## 5. Les URLs et le crawl budget
 
@@ -363,8 +368,10 @@ Pour qu'un WordPress atteigne des perfs SEO comparables à un site sur mesure, i
 
 Tout ça est **natif** sur un site codé sur mesure. C'est la différence entre essayer de faire voler un camion en lui collant des ailes, et concevoir un avion dès le départ.
 
+Des questions sur notre approche technique ? Consultez notre [FAQ](/faq) pour des réponses détaillées.
+
 ## On en discute ?
 
 Chez Tempo Hub, on conçoit des [sites qui intègrent toutes ces optimisations](/services) dès le jour 1. Chaque site est généré statiquement, balisé sémantiquement, optimisé mobile, et pensé pour offrir la meilleure expérience aux visiteurs et aux moteurs de recherche.
 
-Vous êtes artisan, commerçant, ou dirigez une PME ? **Votre visibilité en ligne mérite mieux qu'un thème WordPress ralenti par vingt plugins.** [Contactez-nous](/rendez-vous) pour voir ce qu'un site sur mesure peut faire pour votre référencement.
+Vous êtes artisan, commerçant, ou dirigez une PME ? **Votre visibilité en ligne mérite mieux qu'un thème WordPress ralenti par vingt plugins.** [Prenez rendez-vous](/rendez-vous) ou [envoyez-nous un message](/contact) pour voir ce qu'un site sur mesure peut faire pour votre référencement.
