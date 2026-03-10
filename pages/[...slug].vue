@@ -1,9 +1,6 @@
 <template>
   <div>
-    <AppBreadcrumb
-      v-if="!isHome"
-      :items="[{ label: 'Accueil', to: '/' }, { label: page?.navLabel || page?.title }]"
-    />
+    <AppBreadcrumb v-if="!isHome" :items="breadcrumbItems" />
     <!-- Frontmatter sections: legacy format (backward compat during migration) -->
     <PageRenderer
       v-if="page?.sections"
@@ -32,8 +29,6 @@ const slug = Array.isArray(route.params.slug)
   ? route.params.slug.join('/')
   : route.params.slug || 'index'
 
-const isHome = slug === 'index'
-
 const contentPath = `/${locale.value}/pages/${slug}`
 
 const { data: page } = await useAsyncData(`page-${contentPath}`, () =>
@@ -45,21 +40,10 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
-// SEO meta from frontmatter
-useHead({
-  title: page.value.title,
-  meta: [
-    { name: 'description', content: page.value.description },
-  ],
-})
+// Core SEO (meta tags, OG image, breadcrumbs)
+const { isHome, breadcrumbItems } = usePageSeo(page)
 
-useSeoMeta({
-  ogImage: '/og-image.jpg',
-})
-
-defineOgImage({ component: 'NuxtSeo' })
-
-// Service schema for /services page
+// Site-specific: Service schema for /services page
 if (slug === 'services') {
   useSchemaOrg([
     {

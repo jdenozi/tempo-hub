@@ -18,8 +18,6 @@ export default defineNuxtConfig({
       title: 'Agence web sur mesure à Bordeaux — Sites performants',
       titleTemplate: '%s — Tempo Hub',
       meta: [
-        { property: 'og:image:width', content: '1200' },
-        { property: 'og:image:height', content: '630' },
         { property: 'og:locale', content: 'fr_FR' },
       ],
       link: [

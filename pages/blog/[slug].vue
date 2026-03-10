@@ -8,11 +8,7 @@
         &larr; {{ $t('blog.backToList') }}
       </NuxtLink>
 
-      <AppBreadcrumb :items="[
-        { label: 'Accueil', to: '/' },
-        { label: 'Blog', to: '/blog' },
-        { label: article.title },
-      ]" />
+      <AppBreadcrumb :items="breadcrumbItems" />
 
       <img
         v-if="article.image"
@@ -58,43 +54,8 @@ if (!article.value) {
   throw createError({ statusCode: 404, statusMessage: 'Article not found' })
 }
 
-useHead({
-  title: article.value.title,
-  meta: [
-    { name: 'description', content: article.value.description },
-  ],
-})
-
-useSeoMeta({
-  ogType: 'article',
-  ogImage: article.value.image || '/og-image.jpg',
-  articlePublishedTime: article.value.date,
-})
-
-defineOgImage({
-  component: 'NuxtSeo',
-  props: {
-    title: article.value.title,
-    description: article.value.description,
-    image: article.value.image || '/og-image.jpg',
-  },
-})
-
-useSchemaOrg([
-  defineArticle({
-    '@type': 'BlogPosting',
-    headline: article.value.title,
-    description: article.value.description,
-    datePublished: article.value.date,
-    image: article.value.image || '/og-image.jpg',
-    author: {
-      '@type': 'Person',
-      name: 'Jonathan Denozi',
-      url: 'https://tempo-hub.fr/a-propos',
-    },
-    publisher: { '@id': 'https://tempo-hub.fr/#identity' },
-  }),
-])
+// Core SEO (meta, OG, BlogPosting schema, breadcrumbs)
+const { breadcrumbItems } = useBlogArticleSeo(article)
 </script>
 
 <style scoped>

@@ -15,7 +15,7 @@
     </section>
 
     <div class="container-page">
-      <AppBreadcrumb :items="[{ label: 'Accueil', to: '/' }, { label: 'Blog' }]" />
+      <AppBreadcrumb :items="breadcrumbItems" />
     </div>
 
     <!-- Articles grid -->
@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-const { locale, t } = useI18n()
+const { locale } = useI18n()
 const localePath = useLocalePath()
 
 const { data: articles } = await useAsyncData(`blog-list-${locale.value}`, () =>
@@ -95,16 +95,8 @@ const { data: articles } = await useAsyncData(`blog-list-${locale.value}`, () =>
     .all()
 )
 
-useHead({
-  title: 'Conseils web, SEO et comparatifs techniques — Blog',
-})
-
-useSeoMeta({
-  description: 'Articles, comparatifs et conseils pratiques pour votre site web. Performance, SEO, WordPress vs sur mesure, Core Web Vitals — le blog de Tempo Hub, agence web française.',
-  ogImage: '/og-image.jpg',
-})
-
-defineOgImage({ component: 'NuxtSeo' })
+// Core SEO (meta, OG, breadcrumbs)
+const { breadcrumbItems } = useBlogListSeo()
 </script>
 
 <style scoped>

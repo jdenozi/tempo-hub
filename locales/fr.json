@@ -6,6 +6,9 @@
     "blog": "Blog",
     "contact": "Contact"
   },
+  "breadcrumb": {
+    "home": "Accueil"
+  },
   "cta": {
     "book": "Réserver",
     "contact": "Me contacter",
