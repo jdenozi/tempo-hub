@@ -13,6 +13,8 @@ Le problème n'est pas votre hébergeur. Le problème, c'est WordPress lui-même
 
 On va les passer en revue, une par une. Sans jargon inutile, avec des chiffres concrets.
 
+![Le cauchemar de tout développeur : le CEO qui envoie "le WordPress est down" à 23h59](/images/blog/wordpress-lent/wordpress-crash-meme.jpg)
+
 ## Les 5 vraies raisons de la lenteur
 
 ### Raison 1 : Les plugins
@@ -44,6 +46,8 @@ Chaque plugin y stocke ses données. Les transients (données temporaires) s'acc
 Sur un site de 3 ans avec une vingtaine de plugins, il n'est pas rare de trouver une `wp_options` avec 10 000 lignes, dont 2 000 en autoload. À chaque visite, WordPress charge tout ça en mémoire.
 
 La solution recommandée : "optimisez votre base de données". Avec un plugin, bien sûr. Qui ajoutera ses propres données dans `wp_options`. Et la table regrossira dans les semaines qui suivent.
+
+![Les programmeurs n'ont peur de rien… sauf du logo WordPress](/images/blog/wordpress-lent/wordpress-nightmare-meme.jpg)
 
 ### Raison 4 : L'architecture PHP
 

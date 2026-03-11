@@ -11,6 +11,8 @@ Résultat : la plupart des gens se font soit arnaquer, soit décevoir. Ils paien
 
 On va changer ça. Dans cet article, on vous donne les vrais prix du marché en 2026, les coûts cachés que personne ne mentionne dans ses devis, et comment calculer si un site web vaut vraiment l'investissement. Pas de langue de bois, pas de "ça dépend de vos besoins" sans suite.
 
+![Quand le client demande "juste un petit site" puis veut un e-commerce complet — le scope creep résumé en une image](/images/blog/combien-coute/scope-creep-meme.jpg)
+
 ## Les types de sites et leurs prix
 
 ### Site vitrine (1 à 5 pages) : 500€ à 5 000€
@@ -106,6 +108,8 @@ Le freelance, c'est souvent le meilleur rapport qualité/prix... quand ça se pa
 Le risque réel : la dépendance. Si votre freelance change de métier, part à l'étranger, ou arrête de répondre, vous vous retrouvez avec un site dont vous ne maîtrisez pas les accès, l'hébergement, ou la maintenance. Ça arrive plus souvent qu'on ne le croit.
 
 Sur Malt, la médiane pour un site vitrine tourne autour de 1 500 à 2 000€. Sur ComeUp, on trouve des offres à 300€ qui sont... ce qu'elles sont.
+
+![10 000€ pour 10 minutes de travail ? Non, 10 000€ pour 10 ans d'expérience qui permettent de le faire en 10 minutes](/images/blog/combien-coute/know-your-worth-meme.jpg)
 
 ### Agence classique : 5 000€ à 50 000€
 

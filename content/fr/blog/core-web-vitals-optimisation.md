@@ -13,6 +13,8 @@ Ce guide va au fond du sujet. On explique chaque métrique, on donne les seuils 
 
 Accrochez-vous.
 
+!["Les apps natives n'ont pas d'avenir, le web c'est mieux" — dit avec la confiance de quelqu'un qui n'a jamais testé son site sur un téléphone à 200€](/images/blog/core-web-vitals/performance-meme.jpg)
+
 ---
 
 ## C'est quoi les Core Web Vitals ?
@@ -214,6 +216,8 @@ Chrome UX Report (CrUX) → Terrain, données agrégées par URL
 Un conseil pratique : commencez par PageSpeed Insights sur vos pages les plus importantes (accueil, pages de services, articles populaires). Identifiez les problèmes les plus critiques. Corrigez-les. Vérifiez dans Search Console que les données terrain s'améliorent dans les 28 jours suivants.
 
 ---
+
+![L'état mental du développeur moyen quand il debug des problèmes de performance à 4h du mat'](/images/blog/core-web-vitals/debugging-meme.jpg)
 
 ## Les optimisations qui font vraiment la différence
 
