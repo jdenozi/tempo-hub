@@ -3,8 +3,8 @@ export default defineAppConfig({
   // === CLIENT IDENTITY ===
   client: {
     name: 'Tempo Hub',
-    profession: 'Agence web',
-    logo: '', // TODO: Set logo path (e.g., '/images/logo.svg')
+    profession: 'Agence web à Montpellier',
+    logo: '/images/logo.svg',
     favicon: '/favicon.ico',
   },
 

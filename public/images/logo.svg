@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48" role="img" aria-label="Tempo Hub">
+  <!-- Carré arrondi fond prune avec lettre T or -->
+  <rect x="0" y="0" width="48" height="48" rx="10" ry="10" fill="#2a1540"/>
+  <text x="24" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#d4a853" text-anchor="middle">T</text>
+  <!-- Nom de la marque -->
+  <text x="60" y="19" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="400" fill="#9ca3af" letter-spacing="2">AGENCE WEB</text>
+  <text x="60" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#ffffff">Tempo Hub</text>
+</svg>
