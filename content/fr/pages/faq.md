@@ -23,6 +23,12 @@ size: minimal
 title: Vos questions, nos réponses
 subtitle: Si vous ne trouvez pas la réponse ici, contactez-nous directement
 items:
+  - question: "Un auto-entrepreneur a-t-il besoin d'un site web ?"
+    answer: "Oui, et c'est souvent le premier levier de crédibilité. Un site web professionnel vous rend visible sur Google 24h/24, vous permet de recevoir des demandes de contact sans dépendre des réseaux sociaux, et rassure vos prospects avant même le premier échange. Pour un auto-entrepreneur, c'est la différence entre paraître amateur et paraître sérieux. Notre formule Essentiel à 499€ est conçue exactement pour ça."
+  - question: "Quel est le prix d'un site web pour auto-entrepreneur ?"
+    answer: "Notre formule Essentiel démarre à 499€ pour un site vitrine complet (jusqu'à 5 pages), avec hébergement, maintenance et certificat SSL inclus dans l'abonnement à 15,99€/mois. Pas de frais cachés, pas de renouvellement de plugins, pas de surprise. C'est le tarif le plus transparent du marché pour un site web professionnel livré en 4 à 6 semaines."
+  - question: "Peut-on créer un site web pour une micro-entreprise sans compétences techniques ?"
+    answer: "C'est exactement pour ça qu'on existe. Vous n'avez pas besoin de savoir coder, ni de comprendre ce qu'est un DNS ou un certificat SSL. On s'occupe de tout : conception, développement, mise en ligne et maintenance. Vous fournissez vos textes et vos photos, on fait le reste. Et si vous voulez modifier votre contenu après livraison, on vous forme en 30 minutes."
   - question: "Combien coûte un site web sur mesure ?"
     answer: "Nos formules démarrent à 499€ pour un site vitrine essentiel (jusqu'à 5 pages) et à 999€ pour un site avec outils de conversion — réservation en ligne, paiement Stripe, tableau de bord. Les projets sur mesure avec animations avancées, 3D ou fonctionnalités spécifiques sont à partir de 2 999€. Chaque projet est différent, donc on vous fait un devis gratuit après un premier échange de 30 minutes. Pas de surprise, pas de frais cachés."
   - question: "Quel est le délai de création d'un site ?"
