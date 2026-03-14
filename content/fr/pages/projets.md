@@ -24,6 +24,9 @@ secondaryCtaLink: /a-propos
 ---
 ::
 
+Chaque projet est une [création de site web sur mesure](/creation-site-web-tpe-pme) — pas de template, pas de WordPress. On code en Nuxt.js pour des performances Lighthouse 95+. Vous êtes auto-entrepreneur ou dirigeant de TPE/PME ? [Discutons de votre projet](/rendez-vous), c'est gratuit.
+
+
 ::section-projects
 ---
 animation:

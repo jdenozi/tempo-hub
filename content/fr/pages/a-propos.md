@@ -40,6 +40,9 @@ title: Nos valeurs
 ---
 ::
 
+On travaille principalement avec des auto-entrepreneurs, artisans et TPE qui veulent un [site web professionnel](/creation-site-web-tpe-pme) sans les contraintes de WordPress. Basés à Montpellier, on intervient partout en France. Curieux de voir ce qu'on a livré ? Jetez un œil à nos [réalisations](/projets).
+
+
 ::section-stats
 ---
 items:

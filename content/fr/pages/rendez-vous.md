@@ -16,6 +16,9 @@ size: minimal
 ---
 ::
 
+Ce créneau de 30 minutes est fait pour les auto-entrepreneurs et TPE/PME qui veulent créer leur site web sans se perdre dans les options. On fait le point sur votre activité, vos besoins et votre budget. Pas de jargon technique, pas de pression commerciale. Vous repartez avec une [proposition claire](/services) et un devis gratuit.
+
+
 ::section-booking
 ---
 title: Choisissez un créneau
