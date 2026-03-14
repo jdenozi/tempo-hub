@@ -117,6 +117,8 @@ export default defineNuxtConfig({
     '/faq': { sitemap: { priority: 0.6, changefreq: 'monthly' } },
     '/contact': { sitemap: { priority: 0.6, changefreq: 'yearly' } },
     '/rendez-vous': { sitemap: { priority: 0.5, changefreq: 'yearly' } },
+    '/agence-web-montpellier': { sitemap: { priority: 0.85, changefreq: 'monthly' } },
+    '/creation-site-web-tpe-pme': { sitemap: { priority: 0.85, changefreq: 'monthly' } },
   },
 
   // Vendor chunk isolation — separate long-lived cached chunks for heavy lazy-loaded deps
