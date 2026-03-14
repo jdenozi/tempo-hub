@@ -1,6 +1,6 @@
 ---
 title: "Questions fréquentes — Création de site web sur mesure"
-description: "Réponses à vos questions sur la création de sites web, nos tarifs, délais et technologies. FAQ complète — Tempo Hub, agence web française."
+description: "Toutes vos questions sur la création de site web : tarifs, délais, auto-entrepreneur, technologies. FAQ complète — Tempo Hub, Montpellier."
 navLabel: FAQ
 order: 6
 showInNav: false
@@ -47,8 +47,8 @@ items:
     answer: "Oui. On intègre Stripe pour le paiement en ligne avec une expérience d'achat fluide et sécurisée. Gestion du catalogue produits, panier, checkout, confirmations automatiques — tout est codé sur mesure pour s'adapter à votre activité. C'est inclus dans la formule Pro à partir de 999€. Pour les besoins e-commerce complexes (gestion de stocks avancée, marketplace), on en discute en brief."
   - question: "Comment fonctionne le système de réservation ?"
     answer: "On utilise Cal.com, un outil de réservation open-source qu'on intègre directement dans votre site. Vos clients choisissent un créneau disponible, reçoivent une confirmation automatique, et l'événement se synchronise avec votre agenda Google ou Outlook. Vous définissez vos disponibilités, la durée des rendez-vous et les rappels. C'est inclus dans la formule Pro et ça remplace Calendly ou Doctolib pour la prise de rendez-vous."
-  - question: "Travaillez-vous avec des clients hors de Bordeaux ?"
-    answer: "Bien sûr. On travaille à distance avec des clients partout en France. Le brief se fait en visio, les échanges par email et les retours via des outils collaboratifs. La majorité de nos projets se gèrent intégralement en ligne, sans aucun souci. Que vous soyez à Lyon, Paris, Marseille ou dans un village du Périgord, ça ne change rien à la qualité du résultat."
+  - question: "Vous êtes à Montpellier, mais travaillez-vous avec des clients partout en France ?"
+    answer: "Oui, et c'est même la majorité de nos projets. On est basés à Montpellier mais on travaille à distance avec des clients à Paris, Lyon, Nantes, Lille — partout. Le brief se fait en visio, les échanges par email, les retours via des outils collaboratifs. Pas besoin d'être dans la même ville pour livrer un site qui performe."
 ---
 ::
 

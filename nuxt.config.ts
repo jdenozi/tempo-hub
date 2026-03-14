@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   // NOTE: fonts.googleapis.com NOT included — @nuxt/fonts self-hosts in production
   app: {
     head: {
-      title: 'Agence web sur mesure à Bordeaux — Sites performants',
+      title: 'Agence web sur mesure à Montpellier — Sites performants',
       titleTemplate: '%s — Tempo Hub',
       meta: [
         { property: 'og:locale', content: 'fr_FR' },
@@ -146,7 +146,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://tempo-hub.fr',
     name: 'Tempo Hub',
-    description: 'Tempo Hub, agence web française spécialisée dans la création de sites vitrines sur mesure. Design premium, performances Lighthouse 90+, SEO optimisé et hébergement inclus. Devis gratuit.',
+    description: 'Tempo Hub, agence web à Montpellier. Création de sites web sur mesure pour auto-entrepreneurs et TPE/PME. Design premium, SEO et hébergement inclus. Devis gratuit.',
     defaultLocale: 'fr',
   },
 

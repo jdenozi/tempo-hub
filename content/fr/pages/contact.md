@@ -1,6 +1,6 @@
 ---
 title: "Contactez-nous — Tempo Hub"
-description: "Envoyez-nous un message pour discuter de votre projet web. Réponse garantie sous 24h — Tempo Hub, agence web sur mesure à Bordeaux."
+description: "Envoyez-nous un message pour discuter de votre projet web. Réponse garantie sous 24h — Tempo Hub, agence web à Montpellier."
 navLabel: Contact
 order: 5
 showInNav: false
