@@ -1,6 +1,6 @@
 ---
 title: "Portfolio et réalisations de sites web sur mesure"
-description: "Découvrez nos réalisations : sites vitrine, applications web et projets sur mesure. Performances Lighthouse 90+, design premium et SEO optimisé — portfolio Tempo Hub."
+description: "Portfolio Tempo Hub : sites web sur mesure pour auto-entrepreneurs et TPE/PME. Performances Lighthouse 95+, design premium. Agence web Montpellier."
 heroOverlay: none
 heroPreset: none
 navLabel: Projets

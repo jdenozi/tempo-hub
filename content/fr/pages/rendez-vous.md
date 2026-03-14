@@ -1,6 +1,6 @@
 ---
 title: "Consultation gratuite — Prendre rendez-vous"
-description: "Réservez un créneau gratuit de 30 minutes pour discuter de votre projet web. Sans engagement, conseil personnalisé par un expert — Tempo Hub, agence web sur mesure."
+description: "Réservez un créneau gratuit de 30 minutes pour discuter de votre projet de site web. Sans engagement, conseil personnalisé — Tempo Hub."
 navLabel: Rendez-vous
 order: 4
 showInNav: true

@@ -1,6 +1,6 @@
 ---
-title: "Création de site web sur mesure — Services"
-description: "Sites vitrine, e-commerce et applications web sur mesure. Design responsive, SEO optimisé, hébergement inclus. Devis gratuit à partir de 499€ — Tempo Hub, agence web française."
+title: "Création de site web — Services"
+description: "Création de sites web pour auto-entrepreneurs et TPE/PME. SEO, hébergement inclus. Devis gratuit dès 499€ — Tempo Hub, Montpellier."
 navLabel: Services
 order: 1
 showInNav: true
