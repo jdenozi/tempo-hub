@@ -93,7 +93,7 @@ export default defineNuxtConfig({
   // SSG: prerender all routes at build time
   nitro: {
     prerender: {
-      routes: ['/'],
+      routes: ['/', '/agence-web-montpellier'],
       crawlLinks: true,
       failOnError: false,
     },
