@@ -48,10 +48,12 @@ items:
     title: Intégrations & automatisations
     description: Cal.com, Stripe, n8n, et tous vos outils métier connectés pour
       automatiser votre quotidien.
-subtitle: De la conception à la mise en production
+subtitle: Création de site web sur mesure pour auto-entrepreneurs et TPE/PME
 title: Nos expertises
 ---
 ::
+
+On crée des sites web sur mesure pour les auto-entrepreneurs, artisans, thérapeutes et petites entreprises qui veulent exister en ligne sans se ruiner. Pas de template générique, pas de WordPress qui rame — un [site web professionnel](/creation-site-web-tpe-pme) conçu pour votre activité, livré en 4 à 6 semaines. Vous avez des questions sur les tarifs ? Consultez notre [FAQ](/faq).
 
 ::section-pricing
 ---
@@ -62,9 +64,8 @@ plans:
   - name: Essentiel
     price: À partir de 499€
     period: + 15,99€/mois
-    description: L'indispensable pour exister en ligne. Un site vitrine professionnel,
-      rapide et optimisé pour le référencement. Idéal pour les artisans et petits
-      commerces.
+    description: L'indispensable pour créer votre site web professionnel. Idéal pour
+      les auto-entrepreneurs, artisans et TPE. Rapide, optimisé SEO, hébergement inclus.
     features:
       - Site vitrine responsive (jusqu'à 5 pages)
       - Optimisation SEO de base
