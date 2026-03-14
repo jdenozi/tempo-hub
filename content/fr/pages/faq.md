@@ -1,5 +1,5 @@
 ---
-title: "Questions fréquentes — Création de site web sur mesure"
+title: "FAQ — Création de site web"
 description: "Toutes vos questions sur la création de site web : tarifs, délais, auto-entrepreneur, technologies. FAQ complète — Tempo Hub, Montpellier."
 navLabel: FAQ
 order: 6
@@ -57,6 +57,9 @@ items:
     answer: "Oui, et c'est même la majorité de nos projets. On est basés à Montpellier mais on travaille à distance avec des clients à Paris, Lyon, Nantes, Lille — partout. Le brief se fait en visio, les échanges par email, les retours via des outils collaboratifs. Pas besoin d'être dans la même ville pour livrer un site qui performe."
 ---
 ::
+
+Vous avez d'autres questions sur la [création de votre site web](/creation-site-web-tpe-pme) ? Consultez aussi nos [formules et tarifs](/services) — à partir de 499€, hébergement inclus.
+
 
 ::section-cta
 ---
