@@ -7,11 +7,13 @@ services:
     environment:
       - NITRO_PORT=3000
       - NITRO_HOST=0.0.0.0
+      - NUXT_PUBLIC_STRAPI_URL=http://strapi:1337
     volumes:
       - uploads:/app/.output/public/images/uploads
       - ./data:/app/data
     networks:
       - web
+      - internal
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${APP_NAME:-tempo-hub}.rule=Host(`${DOMAIN:-localhost}`)"
@@ -21,11 +23,76 @@ services:
       - "traefik.http.middlewares.${APP_NAME:-tempo-hub}-compress.compress=true"
       - "traefik.http.middlewares.${APP_NAME:-tempo-hub}-compress.compress.excludedcontenttypes=image/png,image/jpeg,image/gif,image/webp"
       - "traefik.http.routers.${APP_NAME:-tempo-hub}.middlewares=${APP_NAME:-tempo-hub}-compress"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}.priority=10"
     deploy:
       resources:
         limits:
           memory: 512M
           cpus: "0.5"
+    depends_on:
+      strapi:
+        condition: service_started
+
+  strapi:
+    build:
+      context: ./strapi
+      dockerfile: ../Dockerfile.strapi
+    container_name: ${APP_NAME:-tempo-hub}-strapi
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - NODE_ENV=production
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=${DATABASE_NAME:-strapi}
+      - DATABASE_USERNAME=${DATABASE_USERNAME:-strapi}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD:-strapi}
+    volumes:
+      - strapi-uploads:/opt/app/public/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - web
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.rule=Host(`${DOMAIN:-localhost}`) && (PathPrefix(`/admin`) || PathPrefix(`/uploads`))"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.entrypoints=websecure"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.priority=20"
+      - "traefik.http.services.${APP_NAME:-tempo-hub}-strapi.loadbalancer.server.port=1337"
+      - "traefik.http.middlewares.${APP_NAME:-tempo-hub}-strapi-body.buffering.maxRequestBodyBytes=104857600"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.middlewares=${APP_NAME:-tempo-hub}-strapi-body"
+    deploy:
+      resources:
+        limits:
+          memory: 768M
+          cpus: "0.5"
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: ${APP_NAME:-tempo-hub}-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME:-strapi}
+      POSTGRES_USER: ${DATABASE_USERNAME:-strapi}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-strapi}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME:-strapi}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.25"
 
 volumes:
   uploads:
@@ -34,7 +101,13 @@ volumes:
       type: none
       o: bind
       device: ${UPLOADS_PATH:-./data/uploads}
+  strapi-uploads:
+    driver: local
+  postgres-data:
+    driver: local
 
 networks:
   web:
     external: true
+  internal:
+    driver: bridge
