@@ -41,7 +41,7 @@
     "scrollAnimations": true,
     "customCursor": true,
     "backToTop": false,
-    "cookieBanner": false,
+    "cookieBanner": true,
     "maintenanceMode": false,
     "maintenanceMessage": ""
   }

@@ -90,5 +90,20 @@
     "scene4Title": "Prêt à décoller ?",
     "scene4Subtitle": "Prenez rendez-vous pour en discuter, c'est gratuit et sans engagement.",
     "wordpressPromo": "Découvrez pourquoi nos sites surpassent WordPress →"
+  },
+  "cookies": {
+    "title": "Ce site utilise des cookies",
+    "description": "On utilise des cookies pour analyser le trafic et améliorer votre expérience. Vous pouvez choisir les catégories que vous acceptez.",
+    "necessary": "Nécessaires",
+    "necessaryDescription": "Indispensables au fonctionnement du site.",
+    "analytics": "Analytiques",
+    "analyticsDescription": "Nous aident à comprendre comment vous utilisez le site.",
+    "marketing": "Marketing",
+    "marketingDescription": "Utilisés pour vous proposer des contenus pertinents.",
+    "acceptAll": "Tout accepter",
+    "rejectAll": "Tout refuser",
+    "save": "Enregistrer",
+    "alwaysActive": "Toujours actif",
+    "learnMore": "En savoir plus sur notre politique de cookies"
   }
 }

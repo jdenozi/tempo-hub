@@ -2,6 +2,14 @@
 export default defineNuxtConfig({
   extends: ['./tempo-core'],
 
+  // GA4 measurement ID — set via NUXT_PUBLIC_GA_ID env var
+  runtimeConfig: {
+    public: {
+      gaId: '',
+    },
+  },
+
+
   modules: ['nuxt-studio'],
 
   // Treat Stripe custom elements as native
