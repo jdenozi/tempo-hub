@@ -23,15 +23,15 @@
       <div v-if="articles?.length" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         <NuxtLink
           v-for="(article, i) in articles"
-          :key="article.path"
-          :to="localePath(article.path?.replace(`/${locale}/blog`, '/blog') || '#')"
+          :key="article.path || article.slug"
+          :to="localePath(articlePath(article))"
           class="group"
         >
           <article class="blog-card h-full flex flex-col" :class="i === 0 && articles.length > 2 ? 'md:col-span-2 lg:col-span-1' : ''">
             <!-- Image -->
-            <div v-if="article.image" class="relative overflow-hidden rounded-t-lg">
+            <div v-if="articleImage(article)" class="relative overflow-hidden rounded-t-lg">
               <img
-                :src="article.image"
+                :src="articleImage(article)"
                 :alt="article.title"
                 width="600"
                 height="280"
@@ -88,14 +88,45 @@
 const { locale } = useI18n()
 const localePath = useLocalePath()
 
-const { data: articles } = await useAsyncData(`blog-list-${locale.value}`, () =>
+// --- Data sources ---
+
+// 1) Strapi CMS (primary source)
+const { articles: strapiArticles } = useStrapiBlogList()
+
+// 2) Legacy Nuxt Content fallback
+const { data: legacyArticles } = await useAsyncData(`blog-list-${locale.value}`, () =>
   queryCollection('blog')
     .where('path', 'LIKE', `/${locale.value}/blog/%`)
     .order('date', 'DESC')
     .all()
 )
 
-// Core SEO (meta, OG, breadcrumbs)
+// Merged: Strapi takes precedence, fallback to legacy content
+const articles = computed(() => {
+  if (strapiArticles.value?.length) return strapiArticles.value
+  return legacyArticles.value || []
+})
+
+// --- Helpers for data-shape differences ---
+
+/** Resolve article link path (Strapi uses slug, Content uses path) */
+function articlePath(article: any): string {
+  if (article.slug) return `/blog/${article.slug}`
+  // Legacy Nuxt Content: path includes locale prefix
+  return article.path?.replace(`/${locale.value}/blog`, '/blog') || '#'
+}
+
+/** Resolve image URL (Strapi media object vs Content string) */
+function articleImage(article: any): string | null {
+  if (!article.image) return null
+  // Strapi media: { url: '...' }
+  if (typeof article.image === 'object' && article.image.url) return article.image.url
+  // Content: plain string
+  if (typeof article.image === 'string') return article.image
+  return null
+}
+
+// --- SEO ---
 const { breadcrumbItems } = useBlogListSeo()
 </script>
 

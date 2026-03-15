@@ -6,11 +6,19 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       gaId: '',
+      strapiUrl: process.env.NUXT_PUBLIC_STRAPI_URL || 'http://localhost:1337',
     },
   },
 
+  // TODO(Wave 5): Remove 'nuxt-studio' after Strapi migration is validated.
+  // Legacy Nuxt Content + Studio are kept for now — blog/page fallbacks depend on them.
+  modules: ['nuxt-studio', '@nuxtjs/strapi'],
 
-  modules: ['nuxt-studio'],
+  // Strapi CMS configuration
+  strapi: {
+    url: process.env.NUXT_PUBLIC_STRAPI_URL || 'http://localhost:1337',
+    version: 'v5',
+  },
 
   // Treat Stripe custom elements as native
   vue: {
@@ -116,17 +124,17 @@ export default defineNuxtConfig({
     '/images/**': { headers: { 'Cache-Control': 'public, max-age=604800' } },
     '/fonts/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
     // Sitemap priority rules
-    '/': { sitemap: { priority: 1.0, changefreq: 'weekly' } },
-    '/services': { sitemap: { priority: 0.9, changefreq: 'monthly' } },
-    '/projets': { sitemap: { priority: 0.8, changefreq: 'monthly' } },
-    '/a-propos': { sitemap: { priority: 0.8, changefreq: 'monthly' } },
-    '/blog': { sitemap: { priority: 0.8, changefreq: 'weekly' } },
-    '/blog/**': { sitemap: { priority: 0.7, changefreq: 'monthly' } },
-    '/faq': { sitemap: { priority: 0.6, changefreq: 'monthly' } },
-    '/contact': { sitemap: { priority: 0.6, changefreq: 'yearly' } },
-    '/rendez-vous': { sitemap: { priority: 0.5, changefreq: 'yearly' } },
-    '/agence-web-montpellier': { sitemap: { priority: 0.85, changefreq: 'monthly' } },
-    '/creation-site-web-tpe-pme': { sitemap: { priority: 0.85, changefreq: 'monthly' } },
+    '/': { swr: 3600, sitemap: { priority: 1.0, changefreq: 'weekly' } },
+    '/services': { swr: 3600, sitemap: { priority: 0.9, changefreq: 'monthly' } },
+    '/projets': { swr: 3600, sitemap: { priority: 0.8, changefreq: 'monthly' } },
+    '/a-propos': { swr: 3600, sitemap: { priority: 0.8, changefreq: 'monthly' } },
+    '/blog': { swr: 3600, sitemap: { priority: 0.8, changefreq: 'weekly' } },
+    '/blog/**': { swr: 3600, sitemap: { priority: 0.7, changefreq: 'monthly' } },
+    '/faq': { swr: 3600, sitemap: { priority: 0.6, changefreq: 'monthly' } },
+    '/contact': { swr: 3600, sitemap: { priority: 0.6, changefreq: 'yearly' } },
+    '/rendez-vous': { swr: 3600, sitemap: { priority: 0.5, changefreq: 'yearly' } },
+    '/agence-web-montpellier': { swr: 3600, sitemap: { priority: 0.85, changefreq: 'monthly' } },
+    '/creation-site-web-tpe-pme': { swr: 3600, sitemap: { priority: 0.85, changefreq: 'monthly' } },
   },
 
   // Vendor chunk isolation — separate long-lived cached chunks for heavy lazy-loaded deps

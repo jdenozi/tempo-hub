@@ -1,16 +1,23 @@
 <template>
   <div>
     <AppBreadcrumb v-if="!isHome" :items="breadcrumbItems" />
-    <!-- Frontmatter sections: legacy format (backward compat during migration) -->
-    <PageRenderer
-      v-if="page?.sections"
-      :sections="page.sections"
+
+    <!-- Strapi-powered rendering -->
+    <StrapiSectionRenderer
+      v-if="sections.length"
+      :sections="sections"
     />
-    <!-- MDC / prose content rendered by ContentRenderer (sections handle their own layout) -->
-    <ContentRenderer
-      v-else-if="page"
-      :value="page"
-    />
+
+    <!-- Fallback: legacy Nuxt Content rendering (during migration) -->
+    <template v-else-if="legacyPage">
+      <PageRenderer v-if="legacyPage?.sections" :sections="legacyPage.sections" />
+      <ContentRenderer v-else :value="legacyPage" />
+    </template>
+
+    <!-- 404 -->
+    <div v-else-if="!pending" class="min-h-screen flex items-center justify-center">
+      <p class="text-gray-400">Page not found</p>
+    </div>
   </div>
 </template>
 
@@ -24,24 +31,45 @@ if (fullPath.startsWith('/_studio') || fullPath.startsWith('/__nuxt_studio')) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
-// Build content path from locale and slug
+// Build slug
 const slug = Array.isArray(route.params.slug)
   ? route.params.slug.join('/')
   : route.params.slug || 'index'
 
-const contentPath = `/${locale.value}/pages/${slug}`
+// Try Strapi first
+const { page, sections, pending } = useStrapiPage(slug === 'index' ? 'accueil' : slug)
 
-const { data: page } = await useAsyncData(`page-${contentPath}`, () =>
-  queryCollection('pages').path(contentPath).first()
+// Fallback to Nuxt Content (during migration)
+const contentPath = `/${locale.value}/pages/${slug}`
+const { data: legacyPage } = await useAsyncData(`legacy-page-${contentPath}`, () =>
+  queryCollection('pages').path(contentPath).first(),
 )
 
-// 404 if page not found
-if (!page.value) {
+// 404 if neither source has the page
+if (!page.value && !legacyPage.value && !pending.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
-// Core SEO (meta tags, OG image, breadcrumbs)
-const { isHome, breadcrumbItems } = usePageSeo(page)
+// SEO from Strapi (or legacy)
+if (page.value) {
+  useStrapiSeo({
+    title: computed(() => page.value?.title),
+    description: computed(() => page.value?.description),
+  })
+} else if (legacyPage.value) {
+  usePageSeo(legacyPage)
+}
+
+// Breadcrumb
+const isHome = computed(() => slug === 'index' || slug === '' || slug === 'accueil')
+const breadcrumbItems = computed(() => {
+  if (isHome.value) return []
+  const title = page.value?.title || legacyPage.value?.title || slug
+  return [
+    { label: 'Accueil', to: '/' },
+    { label: title, to: route.path },
+  ]
+})
 
 // Site-specific: Service schema for /services page
 if (slug === 'services') {

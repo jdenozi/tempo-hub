@@ -11,8 +11,8 @@
       <AppBreadcrumb :items="breadcrumbItems" />
 
       <img
-        v-if="article.image"
-        :src="article.image"
+        v-if="articleImage"
+        :src="articleImage"
         :alt="article.title"
         width="960"
         height="256"
@@ -29,7 +29,11 @@
       </time>
 
       <div class="blog-content max-w-none">
-        <ContentRenderer :value="article" />
+        <!-- Strapi article: render HTML/markdown content -->
+        <StrapiMarkdown v-if="isStrapi && article.content" :content="article.content" />
+
+        <!-- Legacy: Nuxt Content renderer -->
+        <ContentRenderer v-else-if="legacyArticle" :value="legacyArticle" />
       </div>
     </article>
   </NuxtLayout>
@@ -43,18 +47,38 @@ definePageMeta({
 const { locale } = useI18n()
 const route = useRoute()
 const localePath = useLocalePath()
+const slug = route.params.slug as string
 
-const contentPath = `/${locale.value}/blog/${route.params.slug}`
+// --- Data sources ---
 
-const { data: article } = await useAsyncData(`blog-${contentPath}`, () =>
+// 1) Strapi CMS (primary source)
+const { article: strapiArticle } = useStrapiBlogArticle(slug)
+
+// 2) Legacy Nuxt Content fallback
+const contentPath = `/${locale.value}/blog/${slug}`
+const { data: legacyArticle } = await useAsyncData(`blog-${contentPath}`, () =>
   queryCollection('blog').path(contentPath).first()
 )
 
+// Merged: Strapi takes precedence
+const article = computed(() => strapiArticle.value || legacyArticle.value || null)
+const isStrapi = computed(() => !!strapiArticle.value)
+
+// Resolve image URL (Strapi media object vs Content string)
+const articleImage = computed(() => {
+  const img = article.value?.image
+  if (!img) return null
+  if (typeof img === 'object' && img.url) return img.url
+  if (typeof img === 'string') return img
+  return null
+})
+
+// --- 404 ---
 if (!article.value) {
   throw createError({ statusCode: 404, statusMessage: 'Article not found' })
 }
 
-// Core SEO (meta, OG, BlogPosting schema, breadcrumbs)
+// --- SEO ---
 const { breadcrumbItems } = useBlogArticleSeo(article)
 </script>
 
