@@ -15,6 +15,12 @@ export default {
    *
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
+   *
+   * Roles are configured via admin panel after first deploy:
+   * - Super Admin: Full access to all content types and settings
+   * - Editor: Content management only (Pages, Blog Articles, Projects,
+   *   Testimonials, Site Settings) + Media Library uploads
+   *   Permissions: find, findOne, create, update, delete on all content types
    */
   bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
 };

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_sections_stats",
+  "info": {
+    "displayName": "Stats",
+    "icon": "chartBubble"
+  },
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.stat-item"
+    }
+  }
+}

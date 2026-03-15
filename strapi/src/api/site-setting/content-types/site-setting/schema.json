@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_settings",
+  "info": {
+    "singularName": "site-setting",
+    "pluralName": "site-settings",
+    "displayName": "Site Settings",
+    "description": "Paramètres globaux du site"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "siteName": { "type": "string", "required": true, "default": "Tempo Hub" },
+    "profession": { "type": "string" },
+    "logo": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "favicon": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "email": { "type": "email", "required": true },
+    "phone": { "type": "string" },
+    "address": { "type": "text" },
+    "city": { "type": "string" },
+    "zipCode": { "type": "string" },
+    "country": { "type": "string", "default": "France" },
+    "instagram": { "type": "string" },
+    "facebook": { "type": "string" },
+    "linkedin": { "type": "string" },
+    "twitter": { "type": "string" },
+    "youtube": { "type": "string" },
+    "github": { "type": "string" },
+    "defaultTitle": { "type": "string" },
+    "defaultDescription": { "type": "text" },
+    "ogImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "googleAnalytics": { "type": "string" },
+    "primaryColor": { "type": "string", "default": "#d4a853" },
+    "secondaryColor": { "type": "string", "default": "#1a1a2e" },
+    "headingFont": { "type": "string", "default": "Space Grotesk" },
+    "bodyFont": { "type": "string", "default": "Inter" },
+    "scrollAnimations": { "type": "boolean", "default": true },
+    "customCursor": { "type": "boolean", "default": true },
+    "cookieBanner": { "type": "boolean", "default": true },
+    "maintenanceMode": { "type": "boolean", "default": false },
+    "maintenanceMessage": { "type": "text" }
+  }
+}

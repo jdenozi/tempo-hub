@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_sections_ctas",
+  "info": {
+    "displayName": "Call to Action",
+    "icon": "cursor"
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "subtitle": { "type": "text" },
+    "ctaText": { "type": "string" },
+    "ctaLink": { "type": "string" },
+    "secondaryCtaText": { "type": "string" },
+    "secondaryCtaLink": { "type": "string" }
+  }
+}

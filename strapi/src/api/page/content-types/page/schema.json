@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pages",
+  "info": {
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "Page",
+    "description": "Pages du site avec sections dynamiques"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "navLabel": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "showInNav": {
+      "type": "boolean",
+      "default": true
+    },
+    "heroPreset": {
+      "type": "enumeration",
+      "enum": ["starfield", "nebula", "planet-horizon", "grid-station", "orbital", "retro-scan", "none"],
+      "default": "none"
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.page-banner",
+        "sections.features",
+        "sections.pricing",
+        "sections.cta",
+        "sections.faq",
+        "sections.stats",
+        "sections.contact",
+        "sections.projects",
+        "sections.booking"
+      ]
+    }
+  }
+}

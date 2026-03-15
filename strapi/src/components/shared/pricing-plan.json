@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_pricing_plans",
+  "info": {
+    "displayName": "Pricing Plan",
+    "icon": "creditCard"
+  },
+  "attributes": {
+    "name": { "type": "string", "required": true },
+    "price": { "type": "string", "required": true },
+    "period": { "type": "string" },
+    "description": { "type": "text" },
+    "features": { "type": "json" },
+    "ctaText": { "type": "string" },
+    "ctaLink": { "type": "string" },
+    "highlighted": { "type": "boolean", "default": false }
+  }
+}

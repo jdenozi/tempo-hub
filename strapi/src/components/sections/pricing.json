@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_sections_pricings",
+  "info": {
+    "displayName": "Pricing",
+    "icon": "shoppingCart"
+  },
+  "attributes": {
+    "title": { "type": "string" },
+    "subtitle": { "type": "text" },
+    "columns": { "type": "string", "default": "3" },
+    "plans": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.pricing-plan"
+    }
+  }
+}

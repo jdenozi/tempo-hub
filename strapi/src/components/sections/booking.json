@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_sections_bookings",
+  "info": {
+    "displayName": "Booking",
+    "icon": "calendar"
+  },
+  "attributes": {
+    "title": { "type": "string" },
+    "subtitle": { "type": "text" },
+    "theme": {
+      "type": "enumeration",
+      "enum": ["dark", "light"],
+      "default": "dark"
+    }
+  }
+}

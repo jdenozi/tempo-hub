@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testimonials",
+  "info": {
+    "singularName": "testimonial",
+    "pluralName": "testimonials",
+    "displayName": "Testimonial",
+    "description": "Témoignages clients"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": { "type": "string", "required": true },
+    "role": { "type": "string", "required": true },
+    "photo": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "quote": { "type": "text", "required": true },
+    "rating": { "type": "integer", "min": 1, "max": 5, "default": 5 },
+    "order": { "type": "integer", "default": 0 }
+  }
+}

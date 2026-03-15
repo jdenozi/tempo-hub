@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_sections_contacts",
+  "info": {
+    "displayName": "Contact",
+    "icon": "envelop"
+  },
+  "attributes": {
+    "title": { "type": "string" },
+    "subtitle": { "type": "text" }
+  }
+}
