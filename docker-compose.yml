@@ -31,7 +31,7 @@ services:
           cpus: "0.5"
     depends_on:
       strapi:
-        condition: service_started
+        condition: service_healthy
 
   strapi:
     build:
@@ -48,17 +48,25 @@ services:
       - DATABASE_NAME=${DATABASE_NAME:-strapi}
       - DATABASE_USERNAME=${DATABASE_USERNAME:-strapi}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD:-strapi}
+      - PUBLIC_URL=${PUBLIC_URL:-http://localhost:1337}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}
     volumes:
       - strapi-uploads:/opt/app/public/uploads
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:1337/_health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
     networks:
       - web
       - internal
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.rule=Host(`${DOMAIN:-localhost}`) && (PathPrefix(`/admin`) || PathPrefix(`/uploads`))"
+      - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.rule=Host(`${DOMAIN:-localhost}`) && (PathPrefix(`/admin`) || PathPrefix(`/uploads`) || PathPrefix(`/api`) || PathPrefix(`/content-manager`) || PathPrefix(`/content-type-builder`) || PathPrefix(`/upload`) || PathPrefix(`/i18n`) || PathPrefix(`/users-permissions`))"
       - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.entrypoints=websecure"
       - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.tls.certresolver=letsencrypt"
       - "traefik.http.routers.${APP_NAME:-tempo-hub}-strapi.priority=20"
