@@ -52,7 +52,7 @@ const slug = route.params.slug as string
 // --- Data sources ---
 
 // 1) Strapi CMS (primary source)
-const { article: strapiArticle } = useStrapiBlogArticle(slug)
+const { article: strapiArticle, pending: strapiPending } = useStrapiBlogArticle(slug)
 
 // 2) Legacy Nuxt Content fallback
 const contentPath = `/${locale.value}/blog/${slug}`
@@ -63,6 +63,7 @@ const { data: legacyArticle } = await useAsyncData(`blog-${contentPath}`, () =>
 // Merged: Strapi takes precedence
 const article = computed(() => strapiArticle.value || legacyArticle.value || null)
 const isStrapi = computed(() => !!strapiArticle.value)
+const pending = computed(() => strapiPending.value)
 
 // Resolve image URL (Strapi media object vs Content string)
 const articleImage = computed(() => {
@@ -74,7 +75,7 @@ const articleImage = computed(() => {
 })
 
 // --- 404 ---
-if (!article.value) {
+if (!article.value && !pending.value) {
   throw createError({ statusCode: 404, statusMessage: 'Article not found' })
 }
 
