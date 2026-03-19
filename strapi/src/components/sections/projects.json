@@ -7,6 +7,11 @@
   "attributes": {
     "title": { "type": "string" },
     "subtitle": { "type": "text" },
-    "showAll": { "type": "boolean", "default": true }
+    "showAll": { "type": "boolean", "default": true },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.project-item"
+    }
   }
 }

@@ -95,7 +95,7 @@ import type { SectionVisualProps } from '../../composables/useSectionStyle'
 export interface ProjectItem {
   title: string
   description: string
-  image?: string
+  image?: string | { url: string; [key: string]: any }
   images?: string[]
   tags?: string[]
   link?: string
@@ -121,7 +121,13 @@ const { bgClass, spacingClass, borderClass, titleClass, isAnimatedBg } = useSect
 // Resolve images array from either `images` or `image` prop
 function getImages(item: ProjectItem): string[] {
   if (item.images && item.images.length > 0) return item.images
-  if (item.image) return [item.image]
+  if (item.image) {
+    // Handle Strapi media object ({ url: '...' }) or plain string
+    const url = typeof item.image === 'object' && item.image !== null && 'url' in item.image
+      ? (item.image as { url: string }).url
+      : item.image as string
+    if (url) return [url]
+  }
   return []
 }
 

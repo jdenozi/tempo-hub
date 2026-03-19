@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_project_items",
+  "info": {
+    "displayName": "Project Item",
+    "icon": "picture"
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "description": { "type": "text", "required": true },
+    "image": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "tags": { "type": "json" },
+    "link": { "type": "string" }
+  }
+}
