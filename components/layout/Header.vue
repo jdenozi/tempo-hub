@@ -85,30 +85,36 @@ const { locale } = useI18n()
 const { client } = useClientConfig()
 const mobileOpen = ref(false)
 
-// Query pages from content to build dynamic nav
-const { data: pages } = await useAsyncData(`nav-pages-${locale.value}`, () =>
-  queryCollection('pages')
-    .where('path', 'LIKE', `/${locale.value}/pages/%`)
-    .order('order', 'ASC')
-    .all()
-)
+// Fetch nav pages from Strapi
+const { find } = useStrapi()
+const { data: strapiPages } = await useAsyncData(`nav-pages-strapi-${locale.value}`, async () => {
+  try {
+    // @ts-expect-error — @nuxtjs/strapi v5 type limitations
+    const res = await find('pages', {
+      filters: { showInNav: { $eq: true } },
+      sort: 'order:asc',
+      fields: ['slug', 'navLabel', 'title', 'order', 'showInNav'],
+      pagination: { pageSize: 50 },
+    })
+    return res?.data ?? []
+  } catch {
+    return []
+  }
+})
 
 const dynamicNavItems = computed<NavItem[]>(() => {
   const items: NavItem[] = [{ label: 'nav.home', to: '/' }]
 
-  if (pages.value) {
-    const prefix = `/${locale.value}/pages`
+  if (strapiPages.value) {
+    // Separate root pages and child pages based on slug depth
+    const rootPages: typeof strapiPages.value = []
+    const childPages: typeof strapiPages.value = []
 
-    // Separate root pages and child pages
-    const rootPages: typeof pages.value = []
-    const childPages: typeof pages.value = []
-
-    for (const page of pages.value) {
-      if (page.showInNav === false) continue
-      const relativePath = page.path.replace(prefix, '')
-      // Count slashes: /services = 1 slash (root), /services/site-vitrine = 2 slashes (child)
-      const depth = relativePath.split('/').length - 1
-      if (depth <= 1) {
+    for (const page of strapiPages.value) {
+      if (!page.showInNav) continue
+      // Slug depth: "services" = 0 slashes (root), "services/site-vitrine" = 1 slash (child)
+      const slashCount = (page.slug?.split('/').length ?? 1) - 1
+      if (slashCount === 0) {
         rootPages.push(page)
       } else {
         childPages.push(page)
@@ -116,18 +122,17 @@ const dynamicNavItems = computed<NavItem[]>(() => {
     }
 
     for (const page of rootPages) {
-      const routePath = page.path.replace(prefix, '') || '/'
       const navItem: NavItem = {
         label: page.navLabel || page.title,
-        to: routePath,
+        to: `/${page.slug}`,
       }
 
-      // Find children matching this parent path
+      // Find children whose slug starts with this parent's slug
       const children = childPages
-        .filter(child => child.path.startsWith(page.path + '/'))
+        .filter(child => child.slug?.startsWith(page.slug + '/'))
         .map(child => ({
           label: child.navLabel || child.title,
-          to: child.path.replace(prefix, ''),
+          to: `/${child.slug}`,
         }))
 
       if (children.length > 0) {
