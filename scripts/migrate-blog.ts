@@ -11,10 +11,11 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
-import { strapiFind, strapiCreate } from './strapi-client.js'
+import { strapiFind, strapiCreate, strapiUpdate } from './strapi-client.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const BLOG_DIR = path.resolve(__dirname, '../content/fr/blog')
+const FORCE = process.argv.includes('--force')
 
 export async function migrateBlog() {
   console.log('📝 Migrating blog articles...')
@@ -35,18 +36,6 @@ export async function migrateBlog() {
     const raw = fs.readFileSync(filePath, 'utf-8')
     const { data: frontmatter, content } = matter(raw)
 
-    // Idempotent: skip if already exists
-    try {
-      const existing = await strapiFind('blog-articles', { slug })
-      if (existing.data?.length > 0) {
-        console.log(`  ⏭️  Skip ${slug} (already exists)`)
-        skipped++
-        continue
-      }
-    } catch {
-      // Continue with creation if API check fails
-    }
-
     const articleData = {
       title: frontmatter.title,
       slug,
@@ -56,6 +45,25 @@ export async function migrateBlog() {
         ? new Date(frontmatter.date).toISOString().split('T')[0]
         : new Date().toISOString().split('T')[0],
       author: frontmatter.author || 'Tempo Hub',
+      publishedAt: new Date().toISOString(),
+    }
+
+    // Idempotent: skip if already exists (unless --force)
+    try {
+      const existing = await strapiFind('blog-articles', { slug })
+      if (existing.data?.length > 0) {
+        if (FORCE) {
+          const documentId = existing.data[0].documentId
+          await strapiUpdate('blog-articles', documentId, articleData)
+          console.log(`  🔄 Updated ${slug}`)
+        } else {
+          console.log(`  ⏭️  Skip ${slug} (already exists)`)
+          skipped++
+        }
+        continue
+      }
+    } catch {
+      // Continue with creation if API check fails
     }
 
     try {

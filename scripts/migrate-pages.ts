@@ -12,10 +12,12 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
 import yaml from 'js-yaml'
-import { strapiFind, strapiCreate } from './strapi-client.js'
+import { strapiFind, strapiCreate, strapiUpdate, uploadImage } from './strapi-client.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const PAGES_DIR = path.resolve(__dirname, '../content/fr/pages')
+const PUBLIC_DIR = path.resolve(__dirname, '../public')
+const FORCE = process.argv.includes('--force')
 
 // ---------------------------------------------------------------------------
 // Valid Strapi attributes per section component (from schema.json files).
@@ -30,7 +32,7 @@ const SECTION_ALLOWED_ATTRS: Record<string, Set<string>> = {
   'stats': new Set(['items']),
   'contact': new Set(['title', 'subtitle']),
   'booking': new Set(['title', 'subtitle', 'theme']),
-  'projects': new Set(['title', 'subtitle', 'showAll']),
+  'projects': new Set(['title', 'subtitle', 'showAll', 'items']),
 }
 
 // ---------------------------------------------------------------------------
@@ -137,15 +139,48 @@ function mapStatItems(items: any[]): any[] {
   }))
 }
 
+/** Map project items — upload images to Strapi media library. */
+async function mapProjectItems(items: any[]): Promise<any[]> {
+  return Promise.all(
+    items.map(async (item) => {
+      const result: Record<string, any> = {
+        title: item.title || '',
+        description: item.description || '',
+        tags: item.tags || null,
+        link: item.link || '',
+      }
+      const imageArray: string[] = item.images || (item.image ? [item.image] : [])
+      const uploadedIds: number[] = []
+      for (const imgSrc of imageArray) {
+        const rel = imgSrc.startsWith('/') ? imgSrc.slice(1) : imgSrc
+        const fullPath = path.join(PUBLIC_DIR, rel)
+        if (fs.existsSync(fullPath)) {
+          try {
+            const media = await uploadImage(fullPath)
+            uploadedIds.push(media.id)
+          } catch (err) {
+            console.warn(`  ⚠️  Image upload failed: ${imgSrc}`, err instanceof Error ? err.message : err)
+          }
+        } else {
+          console.warn(`  ⚠️  Image not found: ${fullPath}`)
+        }
+      }
+      if (uploadedIds.length > 0) result.image = uploadedIds[0]
+      if (uploadedIds.length > 1) result.images = uploadedIds.slice(1)
+      return result
+    }),
+  )
+}
+
 /**
  * Build a Strapi Dynamic Zone entry from a parsed MDC section.
  * Returns the component object with __component set.
  */
-function buildStrapiSection(section: MdcSection): Record<string, any> | null {
+async function buildStrapiSection(section: MdcSection): Promise<Record<string, any> | null> {
   const { name, props } = section
-  const cleaned = stripUnknownProps(name, props)
+  const { animation, ...propsWithoutAnimation } = props
+  const cleaned = stripUnknownProps(name, propsWithoutAnimation)
 
-  // Map nested repeatable components
   switch (name) {
     case 'features':
       if (cleaned.items) cleaned.items = mapFeatureItems(cleaned.items)
@@ -160,15 +195,16 @@ function buildStrapiSection(section: MdcSection): Record<string, any> | null {
       if (cleaned.items) cleaned.items = mapStatItems(cleaned.items)
       break
     case 'projects':
-      // MDC has full project items but Strapi schema only stores title/subtitle/showAll.
-      // Strip items, default showAll to true.
-      delete cleaned.items
+      if (cleaned.items && Array.isArray(cleaned.items)) {
+        cleaned.items = await mapProjectItems(cleaned.items)
+      }
       if (cleaned.showAll === undefined) cleaned.showAll = true
       break
   }
 
   return {
     __component: `sections.${name}`,
+    ...(animation ? { animation } : {}),
     ...cleaned,
   }
 }
@@ -196,23 +232,11 @@ export async function migratePages() {
     const raw = fs.readFileSync(filePath, 'utf-8')
     const { data: frontmatter, content } = matter(raw)
 
-    // Idempotent: skip if already exists
-    try {
-      const existing = await strapiFind('pages', { slug })
-      if (existing.data?.length > 0) {
-        console.log(`  ⏭️  Skip ${slug} (already exists)`)
-        skipped++
-        continue
-      }
-    } catch {
-      // If API call fails (e.g. 404), continue with creation
-    }
-
     // Parse MDC sections from body
     const mdcSections = parseMdcSections(content)
-    const strapiSections = mdcSections
-      .map(buildStrapiSection)
-      .filter((s): s is Record<string, any> => s !== null)
+    const strapiSections = (
+      await Promise.all(mdcSections.map(buildStrapiSection))
+    ).filter((s): s is Record<string, any> => s !== null)
 
     const pageData: Record<string, any> = {
       title: frontmatter.title,
@@ -223,6 +247,24 @@ export async function migratePages() {
       showInNav: frontmatter.showInNav !== false,
       heroPreset: frontmatter.heroPreset || 'none',
       sections: strapiSections,
+      publishedAt: new Date().toISOString(),
+    }
+
+    try {
+      const existing = await strapiFind('pages', { slug })
+      if (existing.data?.length > 0) {
+        if (FORCE) {
+          const documentId = existing.data[0].documentId
+          await strapiUpdate('pages', documentId, pageData)
+          console.log(`  🔄 Updated ${slug} (${strapiSections.length} sections)`)
+        } else {
+          console.log(`  ⏭️  Skip ${slug} (already exists)`)
+          skipped++
+        }
+        continue
+      }
+    } catch {
+      // If API call fails (e.g. 404), continue with creation
     }
 
     try {

@@ -3,6 +3,9 @@
  * Usage: STRAPI_URL=http://localhost:1337 STRAPI_TOKEN=xxx npx tsx scripts/migrate-all.ts
  */
 
+import fs from 'node:fs'
+import path from 'node:path'
+
 const STRAPI_URL = process.env.STRAPI_URL || 'http://localhost:1337'
 const STRAPI_TOKEN = process.env.STRAPI_TOKEN || ''
 
@@ -57,4 +60,23 @@ export async function strapiUpdate(contentType: string, documentId: string, data
 
 export function getStrapiUrl() {
   return STRAPI_URL
+}
+
+export async function uploadImage(filePath: string): Promise<{ id: number; url: string }> {
+  const filename = path.basename(filePath)
+  const fileBuffer = fs.readFileSync(filePath)
+  const blob = new Blob([fileBuffer])
+  const form = new FormData()
+  form.append('files', blob, filename)
+  const res = await fetch(`${STRAPI_URL}/api/upload`, {
+    method: 'POST',
+    headers: STRAPI_TOKEN ? { Authorization: `Bearer ${STRAPI_TOKEN}` } : {},
+    body: form,
+  })
+  if (!res.ok) {
+    const text = await res.text()
+    throw new Error(`Upload failed for ${filename}: ${res.status} ${text}`)
+  }
+  const [media] = await res.json()
+  return { id: media.id, url: media.url }
 }
