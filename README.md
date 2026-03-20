@@ -289,7 +289,6 @@ Voir le dossier `docs/` pour la documentation détaillée :
 | `07-smooth-scroll.md` | Smooth scroll (Lenis) |
 | `08-threejs.md` | Three.js scenes |
 | `09-i18n-seo.md` | i18n + SEO |
-| `10-content-cms.md` | Nuxt Content + Nuxt Studio |
 | `11-integrations.md` | Cal.com + n8n |
 | `12-docker-deployment.md` | Docker + deployment |
 | `13-seo-strategy.md` | Stratégie SEO complète |

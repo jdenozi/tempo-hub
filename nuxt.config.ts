@@ -47,64 +47,6 @@ export default defineNuxtConfig({
   // Client-level theme (loaded after core CSS)
   css: ['~/assets/css/theme.css'],
 
-  // Nuxt Studio — full config
-  studio: {
-    dev: true,
-    route: '/_studio',
-    repository: {
-      provider: 'github',
-      owner: 'jdenozi',
-      repo: 'tempo-hub',
-      branch: 'main',
-      rootDir: '',
-      private: true,
-    },
-    auth: {
-      github: {
-        clientId: process.env.STUDIO_GITHUB_CLIENT_ID,
-        clientSecret: process.env.STUDIO_GITHUB_CLIENT_SECRET,
-      },
-    },
-    ai: {
-      apiKey: process.env.AI_GATEWAY_API_KEY || '',
-      context: {
-        title: 'Tempo Hub',
-        description: 'Tempo Hub, agence web française spécialisée dans la création de sites vitrines sur mesure. Design premium, performances Lighthouse 90+, SEO optimisé et hébergement inclus. Devis gratuit.',
-        style: 'Professionnel, moderne, orienté conversion. Ton expert mais accessible.',
-        tone: 'Confiant et pédagogique, sans jargon excessif.',
-        collection: {
-          name: 'studio',
-          folder: '.studio',
-        },
-      },
-      experimental: {
-        collectionContext: true,
-      },
-    },
-    i18n: {
-      defaultLocale: 'fr',
-    },
-    meta: {
-      components: {
-        include: [
-          'SectionPageBanner',
-          'SectionFeatures',
-          'SectionCta',
-          'SectionStats',
-          'SectionPricing',
-          'SectionTestimonials',
-          'SectionFaq',
-          'SectionContact',
-          'SectionLogos',
-          'SectionStripePricing',
-          'SectionProjects',
-          'SectionBooking',
-        ],
-        exclude: [],
-      },
-    },
-  },
-
   // SSG: prerender all routes at build time
   nitro: {
     prerender: {
@@ -114,11 +56,9 @@ export default defineNuxtConfig({
     },
   },
 
-  // Route rules: Studio stays SSR; static assets get long-lived cache headers
+  // Route rules: static assets get long-lived cache headers
   // Sitemap priorities: home (1.0) > services/projects/about/blog (0.7-0.9) > secondary (0.5-0.6)
   routeRules: {
-    '/_studio/**': { ssr: true },
-    '/__nuxt_studio/**': { ssr: true },
     '/_nuxt/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
     '/images/**': { headers: { 'Cache-Control': 'public, max-age=604800' } },
     '/fonts/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
