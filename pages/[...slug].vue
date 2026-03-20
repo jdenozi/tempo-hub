@@ -8,12 +8,6 @@
       :sections="sections"
     />
 
-    <!-- Fallback: legacy Nuxt Content rendering (during migration) -->
-    <template v-else-if="legacyPage">
-      <PageRenderer v-if="legacyPage?.sections" :sections="legacyPage.sections" />
-      <ContentRenderer v-else :value="legacyPage" />
-    </template>
-
     <!-- 404 -->
     <div v-else-if="!pending" class="min-h-screen flex items-center justify-center">
       <p class="text-gray-400">Page not found</p>
@@ -36,35 +30,25 @@ const slug = Array.isArray(route.params.slug)
   ? route.params.slug.join('/')
   : route.params.slug || 'index'
 
-// Try Strapi first
+// Fetch from Strapi
 const { page, sections, pending } = useStrapiPage(slug === 'index' ? 'accueil' : slug)
 
-// Fallback to Nuxt Content (during migration)
-const contentPath = `/${locale.value}/pages/${slug}`
-const { data: legacyPage } = await useAsyncData(`legacy-page-${contentPath}`, () =>
-  queryCollection('pages').path(contentPath).first(),
-)
-
-// 404 if neither source has the page
-if (!page.value && !legacyPage.value && !pending.value) {
+// 404 if page not found
+if (!page.value && !pending.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
-// SEO from Strapi (or legacy)
-if (page.value) {
-  useStrapiSeo({
-    title: computed(() => page.value?.title),
-    description: computed(() => page.value?.description),
-  })
-} else if (legacyPage.value) {
-  usePageSeo(legacyPage)
-}
+// SEO from Strapi
+useStrapiSeo({
+  title: computed(() => page.value?.title),
+  description: computed(() => page.value?.description),
+})
 
 // Breadcrumb
 const isHome = computed(() => slug === 'index' || slug === '' || slug === 'accueil')
 const breadcrumbItems = computed(() => {
   if (isHome.value) return []
-  const title = page.value?.title || legacyPage.value?.title || slug
+  const title = page.value?.title || slug
   return [
     { label: 'Accueil', to: '/' },
     { label: title, to: route.path },

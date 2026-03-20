@@ -90,39 +90,20 @@ const localePath = useLocalePath()
 
 // --- Data sources ---
 
-// 1) Strapi CMS (primary source)
-const { articles: strapiArticles } = useStrapiBlogList()
+// Strapi CMS (primary source)
+const { articles } = useStrapiBlogList()
 
-// 2) Legacy Nuxt Content fallback
-const { data: legacyArticles } = await useAsyncData(`blog-list-${locale.value}`, () =>
-  queryCollection('blog')
-    .where('path', 'LIKE', `/${locale.value}/blog/%`)
-    .order('date', 'DESC')
-    .all()
-)
+// --- Helpers ---
 
-// Merged: Strapi takes precedence, fallback to legacy content
-const articles = computed(() => {
-  if (strapiArticles.value?.length) return strapiArticles.value
-  return legacyArticles.value || []
-})
-
-// --- Helpers for data-shape differences ---
-
-/** Resolve article link path (Strapi uses slug, Content uses path) */
+/** Resolve article link path */
 function articlePath(article: any): string {
-  if (article.slug) return `/blog/${article.slug}`
-  // Legacy Nuxt Content: path includes locale prefix
-  return article.path?.replace(`/${locale.value}/blog`, '/blog') || '#'
+  return `/blog/${article.slug}`
 }
 
-/** Resolve image URL (Strapi media object vs Content string) */
+/** Resolve image URL (Strapi media object) */
 function articleImage(article: any): string | null {
   if (!article.image) return null
-  // Strapi media: { url: '...' }
   if (typeof article.image === 'object' && article.image.url) return article.image.url
-  // Content: plain string
-  if (typeof article.image === 'string') return article.image
   return null
 }
 

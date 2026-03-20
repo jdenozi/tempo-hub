@@ -10,9 +10,8 @@ export default defineNuxtConfig({
     },
   },
 
-  // TODO(Wave 5): Remove 'nuxt-studio' after Strapi migration is validated.
-  // Legacy Nuxt Content + Studio are kept for now — blog/page fallbacks depend on them.
-  modules: ['nuxt-studio', '@nuxtjs/strapi'],
+  // Strapi CMS module
+  modules: ['@nuxtjs/strapi'],
 
   // Strapi CMS configuration
   strapi: {

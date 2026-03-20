@@ -29,11 +29,8 @@
       </time>
 
       <div class="blog-content max-w-none">
-        <!-- Strapi article: render HTML/markdown content -->
-        <StrapiMarkdown v-if="isStrapi && article.content" :content="article.content" />
-
-        <!-- Legacy: Nuxt Content renderer -->
-        <ContentRenderer v-else-if="legacyArticle" :value="legacyArticle" />
+        <!-- Strapi article: render markdown content -->
+        <StrapiMarkdown v-if="article.content" :content="article.content" />
       </div>
     </article>
   </NuxtLayout>
@@ -51,19 +48,8 @@ const slug = route.params.slug as string
 
 // --- Data sources ---
 
-// 1) Strapi CMS (primary source)
-const { article: strapiArticle, pending: strapiPending } = useStrapiBlogArticle(slug)
-
-// 2) Legacy Nuxt Content fallback
-const contentPath = `/${locale.value}/blog/${slug}`
-const { data: legacyArticle } = await useAsyncData(`blog-${contentPath}`, () =>
-  queryCollection('blog').path(contentPath).first()
-)
-
-// Merged: Strapi takes precedence
-const article = computed(() => strapiArticle.value || legacyArticle.value || null)
-const isStrapi = computed(() => !!strapiArticle.value)
-const pending = computed(() => strapiPending.value)
+// Strapi CMS
+const { article, pending } = useStrapiBlogArticle(slug)
 
 // Resolve image URL (Strapi media object vs Content string)
 const articleImage = computed(() => {
