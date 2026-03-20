@@ -12,6 +12,9 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.project-item"
+    },
+    "animation": {
+      "type": "json"
     }
   }
 }

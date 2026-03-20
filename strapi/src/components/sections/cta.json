@@ -10,6 +10,9 @@
     "ctaText": { "type": "string" },
     "ctaLink": { "type": "string" },
     "secondaryCtaText": { "type": "string" },
-    "secondaryCtaLink": { "type": "string" }
+    "secondaryCtaLink": { "type": "string" },
+    "animation": {
+      "type": "json"
+    }
   }
 }

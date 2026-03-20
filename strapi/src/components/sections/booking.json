@@ -11,6 +11,9 @@
       "type": "enumeration",
       "enum": ["dark", "light"],
       "default": "dark"
+    },
+    "animation": {
+      "type": "json"
     }
   }
 }

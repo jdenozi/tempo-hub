@@ -6,6 +6,9 @@
   },
   "attributes": {
     "title": { "type": "string" },
-    "subtitle": { "type": "text" }
+    "subtitle": { "type": "text" },
+    "animation": {
+      "type": "json"
+    }
   }
 }

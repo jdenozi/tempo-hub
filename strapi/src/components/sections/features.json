@@ -11,6 +11,9 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.feature-item"
+    },
+    "animation": {
+      "type": "json"
     }
   }
 }

@@ -20,6 +20,9 @@
       "type": "enumeration",
       "enum": ["starfield", "nebula", "planet-horizon", "grid-station", "orbital", "retro-scan", "none"],
       "default": "none"
+    },
+    "animation": {
+      "type": "json"
     }
   }
 }

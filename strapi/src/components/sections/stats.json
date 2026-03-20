@@ -9,6 +9,9 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.stat-item"
+    },
+    "animation": {
+      "type": "json"
     }
   }
 }
