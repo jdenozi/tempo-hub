@@ -7,7 +7,7 @@
     <TempoBot v-if="authStore.isAuthenticated" />
 
     <!-- Version footer -->
-    <div class="fixed bottom-4 right-4 text-xs text-gray-400 bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm z-40">
+    <div class="fixed bottom-4 left-4 text-xs text-gray-400 bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm z-40">
       v{{ version }} · par <span class="font-medium text-primary-500">gratonbaveur</span>
     </div>
   </div>
