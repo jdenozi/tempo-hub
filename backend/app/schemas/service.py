@@ -34,6 +34,7 @@ class ServiceResponse(BaseModel):
     is_public: bool
     is_active: bool
     created_at: datetime
+    is_accessible: bool = True
 
     class Config:
         from_attributes = True

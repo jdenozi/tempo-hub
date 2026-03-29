@@ -17,22 +17,35 @@ def list_services(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    """Liste les services accessibles par l'utilisateur"""
-    # Admin voit tout
-    if current_user.role.value == "admin":
-        return db.query(Service).filter(Service.is_active == True).all()
+    """Liste tous les services avec flag is_accessible"""
+    # Récupère tous les services actifs
+    all_services = db.query(Service).filter(Service.is_active == True).all()
 
-    # User ne voit QUE les services où il a une permission explicite
+    # Admin a accès à tout
+    if current_user.role.value == "admin":
+        return [
+            ServiceResponse(
+                **{c.name: getattr(s, c.name) for c in s.__table__.columns},
+                is_accessible=True
+            )
+            for s in all_services
+        ]
+
+    # Récupère les IDs des services accessibles par l'utilisateur
     permitted_service_ids = db.query(Permission.service_id).filter(
         Permission.user_id == current_user.id,
         Permission.can_access == True
     ).all()
-    permitted_ids = [p[0] for p in permitted_service_ids]
+    permitted_ids = {p[0] for p in permitted_service_ids}
 
-    return db.query(Service).filter(
-        Service.id.in_(permitted_ids),
-        Service.is_active == True
-    ).all()
+    # Retourne tous les services avec le flag is_accessible
+    return [
+        ServiceResponse(
+            **{c.name: getattr(s, c.name) for c in s.__table__.columns},
+            is_accessible=(s.id in permitted_ids or s.is_public)
+        )
+        for s in all_services
+    ]
 
 
 @router.get("/all", response_model=List[ServiceResponse])
