@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  background-color: #fed7aa;
+  background-image: url('/bones-pattern.png');
+  background-repeat: repeat;
+}
+
+/* Fun cartoon style */
+.card-cartoon {
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 0 0 rgba(249, 115, 22, 0.2);
+  transition: all 0.2s ease;
+}
+
+.card-cartoon:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 0 0 rgba(249, 115, 22, 0.25);
+}
+
+/* Bouncy button */
+.btn-bounce {
+  transition: transform 0.15s ease;
+}
+
+.btn-bounce:active {
+  transform: scale(0.95);
+}
