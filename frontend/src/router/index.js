@@ -76,9 +76,11 @@ router.beforeEach(async (to, from, next) => {
     return next({ name: 'dashboard' })
   }
 
-  // Auth required routes
+  // Auth required routes - redirect to SSO
   if (to.meta.auth && !authStore.isAuthenticated) {
-    return next({ name: 'login' })
+    // Redirect to Authentik SSO instead of local login page
+    window.location.href = '/auth/login'
+    return
   }
 
   // Admin required routes
