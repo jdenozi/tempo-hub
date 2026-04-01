@@ -100,7 +100,7 @@ def startup():
                 "name": "calcom",
                 "display_name": "Cal.com",
                 "description": "Planification de rendez-vous",
-                "url": "https://cal.tempo-hub.fr",
+                "url": "https://calcom.tempo-hub.fr",
                 "icon": "calendar",
                 "is_public": False
             },
