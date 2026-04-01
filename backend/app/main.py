@@ -128,6 +128,10 @@ def startup():
                 service = Service(**svc_data, type=ServiceType.FIXED)
                 db.add(service)
                 print(f"Service créé: {svc_data['display_name']}")
+            elif existing.url != svc_data["url"]:
+                # Mettre à jour l'URL si elle a changé
+                existing.url = svc_data["url"]
+                print(f"Service mis à jour: {svc_data['display_name']} -> {svc_data['url']}")
 
         db.commit()
     finally:
