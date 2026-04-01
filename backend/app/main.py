@@ -68,7 +68,7 @@ def startup():
                 "name": "nextcloud",
                 "display_name": "Nextcloud",
                 "description": "Stockage cloud et synchronisation de fichiers",
-                "url": "https://cloud.dnz-server.duckdns.org",
+                "url": "https://cloud.tempo-hub.fr",
                 "icon": "cloud",
                 "is_public": False
             },
@@ -84,7 +84,7 @@ def startup():
                 "name": "jellyfin",
                 "display_name": "Jellyfin",
                 "description": "Streaming média personnel",
-                "url": "https://jellyfin.dnz-server.duckdns.org",
+                "url": "https://jellyfin.tempo-hub.fr",
                 "icon": "play-circle",
                 "is_public": False
             },
@@ -100,7 +100,7 @@ def startup():
                 "name": "calcom",
                 "display_name": "Cal.com",
                 "description": "Planification de rendez-vous",
-                "url": "https://calcom.tempo-finance.com",
+                "url": "https://cal.tempo-hub.fr",
                 "icon": "calendar",
                 "is_public": False
             },
@@ -116,7 +116,7 @@ def startup():
                 "name": "grafana",
                 "display_name": "Grafana",
                 "description": "Monitoring et dashboards",
-                "url": "https://grafana.tempo-finance.com",
+                "url": "https://grafana.tempo-hub.fr",
                 "icon": "bar-chart-2",
                 "is_public": False
             }
