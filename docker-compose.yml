@@ -30,6 +30,8 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@tempo-hub.fr}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-changeme}
+    volumes:
+      - /home/debian/web/sites:/root/web/sites:ro
     depends_on:
       db:
         condition: service_healthy

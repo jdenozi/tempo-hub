@@ -55,6 +55,18 @@ const routes = [
     name: 'admin-services',
     component: () => import('../views/AdminServices.vue'),
     meta: { auth: true, admin: true }
+  },
+  {
+    path: '/admin/wordpress',
+    name: 'admin-wordpress',
+    component: () => import('../views/AdminWordPress.vue'),
+    meta: { auth: true, admin: true }
+  },
+  {
+    path: '/faq',
+    name: 'faq',
+    component: () => import('../views/FAQ.vue'),
+    meta: { auth: true }
   }
 ]
 

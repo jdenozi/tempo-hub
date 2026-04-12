@@ -12,6 +12,14 @@
         <!-- Desktop menu -->
         <div class="hidden sm:flex items-center gap-4">
           <router-link
+            to="/faq"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium flex items-center gap-1"
+          >
+            <HelpCircle class="w-4 h-4" />
+            Aide
+          </router-link>
+
+          <router-link
             v-if="authStore.isAdmin"
             to="/admin"
             class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
@@ -51,6 +59,15 @@
     <div v-if="mobileMenuOpen" class="sm:hidden bg-white border-t border-gray-200">
       <div class="px-4 py-3 space-y-2">
         <router-link
+          to="/faq"
+          @click="mobileMenuOpen = false"
+          class="block text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium flex items-center gap-2"
+        >
+          <HelpCircle class="w-5 h-5" />
+          Aide
+        </router-link>
+
+        <router-link
           v-if="authStore.isAdmin"
           to="/admin"
           @click="mobileMenuOpen = false"
@@ -83,7 +100,7 @@
 import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
-import { LogOut, Menu, X } from 'lucide-vue-next'
+import { LogOut, Menu, X, HelpCircle } from 'lucide-vue-next'
 
 const authStore = useAuthStore()
 const router = useRouter()

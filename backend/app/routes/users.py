@@ -1,11 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
+from pydantic import BaseModel
 
 from app.database import get_db
 from app.models.user import User
 from app.schemas.user import UserResponse, UserUpdate, UserAdminUpdate, UserCreate
 from app.auth import get_current_user, get_current_admin, get_password_hash
+from app.services.authentik_service import authentik_service
+
+
+class ResetPasswordRequest(BaseModel):
+    new_password: str
 
 router = APIRouter(prefix="/api/users", tags=["users"])
 
@@ -130,3 +136,24 @@ def delete_user(
 
     db.delete(user)
     db.commit()
+
+
+@router.post("/{user_id}/reset-password")
+async def reset_user_password(
+    user_id: int,
+    request: ResetPasswordRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_admin)
+):
+    """Réinitialise le mot de passe d'un utilisateur dans Authentik (admin only)"""
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="Utilisateur non trouvé")
+
+    # Appeler l'API Authentik pour reset le mot de passe
+    result = await authentik_service.reset_user_password(user.email, request.new_password)
+
+    if not result["success"]:
+        raise HTTPException(status_code=400, detail=result["message"])
+
+    return {"message": result["message"]}

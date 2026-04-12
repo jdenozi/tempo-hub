@@ -67,8 +67,14 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-right">
               <button
+                @click="openResetPassword(user)"
+                class="text-orange-600 hover:text-orange-800 text-sm font-medium mr-4"
+              >
+                Reset MDP
+              </button>
+              <button
                 @click="openPermissions(user)"
-                class="text-primary-600 hover:text-primary-800 text-sm font-medium mr-4"
+                class="text-primary-600 hover:text-primary-800 text-sm font-medium"
               >
                 Permissions
               </button>
@@ -106,18 +112,70 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Reset Password -->
+    <div v-if="resetPasswordUser" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4">
+        <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+          <h3 class="text-lg font-semibold">Reset mot de passe</h3>
+          <button @click="closeResetPassword" class="text-gray-400 hover:text-gray-600">
+            <X class="w-5 h-5" />
+          </button>
+        </div>
+        <div class="px-6 py-4">
+          <p class="text-sm text-gray-600 mb-4">
+            Réinitialiser le mot de passe SSO de <strong>{{ resetPasswordUser.username }}</strong> ({{ resetPasswordUser.email }})
+          </p>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nouveau mot de passe</label>
+            <input
+              v-model="newPassword"
+              type="text"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              placeholder="Mot de passe temporaire"
+            />
+          </div>
+          <div class="flex justify-end gap-3">
+            <button
+              @click="closeResetPassword"
+              class="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+            >
+              Annuler
+            </button>
+            <button
+              @click="resetPassword"
+              :disabled="!newPassword || resetting"
+              class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            >
+              <Key class="w-4 h-4" />
+              {{ resetting ? 'En cours...' : 'Réinitialiser' }}
+            </button>
+          </div>
+          <p v-if="resetMessage" :class="resetSuccess ? 'text-green-600' : 'text-red-600'" class="mt-3 text-sm">
+            {{ resetMessage }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { ArrowLeft, X, UserPlus } from 'lucide-vue-next'
+import { ArrowLeft, X, UserPlus, Key } from 'lucide-vue-next'
 import api from '../api'
 
 const users = ref([])
 const services = ref([])
 const selectedUser = ref(null)
 const userPermissions = ref([])
+
+// Reset password
+const resetPasswordUser = ref(null)
+const newPassword = ref('')
+const resetting = ref(false)
+const resetMessage = ref('')
+const resetSuccess = ref(false)
 
 onMounted(async () => {
   const [usersRes, servicesRes] = await Promise.all([
@@ -158,5 +216,39 @@ async function togglePermission(serviceId, canAccess) {
 
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('fr-FR')
+}
+
+function openResetPassword(user) {
+  resetPasswordUser.value = user
+  newPassword.value = ''
+  resetMessage.value = ''
+  resetSuccess.value = false
+}
+
+function closeResetPassword() {
+  resetPasswordUser.value = null
+  newPassword.value = ''
+  resetMessage.value = ''
+}
+
+async function resetPassword() {
+  if (!newPassword.value || !resetPasswordUser.value) return
+
+  resetting.value = true
+  resetMessage.value = ''
+
+  try {
+    const res = await api.post(`/api/users/${resetPasswordUser.value.id}/reset-password`, {
+      new_password: newPassword.value
+    })
+    resetSuccess.value = true
+    resetMessage.value = res.data.message
+    newPassword.value = ''
+  } catch (error) {
+    resetSuccess.value = false
+    resetMessage.value = error.response?.data?.detail || 'Erreur lors de la réinitialisation'
+  } finally {
+    resetting.value = false
+  }
 }
 </script>

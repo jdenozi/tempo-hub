@@ -33,17 +33,20 @@
         </div>
       </router-link>
 
-      <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 opacity-50">
+      <router-link
+        to="/admin/wordpress"
+        class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md hover:border-primary-300 transition-all"
+      >
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
             <Globe class="w-6 h-6 text-purple-600" />
           </div>
           <div>
             <h3 class="font-semibold text-gray-900">WordPress</h3>
-            <p class="text-sm text-gray-500">Bientôt disponible</p>
+            <p class="text-sm text-gray-500">{{ stats.wordpress }} site(s)</p>
           </div>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -55,17 +58,20 @@ import api from '../api'
 
 const stats = ref({
   users: 0,
-  services: 0
+  services: 0,
+  wordpress: 0
 })
 
 onMounted(async () => {
   try {
-    const [usersRes, servicesRes] = await Promise.all([
+    const [usersRes, servicesRes, wordpressRes] = await Promise.all([
       api.get('/api/users'),
-      api.get('/api/services/all')
+      api.get('/api/services/all'),
+      api.get('/api/wordpress/sites')
     ])
     stats.value.users = usersRes.data.length
     stats.value.services = servicesRes.data.length
+    stats.value.wordpress = wordpressRes.data.length
   } catch (error) {
     console.error('Error loading stats:', error)
   }

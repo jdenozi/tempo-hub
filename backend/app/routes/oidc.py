@@ -3,6 +3,7 @@ from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from authlib.integrations.starlette_client import OAuth
 from starlette.requests import Request
+from urllib.parse import urlencode
 import httpx
 
 from app.database import get_db
@@ -100,6 +101,10 @@ async def callback(request: Request, db: Session = Depends(get_db)):
 
 @router.get("/logout")
 async def logout():
-    """Redirect to Authentik logout"""
-    authentik_logout = f"{settings.OIDC_ISSUER}end-session/"
+    """Redirect to Authentik logout with global session termination"""
+    # Build logout URL with redirect back to TempoHub
+    params = {
+        'post_logout_redirect_uri': f"{settings.FRONTEND_URL}/login"
+    }
+    authentik_logout = f"{settings.OIDC_ISSUER}end-session/?{urlencode(params)}"
     return RedirectResponse(url=authentik_logout)

@@ -25,6 +25,10 @@ class Settings(BaseSettings):
     OIDC_ISSUER: str = "https://auth.tempo-hub.fr/application/o/tempohub/"
     OIDC_REDIRECT_URI: str = "https://tempo-hub.fr/auth/callback"
 
+    # Authentik API (for admin operations)
+    AUTHENTIK_API_URL: str = "https://auth.tempo-hub.fr"
+    AUTHENTIK_API_TOKEN: str = ""
+
     # Frontend URL
     FRONTEND_URL: str = "https://tempo-hub.fr"
 
