@@ -25,6 +25,36 @@
       padding: 60px 10%;
       gap: 60px;
       flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Grid animation background */
+    .grid-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    .grid-animation .dot {
+      width: 8px;
+      height: 8px;
+      margin: 12px;
+      background: #63e2b7;
+      border-radius: 50%;
+    }
+
+    .hero-content, .hero-visual {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-content { flex: 1; min-width: 300px; }
@@ -345,6 +375,7 @@
 
   <!-- Hero -->
   <section class="hero">
+    <div class="grid-animation" id="gridAnimation"></div>
     <div class="hero-content">
       <div class="hero-logo">🚀</div>
       <h1 class="animated-title">Tempo Hub</h1>
@@ -552,6 +583,36 @@
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Create grid dots
+      const gridEl = document.getElementById('gridAnimation');
+      const cols = 15;
+      const rows = 10;
+      for (let i = 0; i < cols * rows; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        gridEl.appendChild(dot);
+      }
+
+      // Animate grid
+      function animateGrid() {
+        anime({
+          targets: '.grid-animation .dot',
+          scale: [
+            {value: 1.2, easing: 'easeOutSine', duration: 500},
+            {value: 1, easing: 'easeInOutQuad', duration: 500}
+          ],
+          translateY: anime.stagger([-15, 15], {grid: [cols, rows], from: 'center', axis: 'y'}),
+          translateX: anime.stagger([-15, 15], {grid: [cols, rows], from: 'center', axis: 'x'}),
+          opacity: [
+            {value: 0.8, easing: 'easeOutSine', duration: 500},
+            {value: 0.3, easing: 'easeInOutQuad', duration: 500}
+          ],
+          delay: anime.stagger(50, {grid: [cols, rows], from: 'center'}),
+          complete: animateGrid
+        });
+      }
+      animateGrid();
+
       // Smooth scroll
       document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
@@ -560,7 +621,7 @@
         });
       });
 
-      // Anime.js title animation - using safe DOM methods
+      // Anime.js title animation
       const title = document.querySelector('.animated-title');
       if (title) {
         const text = title.textContent;
