@@ -551,65 +551,68 @@
 
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
   <script>
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
-      });
-    });
-
-    // Anime.js title animation - using safe DOM methods
-    const title = document.querySelector('.animated-title');
-    const text = title.textContent;
-    title.textContent = '';
-    text.split('').forEach(char => {
-      const span = document.createElement('span');
-      span.className = 'letter';
-      span.textContent = char === ' ' ? '\u00A0' : char;
-      title.appendChild(span);
-    });
-
-    anime.timeline({loop: false})
-      .add({
-        targets: '.animated-title .letter',
-        opacity: [0, 1],
-        translateY: [40, 0],
-        translateZ: 0,
-        easing: 'easeOutExpo',
-        duration: 1200,
-        delay: (el, i) => 80 + 50 * i
+    document.addEventListener('DOMContentLoaded', function() {
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+        });
       });
 
-    // Fade in hero content
-    anime({
-      targets: '.hero-subtitle, .hero-buttons, .question-link, .hero-visual',
-      opacity: [0, 1],
-      translateY: [30, 0],
-      easing: 'easeOutExpo',
-      duration: 1000,
-      delay: anime.stagger(150, {start: 800})
-    });
+      // Anime.js title animation - using safe DOM methods
+      const title = document.querySelector('.animated-title');
+      if (title) {
+        const text = title.textContent;
+        title.textContent = '';
+        text.split('').forEach(char => {
+          const span = document.createElement('span');
+          span.className = 'letter';
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          title.appendChild(span);
+        });
 
-    // Animate feature cards on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          anime({
-            targets: entry.target,
+        anime.timeline({loop: false})
+          .add({
+            targets: '.animated-title .letter',
             opacity: [0, 1],
-            translateY: [30, 0],
+            translateY: [40, 0],
             easing: 'easeOutExpo',
-            duration: 800
+            duration: 1200,
+            delay: (el, i) => 80 + 50 * i
           });
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+      }
 
-    document.querySelectorAll('.feature-card, .step, .pricing-card, .included-item').forEach(el => {
-      el.style.opacity = '0';
-      observer.observe(el);
+      // Fade in hero content
+      anime({
+        targets: '.hero-subtitle, .hero-buttons, .question-link, .hero-visual',
+        opacity: [0, 1],
+        translateY: [30, 0],
+        easing: 'easeOutExpo',
+        duration: 1000,
+        delay: anime.stagger(150, {start: 800})
+      });
+
+      // Animate cards on scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            anime({
+              targets: entry.target,
+              opacity: [0, 1],
+              translateY: [30, 0],
+              easing: 'easeOutExpo',
+              duration: 800
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.feature-card, .step, .pricing-card, .included-item').forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
     });
   </script>
 </body>
