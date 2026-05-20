@@ -11,10 +11,17 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.tempohub.rule=Host(`tempo-hub.fr`)"
+      # HTTPS router (main)
+      - "traefik.http.routers.tempohub.rule=Host(`tempo-hub.fr`) || Host(`www.tempo-hub.fr`)"
       - "traefik.http.routers.tempohub.entrypoints=websecure"
       - "traefik.http.routers.tempohub.tls.certresolver=letsencrypt"
       - "traefik.http.services.tempohub.loadbalancer.server.port=80"
+      # HTTP to HTTPS redirect
+      - "traefik.http.routers.tempohub-http.rule=Host(`tempo-hub.fr`) || Host(`www.tempo-hub.fr`)"
+      - "traefik.http.routers.tempohub-http.entrypoints=web"
+      - "traefik.http.routers.tempohub-http.middlewares=tempohub-https-redirect"
+      - "traefik.http.middlewares.tempohub-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.tempohub-https-redirect.redirectscheme.permanent=true"
 
 networks:
   web:
