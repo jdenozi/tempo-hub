@@ -35,9 +35,16 @@
       font-size: clamp(2.5rem, 5vw, 3.5rem);
       font-weight: 700;
       margin-bottom: 16px;
-      background: linear-gradient(135deg, #63e2b7, #18a058);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #63e2b7;
+    }
+
+    .hero h1 .letter {
+      display: inline-block;
+      opacity: 0;
+    }
+
+    .hero-subtitle, .hero-buttons, .question-link, .hero-visual {
+      opacity: 0;
     }
 
     .hero-subtitle {
@@ -218,6 +225,88 @@
 
     .pricing-card .btn { width: 100%; text-align: center; display: block; }
 
+    .pricing-intro {
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 40px;
+      font-size: 1rem;
+    }
+
+    /* How it works */
+    .how-it-works {
+      padding: 80px 10%;
+      background: linear-gradient(180deg, #0a0a0a 0%, #0f0f1a 100%);
+    }
+
+    .how-it-works h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 50px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .step {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #63e2b7, #18a058);
+      color: #000;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .step h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .step p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.5; }
+
+    /* Included */
+    .included {
+      padding: 80px 10%;
+      background: #0f0f1a;
+    }
+
+    .included h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 50px;
+    }
+
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .included-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(99,226,183,0.05);
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 3px solid #63e2b7;
+    }
+
+    .included-icon { font-size: 1.8rem; }
+    .included-item h4 { font-size: 1rem; margin-bottom: 4px; }
+    .included-item p { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+
     /* CTA */
     .cta {
       padding: 80px 10%;
@@ -258,7 +347,7 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-logo">🚀</div>
-      <h1>Tempo Hub</h1>
+      <h1 class="animated-title">Tempo Hub</h1>
       <p class="hero-subtitle">
         Agence web spécialisée dans la création de sites sur-mesure.<br>
         Concentrez-vous sur votre activité, on s'occupe du reste.
@@ -310,19 +399,50 @@
     </div>
   </section>
 
+  <!-- How it works -->
+  <section class="how-it-works">
+    <h2>Comment ça marche</h2>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Consultation gratuite</h3>
+        <p>On discute de votre projet, vos besoins et vos objectifs lors d'un appel de 30 min.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Proposition sur-mesure</h3>
+        <p>Vous recevez un devis détaillé avec maquettes et planning de réalisation.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Développement</h3>
+        <p>On crée votre site avec des points réguliers pour valider chaque étape.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Mise en ligne</h3>
+        <p>Votre site est déployé, optimisé et vous êtes formé à son utilisation.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing -->
   <section id="pricing" class="pricing">
-    <h2>Tarifs</h2>
+    <h2>Nos offres</h2>
+    <p class="pricing-intro">Chaque offre inclut : hébergement 1 an, nom de domaine, certificat SSL et formation à l'utilisation.</p>
     <div class="pricing-grid">
       <div class="pricing-card">
         <h3>Essentiel</h3>
         <div class="price">990 €</div>
-        <p class="desc">Pour démarrer</p>
+        <p class="desc">Idéal pour les indépendants et petites entreprises</p>
         <ul>
-          <li>Site 5 pages</li>
-          <li>Design responsive</li>
-          <li>Formulaire contact</li>
-          <li>SEO de base</li>
+          <li>Site vitrine jusqu'à 5 pages</li>
+          <li>Design moderne et responsive</li>
+          <li>Formulaire de contact</li>
+          <li>Optimisation SEO de base</li>
+          <li>Intégration Google Analytics</li>
+          <li>Hébergement inclus 1 an</li>
+          <li>Livraison sous 2 semaines</li>
         </ul>
         <a href="https://calcom.tempo-hub.fr/tempo-hub" class="btn btn-secondary">Choisir</a>
       </div>
@@ -330,27 +450,83 @@
         <span class="pricing-badge">Populaire</span>
         <h3>Pro</h3>
         <div class="price">1 990 €</div>
-        <p class="desc">Pour se démarquer</p>
+        <p class="desc">Pour les entreprises qui veulent se démarquer</p>
         <ul>
-          <li>Tout Essentiel +</li>
-          <li>Animations premium</li>
-          <li>CMS intégré</li>
-          <li>Multi-langue</li>
-          <li>Support 6 mois</li>
+          <li>Tout Essentiel inclus</li>
+          <li>Jusqu'à 10 pages</li>
+          <li>Animations et effets premium</li>
+          <li>CMS pour modifier le contenu</li>
+          <li>Blog intégré</li>
+          <li>Multi-langue (2 langues)</li>
+          <li>Support technique 6 mois</li>
+          <li>Livraison sous 4 semaines</li>
         </ul>
         <a href="https://calcom.tempo-hub.fr/tempo-hub" class="btn btn-primary">Choisir</a>
       </div>
       <div class="pricing-card">
         <h3>Sur-mesure</h3>
-        <div class="price">Devis</div>
-        <p class="desc">Projets ambitieux</p>
+        <div class="price">Sur devis</div>
+        <p class="desc">E-commerce, applications web, projets complexes</p>
         <ul>
-          <li>Tout Pro +</li>
-          <li>Fonctions custom</li>
-          <li>Intégrations API</li>
-          <li>Support 12 mois</li>
+          <li>Tout Pro inclus</li>
+          <li>Pages illimitées</li>
+          <li>Fonctionnalités sur-mesure</li>
+          <li>Boutique e-commerce</li>
+          <li>Intégrations API tierces</li>
+          <li>Espace client / membres</li>
+          <li>Support technique 12 mois</li>
+          <li>Maintenance évolutive</li>
         </ul>
-        <a href="https://calcom.tempo-hub.fr/tempo-hub" class="btn btn-secondary">Contact</a>
+        <a href="https://calcom.tempo-hub.fr/tempo-hub" class="btn btn-secondary">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Included -->
+  <section class="included">
+    <h2>Inclus dans toutes nos offres</h2>
+    <div class="included-grid">
+      <div class="included-item">
+        <span class="included-icon">🔒</span>
+        <div>
+          <h4>Certificat SSL</h4>
+          <p>Site sécurisé en HTTPS</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <span class="included-icon">📱</span>
+        <div>
+          <h4>Responsive design</h4>
+          <p>Adapté mobile, tablette, desktop</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <span class="included-icon">🚀</span>
+        <div>
+          <h4>Performance optimisée</h4>
+          <p>Temps de chargement rapide</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <span class="included-icon">🎓</span>
+        <div>
+          <h4>Formation incluse</h4>
+          <p>Apprenez à gérer votre site</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <span class="included-icon">🌐</span>
+        <div>
+          <h4>Nom de domaine</h4>
+          <p>1 an offert (.fr ou .com)</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <span class="included-icon">💾</span>
+        <div>
+          <h4>Hébergement</h4>
+          <p>1 an inclus, serveurs français</p>
+        </div>
       </div>
     </div>
   </section>
@@ -373,12 +549,67 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
   <script>
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
         document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
       });
+    });
+
+    // Anime.js title animation - using safe DOM methods
+    const title = document.querySelector('.animated-title');
+    const text = title.textContent;
+    title.textContent = '';
+    text.split('').forEach(char => {
+      const span = document.createElement('span');
+      span.className = 'letter';
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      title.appendChild(span);
+    });
+
+    anime.timeline({loop: false})
+      .add({
+        targets: '.animated-title .letter',
+        opacity: [0, 1],
+        translateY: [40, 0],
+        translateZ: 0,
+        easing: 'easeOutExpo',
+        duration: 1200,
+        delay: (el, i) => 80 + 50 * i
+      });
+
+    // Fade in hero content
+    anime({
+      targets: '.hero-subtitle, .hero-buttons, .question-link, .hero-visual',
+      opacity: [0, 1],
+      translateY: [30, 0],
+      easing: 'easeOutExpo',
+      duration: 1000,
+      delay: anime.stagger(150, {start: 800})
+    });
+
+    // Animate feature cards on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          anime({
+            targets: entry.target,
+            opacity: [0, 1],
+            translateY: [30, 0],
+            easing: 'easeOutExpo',
+            duration: 800
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.feature-card, .step, .pricing-card, .included-item').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
     });
   </script>
 </body>
