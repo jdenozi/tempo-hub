@@ -1,59 +1,13 @@
 version: "3.8"
 
 services:
-  db:
-    image: postgres:16-alpine
-    container_name: tempohub-db
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: ${DB_USER:-tempohub}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-tempohub}
-      POSTGRES_DB: ${DB_NAME:-tempohub}
-    volumes:
-      - tempohub_db:/var/lib/postgresql/data
-    networks:
-      - tempohub-internal
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U tempohub"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: tempohub-backend
-    restart: unless-stopped
-    environment:
-      DATABASE_URL: postgresql://${DB_USER:-tempohub}:${DB_PASSWORD:-tempohub}@db:5432/${DB_NAME:-tempohub}
-      JWT_SECRET: ${JWT_SECRET}
-      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@tempo-hub.fr}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-changeme}
-    volumes:
-      - /home/debian/web/sites:/root/web/sites:ro
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - tempohub-internal
-      - web
-    healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
   frontend:
     build:
-      context: ./frontend
+      context: ./frontend-redirect
       dockerfile: Dockerfile
-    container_name: tempohub-frontend
+    container_name: tempohub-redirect
     restart: unless-stopped
-    depends_on:
-      - backend
     networks:
-      - tempohub-internal
       - web
     labels:
       - "traefik.enable=true"
@@ -62,10 +16,6 @@ services:
       - "traefik.http.routers.tempohub.tls.certresolver=letsencrypt"
       - "traefik.http.services.tempohub.loadbalancer.server.port=80"
 
-volumes:
-  tempohub_db:
-
 networks:
-  tempohub-internal:
   web:
     external: true
