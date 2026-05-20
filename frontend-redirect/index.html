@@ -32,24 +32,21 @@
     /* Grid animation background */
     .grid-animation {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      grid-template-columns: repeat(25, 1fr);
+      gap: 20px;
       z-index: 0;
-      opacity: 0.4;
     }
 
     .grid-animation .dot {
-      width: 8px;
-      height: 8px;
-      margin: 12px;
+      width: 6px;
+      height: 6px;
       background: #63e2b7;
       border-radius: 50%;
+      opacity: 0.6;
     }
 
     .hero-content, .hero-visual {
@@ -585,33 +582,33 @@
     document.addEventListener('DOMContentLoaded', function() {
       // Create grid dots
       const gridEl = document.getElementById('gridAnimation');
-      const cols = 15;
-      const rows = 10;
+      const cols = 25;
+      const rows = 15;
       for (let i = 0; i < cols * rows; i++) {
         const dot = document.createElement('div');
         dot.className = 'dot';
         gridEl.appendChild(dot);
       }
 
-      // Animate grid
-      function animateGrid() {
+      // Lens/ripple effect animation
+      function animateLens() {
         anime({
           targets: '.grid-animation .dot',
           scale: [
-            {value: 1.2, easing: 'easeOutSine', duration: 500},
-            {value: 1, easing: 'easeInOutQuad', duration: 500}
+            {value: 1, duration: 0},
+            {value: 2.5, duration: 800, easing: 'easeInOutQuad'},
+            {value: 1, duration: 800, easing: 'easeInOutQuad'}
           ],
-          translateY: anime.stagger([-15, 15], {grid: [cols, rows], from: 'center', axis: 'y'}),
-          translateX: anime.stagger([-15, 15], {grid: [cols, rows], from: 'center', axis: 'x'}),
           opacity: [
-            {value: 0.8, easing: 'easeOutSine', duration: 500},
-            {value: 0.3, easing: 'easeInOutQuad', duration: 500}
+            {value: 0.6, duration: 0},
+            {value: 1, duration: 800, easing: 'easeInOutQuad'},
+            {value: 0.6, duration: 800, easing: 'easeInOutQuad'}
           ],
-          delay: anime.stagger(50, {grid: [cols, rows], from: 'center'}),
-          complete: animateGrid
+          delay: anime.stagger(30, {grid: [cols, rows], from: 'center'}),
+          complete: animateLens
         });
       }
-      animateGrid();
+      animateLens();
 
       // Smooth scroll
       document.querySelectorAll('a[href^="#"]').forEach(a => {
